@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">FODMAPer</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Fragment Titles -->
+    <string name="FODMAP_fragment">FODMAPs</string>
+    <string name="FODMAP_friendly_fragment">FODMAP Friendly Foods</string>
+    <string name="OCR_fragment">Label Scanner</string>
+
+</resources>
