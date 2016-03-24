@@ -1,4 +1,4 @@
-package com.b3sk.fodmaper;
+package com.b3sk.fodmaper.helpers;
 
 import android.app.Application;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.b3sk.fodmaper;
+package com.b3sk.fodmaper.adapters;
 
 /**
  * Created by Joopk on 3/23/2016.
@@ -7,6 +7,12 @@ package com.b3sk.fodmaper;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.b3sk.fodmaper.helpers.MyApplication;
+import com.b3sk.fodmaper.R;
+import com.b3sk.fodmaper.fragments.FodmapFragment;
+import com.b3sk.fodmaper.fragments.FodmapFriendlyFragment;
+import com.b3sk.fodmaper.fragments.OcrFragment;
 
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
