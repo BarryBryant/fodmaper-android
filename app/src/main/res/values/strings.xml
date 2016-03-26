@@ -11,4 +11,6 @@
     <string name="FODMAP_friendly_fragment">FODMAP Friendly Foods</string>
     <string name="OCR_fragment">Label Scanner</string>
 
+    <string name="action_search">Search FODMAPs</string>
+
 </resources>

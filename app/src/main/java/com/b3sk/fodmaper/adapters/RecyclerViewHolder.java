@@ -13,13 +13,13 @@ import org.w3c.dom.Text;
 /**
  * Created by Joopk on 3/23/2016.
  */
-public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
     public TextView fodmapName;
     public TextView fodmapInfo;
     public ImageView fodmapPhoto;
 
-    public RecyclerViewHolders(View itemView) {
+    public RecyclerViewHolder(View itemView) {
         super(itemView);
         itemView.setOnClickListener(this);
         fodmapName = (TextView)itemView.findViewById(R.id.food_name);
