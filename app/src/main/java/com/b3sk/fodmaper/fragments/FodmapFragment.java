@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.b3sk.fodmaper.R;
+import com.b3sk.fodmaper.adapters.MarginDecoration;
 import com.b3sk.fodmaper.adapters.RecyclerViewAdapter;
+import com.b3sk.fodmaper.helpers.MyApplication;
 import com.b3sk.fodmaper.models.Food;
 
 import java.util.ArrayList;
@@ -52,6 +54,8 @@ public class FodmapFragment extends Fragment {
 
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.fodmap_recycler);
         recyclerView.hasFixedSize();
+        int margin = MyApplication.getResourcesStatic().getDimensionPixelSize(R.dimen.card_margin);
+        recyclerView.addItemDecoration(new MarginDecoration(margin));
         recyclerView.setLayoutManager(mLayout);
 
         RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(
