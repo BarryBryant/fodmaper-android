@@ -3,6 +3,7 @@ package com.b3sk.fodmaper.fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -20,6 +21,7 @@ import android.widget.EditText;
 import com.b3sk.fodmaper.R;
 import com.b3sk.fodmaper.adapters.MarginDecoration;
 import com.b3sk.fodmaper.adapters.RecyclerViewAdapter;
+import com.b3sk.fodmaper.helpers.FoodFilter;
 import com.b3sk.fodmaper.helpers.MyApplication;
 import com.b3sk.fodmaper.models.Food;
 
@@ -61,19 +63,21 @@ public class FodmapFragment extends Fragment implements SearchView.OnQueryTextLi
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fodmap_list, container, false);
         mFoods = getAllItems();
-        mLayout = new GridLayoutManager(getContext(), 2);
-
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.fodmap_recycler);
-        mRecyclerView.hasFixedSize();
-        int margin = MyApplication.getResourcesStatic().getDimensionPixelSize(R.dimen.card_margin);
-        mRecyclerView.addItemDecoration(new MarginDecoration(margin));
+        return rootView;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        mLayout = new GridLayoutManager(getContext(), 2);
         mRecyclerView.setLayoutManager(mLayout);
 
-        mRecyclerViewAdapter = new RecyclerViewAdapter(
-                getActivity(), mFoods);
+        int margin = MyApplication.getResourcesStatic().getDimensionPixelSize(R.dimen.card_margin);
+        mRecyclerView.addItemDecoration(new MarginDecoration(margin));
+
+        mRecyclerViewAdapter = new RecyclerViewAdapter(getActivity(), mFoods);
         mRecyclerView.setAdapter(mRecyclerViewAdapter);
         setHasOptionsMenu(true);
-        return rootView;
     }
 
     @Override
@@ -85,29 +89,15 @@ public class FodmapFragment extends Fragment implements SearchView.OnQueryTextLi
         searchView.setOnQueryTextListener(this);
     }
 
+
     @Override
     public boolean onQueryTextChange(String query) {
-        final List<Food> filteredFoodList = filter(mFoods, query);
-        Log.d(LOG_TAG, "Filt:"+filteredFoodList.size()+"Mfood"+mFoods.size());
+        final List<Food> filteredFoodList = FoodFilter.filter(mFoods, query);
         mRecyclerViewAdapter.animateTo(filteredFoodList);
-        Log.d(LOG_TAG, "Filt:" + filteredFoodList.size() + "Mfood" + mFoods.size());
         mRecyclerView.scrollToPosition(0);
-
         return true;
     }
 
-    private List<Food> filter(List<Food> foods, String query) {
-        query = query.toLowerCase();
-
-        final List<Food> filteredFoodList = new ArrayList<>();
-        for (Food food : foods) {
-            final String text = food.getName().toLowerCase();
-            if (text.contains(query)) {
-                filteredFoodList.add(food);
-            }
-        }
-        return filteredFoodList;
-    }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
