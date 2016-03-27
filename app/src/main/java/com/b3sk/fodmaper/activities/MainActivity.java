@@ -60,6 +60,31 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                invalidateOptionsMenu();
+            }
+
+            @Override
+            public void onPageSelected(int position) {}
+            @Override
+            public void onPageScrollStateChanged(int state) {}
+        });
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.fodmap_menu, menu);
+        if (mViewPager.getCurrentItem()==0){
+            menu.findItem(R.id.action_search).setVisible(false);
+        } else if(mViewPager.getCurrentItem()==1){
+            menu.findItem(R.id.action_search).setVisible(true);
+        } else if(mViewPager.getCurrentItem()==2) {
+            menu.findItem(R.id.action_search).setVisible(false);
+        }
+        return super.onCreateOptionsMenu(menu);
     }
 
 
