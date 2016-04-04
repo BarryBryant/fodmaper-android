@@ -3,12 +3,9 @@ package com.b3sk.fodmaper.fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,13 +13,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import com.b3sk.fodmaper.R;
 import com.b3sk.fodmaper.adapters.MarginDecoration;
 import com.b3sk.fodmaper.adapters.RecyclerViewAdapter;
 import com.b3sk.fodmaper.helpers.FoodFilter;
 import com.b3sk.fodmaper.helpers.MyApplication;
+import com.b3sk.fodmaper.models.FodmapSearch;
 import com.b3sk.fodmaper.models.Food;
 
 import java.util.ArrayList;
@@ -43,6 +40,8 @@ public class FodmapFragment extends Fragment implements SearchView.OnQueryTextLi
     private RecyclerView mRecyclerView;
     private RecyclerViewAdapter mRecyclerViewAdapter;
     private List<Food> mFoods;
+    private boolean mSearchClosed = true;
+
     public FodmapFragment() {
     }
 
@@ -80,6 +79,7 @@ public class FodmapFragment extends Fragment implements SearchView.OnQueryTextLi
         setHasOptionsMenu(true);
     }
 
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         final MenuItem item = menu.findItem(R.id.action_search);
@@ -88,11 +88,13 @@ public class FodmapFragment extends Fragment implements SearchView.OnQueryTextLi
     }
 
 
+
     @Override
     public boolean onQueryTextChange(String query) {
         final List<Food> filteredFoodList = FoodFilter.filter(mFoods, query);
         mRecyclerViewAdapter.animateTo(filteredFoodList);
         mRecyclerView.scrollToPosition(0);
+        FodmapSearch.getInstance().setSearch(query);
         return true;
     }
 
