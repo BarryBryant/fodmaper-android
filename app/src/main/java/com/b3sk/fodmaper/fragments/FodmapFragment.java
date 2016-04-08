@@ -34,13 +34,12 @@ public class FodmapFragment extends Fragment implements SearchView.OnQueryTextLi
      * The fragment argument representing the section number for this
      * fragment.
      */
-    private static final String ARG_SECTION_NUMBER = "section_number";
+
     private static final String LOG_TAG = FodmapFragment.class.getSimpleName();
     private GridLayoutManager mLayout;
     private RecyclerView mRecyclerView;
     private RecyclerViewAdapter mRecyclerViewAdapter;
     private List<Food> mFoods;
-    private boolean mSearchClosed = true;
 
     public FodmapFragment() {
     }
@@ -51,9 +50,6 @@ public class FodmapFragment extends Fragment implements SearchView.OnQueryTextLi
      */
     public static FodmapFragment newInstance() {
         FodmapFragment fragment = new FodmapFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, 1);
-        fragment.setArguments(args);
         return fragment;
     }
 
