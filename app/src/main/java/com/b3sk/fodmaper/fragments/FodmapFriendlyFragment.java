@@ -5,11 +5,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.b3sk.fodmaper.R;
 import com.b3sk.fodmaper.adapters.MarginDecoration;
@@ -24,7 +22,7 @@ import java.util.List;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class FodmapFriendlyFragment extends Fragment {
+public class FodmapFriendlyFragment extends Fragment implements View.OnClickListener {
     /**
      * The fragment argument representing the section number for this
      * fragment.
@@ -39,6 +37,9 @@ public class FodmapFriendlyFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerViewAdapter mRecyclerViewAdapter;
     private List<Food> mFoods;
+    private boolean meatClicked = true;
+    private boolean vegiClicked = true;
+    private boolean fruitClicked = true;
 
 
     /**
@@ -53,9 +54,15 @@ public class FodmapFriendlyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fodmap_list, container, false);
+        final View rootView = inflater.inflate(R.layout.fodmap_friendly_list, container, false);
         mFoods = getAllItems();
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.fodmap_recycler);
+        ImageView meat = (ImageView) rootView.findViewById(R.id.meat_button);
+        meat.setOnClickListener(this);
+        ImageView vegi = (ImageView) rootView.findViewById(R.id.vegitable_button);
+        vegi.setOnClickListener(this);
+        ImageView fruit = (ImageView) rootView.findViewById(R.id.fruit_button);
+        fruit.setOnClickListener(this);
         return rootView;
     }
 
@@ -93,5 +100,50 @@ public class FodmapFriendlyFragment extends Fragment {
         allItems.add(new Food("Query", 1, "Food"));
         allItems.add(new Food("Romeo", 1, "Food"));
         return allItems;
+    }
+
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+            case R.id.meat_button:
+                if (meatClicked) {
+                    meatClicked = false;
+                    ((ImageView) v.findViewById(R.id.meat_button)).setImageResource(
+                            R.drawable.meat_icon_clicked);
+                } else {
+                    meatClicked = true;
+                    ((ImageView) v.findViewById(R.id.meat_button)).setImageResource(
+                            R.drawable.meat_icon);
+                }
+                break;
+
+            case R.id.vegitable_button:
+                if (vegiClicked) {
+                    vegiClicked = false;
+                    ((ImageView) v.findViewById(R.id.vegitable_button)).setImageResource(
+                            R.drawable.meat_icon_clicked);
+                } else {
+                    vegiClicked = true;
+                    ((ImageView) v.findViewById(R.id.vegitable_button)).setImageResource(
+                            R.drawable.meat_icon);
+                }
+                break;
+
+            case R.id.fruit_button:
+                if (fruitClicked) {
+                    fruitClicked = false;
+                    ((ImageView) v.findViewById(R.id.fruit_button)).setImageResource(
+                            R.drawable.meat_icon_clicked);
+                } else {
+                    fruitClicked = true;
+                    ((ImageView) v.findViewById(R.id.fruit_button)).setImageResource(
+                            R.drawable.meat_icon);
+                }
+                break;
+        }
+
+
     }
 }
