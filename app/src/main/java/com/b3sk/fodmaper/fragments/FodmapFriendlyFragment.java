@@ -15,6 +15,10 @@ import com.b3sk.fodmaper.adapters.RecyclerViewAdapter;
 import com.b3sk.fodmaper.data.FoodRepository;
 import com.b3sk.fodmaper.helpers.MyApplication;
 import com.b3sk.fodmaper.models.Food;
+import com.b3sk.fodmaper.presenter.FodmapPresenter;
+import com.b3sk.fodmaper.presenter.FriendlyPresenter;
+import com.b3sk.fodmaper.presenter.PresenterManager;
+import com.b3sk.fodmaper.view.FriendlyView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +27,7 @@ import java.util.List;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class FodmapFriendlyFragment extends Fragment implements View.OnClickListener {
+public class FodmapFriendlyFragment extends Fragment implements View.OnClickListener, FriendlyView {
     /**
      * The fragment argument representing the section number for this
      * fragment.
@@ -37,11 +41,10 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
     private GridLayoutManager mLayout;
     private RecyclerView mRecyclerView;
     private RecyclerViewAdapter mRecyclerViewAdapter;
-    private List<Food> mFoods;
-    private boolean meatClicked = true;
-    private boolean vegiClicked = true;
-    private boolean fruitClicked = true;
-
+    private FriendlyPresenter presenter;
+    private ImageView fruit;
+    private ImageView vegi;
+    private ImageView meat;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -53,16 +56,35 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        presenter.bindView(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        presenter.unbindView();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.fodmap_friendly_list, container, false);
-        mFoods = new FoodRepository().getFood();
+
+        View rootView = inflater.inflate(R.layout.fodmap_friendly_list, container, false);
+
+        if(savedInstanceState == null) {
+            presenter = new FriendlyPresenter();
+        }else {
+            presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
+        }
+
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.fodmap_recycler);
-        ImageView meat = (ImageView) rootView.findViewById(R.id.meat_button);
+        meat = (ImageView) rootView.findViewById(R.id.meat_button);
         meat.setOnClickListener(this);
-        ImageView vegi = (ImageView) rootView.findViewById(R.id.vegitable_button);
+        vegi = (ImageView) rootView.findViewById(R.id.vegitable_button);
         vegi.setOnClickListener(this);
-        ImageView fruit = (ImageView) rootView.findViewById(R.id.fruit_button);
+        fruit = (ImageView) rootView.findViewById(R.id.fruit_button);
         fruit.setOnClickListener(this);
         return rootView;
     }
@@ -74,55 +96,68 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
 
         int margin = MyApplication.getResourcesStatic().getDimensionPixelSize(R.dimen.card_margin);
         mRecyclerView.addItemDecoration(new MarginDecoration(margin));
-
-        mRecyclerViewAdapter = new RecyclerViewAdapter(getActivity(), mFoods);
-        mRecyclerView.setAdapter(mRecyclerViewAdapter);
         setHasOptionsMenu(true);
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
 
+        PresenterManager.getInstance().savePresenter(presenter, outState);
+    }
 
     @Override
     public void onClick(View v) {
-
         switch (v.getId()) {
             case R.id.meat_button:
-                if (meatClicked) {
-                    meatClicked = false;
-                    ((ImageView) v.findViewById(R.id.meat_button)).setImageResource(
-                            R.drawable.meat_icon_clicked);
-                } else {
-                    meatClicked = true;
-                    ((ImageView) v.findViewById(R.id.meat_button)).setImageResource(
-                            R.drawable.meat_icon);
-                }
+                presenter.onMeatClicked();
                 break;
-
             case R.id.vegitable_button:
-                if (vegiClicked) {
-                    vegiClicked = false;
-                    ((ImageView) v.findViewById(R.id.vegitable_button)).setImageResource(
-                            R.drawable.meat_icon_clicked);
-                } else {
-                    vegiClicked = true;
-                    ((ImageView) v.findViewById(R.id.vegitable_button)).setImageResource(
-                            R.drawable.meat_icon);
-                }
+                presenter.onVegiClicked();
                 break;
-
             case R.id.fruit_button:
-                if (fruitClicked) {
-                    fruitClicked = false;
-                    ((ImageView) v.findViewById(R.id.fruit_button)).setImageResource(
-                            R.drawable.meat_icon_clicked);
-                } else {
-                    fruitClicked = true;
-                    ((ImageView) v.findViewById(R.id.fruit_button)).setImageResource(
-                            R.drawable.meat_icon);
-                }
+                presenter.onFruitClicked();
                 break;
         }
+    }
 
+    @Override
+    public void animateToFilter(List<Food> foodList) {
+        mRecyclerViewAdapter.animateTo(foodList);
+        mRecyclerView.scrollToPosition(0);
+    }
 
+    @Override
+    public void bindFoods(List<Food> foodList) {
+        mRecyclerViewAdapter = new RecyclerViewAdapter(getActivity(), foodList);
+        mRecyclerView.setAdapter(mRecyclerViewAdapter);
+
+    }
+
+    @Override
+    public void onFruitClicked(boolean clicked) {
+        if(clicked) {
+            fruit.setImageResource(R.drawable.meat_icon_clicked);
+        }else {
+            fruit.setImageResource(R.drawable.meat_icon);
+        }
+    }
+
+    @Override
+    public void onVegiClicked(boolean clicked) {
+        if(clicked) {
+            vegi.setImageResource(R.drawable.meat_icon_clicked);
+        }else {
+            vegi.setImageResource(R.drawable.meat_icon);
+        }
+    }
+
+    @Override
+    public void onMeatClicked(boolean clicked) {
+        if(clicked) {
+            meat.setImageResource(R.drawable.meat_icon_clicked);
+        }else {
+            meat.setImageResource(R.drawable.meat_icon);
+        }
     }
 }

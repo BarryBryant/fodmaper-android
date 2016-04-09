@@ -22,7 +22,7 @@
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:scaleType="centerInside"
-                android:src="@drawable/meat_icon" />
+                android:src="@drawable/meat_icon_clicked" />
 
             <ImageView
                 android:id="@+id/vegitable_button"
@@ -31,7 +31,7 @@
                 android:layout_weight="1"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
-                android:src="@drawable/meat_icon" />
+                android:src="@drawable/meat_icon_clicked" />
 
             <ImageView
                 android:id="@+id/fruit_button"
@@ -40,7 +40,7 @@
                 android:layout_weight="1"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
-                android:src="@drawable/meat_icon" />
+                android:src="@drawable/meat_icon_clicked" />
 
 
         </LinearLayout>
