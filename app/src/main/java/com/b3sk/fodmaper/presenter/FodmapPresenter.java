@@ -1,0 +1,43 @@
+package com.b3sk.fodmaper.presenter;
+
+import android.support.annotation.NonNull;
+
+import com.b3sk.fodmaper.data.FoodRepository;
+import com.b3sk.fodmaper.helpers.FoodFilter;
+import com.b3sk.fodmaper.models.FodmapSearch;
+import com.b3sk.fodmaper.models.Food;
+import com.b3sk.fodmaper.view.FodmapView;
+
+import java.util.List;
+
+/**
+ * Created by Joopk on 4/8/2016.
+ */
+public class FodmapPresenter extends BasePresenter <List<Food>, FodmapView> {
+
+
+
+    @Override
+    public void bindView(@NonNull FodmapView view) {
+        super.bindView(view);
+        if(model == null) {
+            loadData();
+        }
+    }
+
+    @Override
+    protected void updateView() {
+        view().bindFoods(model);
+    }
+
+
+    public void onQueryTextChanged(String query) {
+        final List<Food> filteredFoodList = FoodFilter.filter(model, query);
+        FodmapSearch.getInstance().setSearch(query);
+        view().animateToFilter(filteredFoodList);
+    }
+
+    private void loadData() {
+        setModel(new FoodRepository().getFood());
+    }
+}

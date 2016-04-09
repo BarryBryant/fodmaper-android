@@ -22,6 +22,9 @@ import com.b3sk.fodmaper.helpers.FoodFilter;
 import com.b3sk.fodmaper.helpers.MyApplication;
 import com.b3sk.fodmaper.models.FodmapSearch;
 import com.b3sk.fodmaper.models.Food;
+import com.b3sk.fodmaper.presenter.FodmapPresenter;
+import com.b3sk.fodmaper.presenter.PresenterManager;
+import com.b3sk.fodmaper.view.FodmapView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +33,7 @@ import java.util.List;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class FodmapFragment extends Fragment implements SearchView.OnQueryTextListener {
+public class FodmapFragment extends Fragment implements SearchView.OnQueryTextListener, FodmapView {
     /**
      * The fragment argument representing the section number for this
      * fragment.
@@ -40,7 +43,7 @@ public class FodmapFragment extends Fragment implements SearchView.OnQueryTextLi
     private GridLayoutManager mLayout;
     private RecyclerView mRecyclerView;
     private RecyclerViewAdapter mRecyclerViewAdapter;
-    private List<Food> mFoods;
+    private FodmapPresenter presenter;
 
     public FodmapFragment() {
     }
@@ -55,10 +58,27 @@ public class FodmapFragment extends Fragment implements SearchView.OnQueryTextLi
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        presenter.bindView(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        presenter.unbindView();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        if(savedInstanceState == null) {
+            presenter = new FodmapPresenter();
+        }else {
+            presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
+        }
+
         View rootView = inflater.inflate(R.layout.fodmap_list, container, false);
-        mFoods = new FoodRepository().getFood();
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.fodmap_recycler);
         return rootView;
     }
@@ -71,8 +91,6 @@ public class FodmapFragment extends Fragment implements SearchView.OnQueryTextLi
         int margin = MyApplication.getResourcesStatic().getDimensionPixelSize(R.dimen.card_margin);
         mRecyclerView.addItemDecoration(new MarginDecoration(margin));
 
-        mRecyclerViewAdapter = new RecyclerViewAdapter(getActivity(), mFoods);
-        mRecyclerView.setAdapter(mRecyclerViewAdapter);
         setHasOptionsMenu(true);
     }
 
@@ -84,14 +102,18 @@ public class FodmapFragment extends Fragment implements SearchView.OnQueryTextLi
         searchView.setOnQueryTextListener(this);
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        PresenterManager.getInstance().savePresenter(presenter, outState);
+    }
+
 
 
     @Override
     public boolean onQueryTextChange(String query) {
-        final List<Food> filteredFoodList = FoodFilter.filter(mFoods, query);
-        mRecyclerViewAdapter.animateTo(filteredFoodList);
-        mRecyclerView.scrollToPosition(0);
-        FodmapSearch.getInstance().setSearch(query);
+        presenter.onQueryTextChanged(query);
         return true;
     }
 
@@ -99,6 +121,19 @@ public class FodmapFragment extends Fragment implements SearchView.OnQueryTextLi
     @Override
     public boolean onQueryTextSubmit(String query) {
         return false;
+    }
+
+
+    @Override
+    public void animateToFilter(List<Food> foodList) {
+        mRecyclerViewAdapter.animateTo(foodList);
+        mRecyclerView.scrollToPosition(0);
+    }
+
+    @Override
+    public void bindFoods(List<Food> foodList) {
+        mRecyclerViewAdapter = new RecyclerViewAdapter(getActivity(), foodList);
+        mRecyclerView.setAdapter(mRecyclerViewAdapter);
     }
 
 }
