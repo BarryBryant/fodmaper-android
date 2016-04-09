@@ -1,4 +1,4 @@
-package com.b3sk.fodmaper.models;
+package com.b3sk.fodmaper.model;
 
 /**
  * Created by Joopk on 3/23/2016.

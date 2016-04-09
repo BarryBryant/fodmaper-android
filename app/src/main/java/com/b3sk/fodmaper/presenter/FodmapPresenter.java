@@ -4,8 +4,8 @@ import android.support.annotation.NonNull;
 
 import com.b3sk.fodmaper.data.FoodRepository;
 import com.b3sk.fodmaper.helpers.FoodFilter;
-import com.b3sk.fodmaper.models.FodmapSearch;
-import com.b3sk.fodmaper.models.Food;
+import com.b3sk.fodmaper.model.FodmapSearch;
+import com.b3sk.fodmaper.model.Food;
 import com.b3sk.fodmaper.view.FodmapView;
 
 import java.util.List;

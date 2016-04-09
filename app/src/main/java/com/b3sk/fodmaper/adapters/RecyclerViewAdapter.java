@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.b3sk.fodmaper.helpers.FoodPhotoRetriever;
 import com.b3sk.fodmaper.R;
-import com.b3sk.fodmaper.models.Food;
+import com.b3sk.fodmaper.model.Food;
 
 import java.util.ArrayList;
 import java.util.List;

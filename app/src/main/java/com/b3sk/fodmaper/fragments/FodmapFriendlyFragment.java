@@ -4,23 +4,21 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.b3sk.fodmaper.R;
-import com.b3sk.fodmaper.adapters.MarginDecoration;
+import com.b3sk.fodmaper.helpers.MarginDecoration;
 import com.b3sk.fodmaper.adapters.RecyclerViewAdapter;
-import com.b3sk.fodmaper.data.FoodRepository;
 import com.b3sk.fodmaper.helpers.MyApplication;
-import com.b3sk.fodmaper.models.Food;
-import com.b3sk.fodmaper.presenter.FodmapPresenter;
+import com.b3sk.fodmaper.model.Food;
 import com.b3sk.fodmaper.presenter.FriendlyPresenter;
 import com.b3sk.fodmaper.presenter.PresenterManager;
 import com.b3sk.fodmaper.view.FriendlyView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -57,12 +55,14 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
 
     @Override
     public void onResume() {
+        Log.d(LOG_TAG, "onResume Called");
         super.onResume();
         presenter.bindView(this);
     }
 
     @Override
     public void onPause() {
+        Log.d(LOG_TAG, "onPause Called");
         super.onPause();
         presenter.unbindView();
     }
@@ -101,6 +101,7 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
+        Log.d(LOG_TAG, "SAVED STATE");
         super.onSaveInstanceState(outState);
 
         PresenterManager.getInstance().savePresenter(presenter, outState);

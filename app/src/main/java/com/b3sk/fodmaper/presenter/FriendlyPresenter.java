@@ -3,8 +3,7 @@ package com.b3sk.fodmaper.presenter;
 import android.support.annotation.NonNull;
 
 import com.b3sk.fodmaper.data.FoodRepository;
-import com.b3sk.fodmaper.models.Food;
-import com.b3sk.fodmaper.view.FodmapView;
+import com.b3sk.fodmaper.model.Food;
 import com.b3sk.fodmaper.view.FriendlyView;
 
 import java.util.List;

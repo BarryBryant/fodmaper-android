@@ -1,4 +1,4 @@
-package com.b3sk.fodmaper.adapters;
+package com.b3sk.fodmaper.helpers;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;

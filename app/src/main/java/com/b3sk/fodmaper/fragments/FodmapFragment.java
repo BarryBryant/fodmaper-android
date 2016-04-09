@@ -6,7 +6,6 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,18 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.b3sk.fodmaper.R;
-import com.b3sk.fodmaper.adapters.MarginDecoration;
+import com.b3sk.fodmaper.helpers.MarginDecoration;
 import com.b3sk.fodmaper.adapters.RecyclerViewAdapter;
-import com.b3sk.fodmaper.data.FoodRepository;
-import com.b3sk.fodmaper.helpers.FoodFilter;
 import com.b3sk.fodmaper.helpers.MyApplication;
-import com.b3sk.fodmaper.models.FodmapSearch;
-import com.b3sk.fodmaper.models.Food;
+import com.b3sk.fodmaper.model.Food;
 import com.b3sk.fodmaper.presenter.FodmapPresenter;
 import com.b3sk.fodmaper.presenter.PresenterManager;
 import com.b3sk.fodmaper.view.FodmapView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -105,7 +100,6 @@ public class FodmapFragment extends Fragment implements SearchView.OnQueryTextLi
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
         PresenterManager.getInstance().savePresenter(presenter, outState);
     }
 
