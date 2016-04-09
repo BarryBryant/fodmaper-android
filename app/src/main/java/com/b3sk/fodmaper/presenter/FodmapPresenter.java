@@ -28,6 +28,12 @@ public class FodmapPresenter extends BasePresenter <List<Food>, FodmapView> {
     @Override
     protected void updateView() {
         view().bindFoods(model);
+
+        //If search is not null on resume animate to filtered list
+        String query = FodmapSearch.getInstance().getSearch();
+        if(query != null) {
+            onQueryTextChanged(query);
+        }
     }
 
 

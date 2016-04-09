@@ -47,7 +47,7 @@ public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> {
             view().onFruitClicked(fruitClicked);
         }
     }
-    
+
     public void onVegiClicked() {
         if(vegiClicked) {
             vegiClicked = false;
