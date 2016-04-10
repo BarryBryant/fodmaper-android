@@ -6,12 +6,15 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.b3sk.fodmaper.R;
 import com.b3sk.fodmaper.helpers.MarginDecoration;
@@ -28,7 +31,7 @@ import java.util.List;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class FodmapFragment extends Fragment implements SearchView.OnQueryTextListener, FodmapView {
+public class FodmapFragment extends Fragment implements FodmapView, TextWatcher {
     /**
      * The fragment argument representing the section number for this
      * fragment.
@@ -39,6 +42,7 @@ public class FodmapFragment extends Fragment implements SearchView.OnQueryTextLi
     private RecyclerView mRecyclerView;
     private RecyclerViewAdapter mRecyclerViewAdapter;
     private FodmapPresenter presenter;
+    private EditText searchText;
 
     public FodmapFragment() {
     }
@@ -75,6 +79,9 @@ public class FodmapFragment extends Fragment implements SearchView.OnQueryTextLi
 
         View rootView = inflater.inflate(R.layout.fodmap_list, container, false);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.fodmap_recycler);
+        searchText = (EditText) rootView.findViewById(R.id.fodmap_search_text);
+        searchText.addTextChangedListener(this);
+
         return rootView;
     }
 
@@ -85,17 +92,10 @@ public class FodmapFragment extends Fragment implements SearchView.OnQueryTextLi
 
         int margin = MyApplication.getResourcesStatic().getDimensionPixelSize(R.dimen.card_margin);
         mRecyclerView.addItemDecoration(new MarginDecoration(margin));
-
         setHasOptionsMenu(true);
+
     }
 
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        final MenuItem item = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-        searchView.setOnQueryTextListener(this);
-    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -103,19 +103,6 @@ public class FodmapFragment extends Fragment implements SearchView.OnQueryTextLi
         PresenterManager.getInstance().savePresenter(presenter, outState);
     }
 
-
-
-    @Override
-    public boolean onQueryTextChange(String query) {
-        presenter.onQueryTextChanged(query);
-        return true;
-    }
-
-
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
 
 
     @Override
@@ -130,4 +117,14 @@ public class FodmapFragment extends Fragment implements SearchView.OnQueryTextLi
         mRecyclerView.setAdapter(mRecyclerViewAdapter);
     }
 
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        presenter.onQueryTextChanged(s.toString());
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {}
 }

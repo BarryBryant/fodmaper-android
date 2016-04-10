@@ -1,25 +1,16 @@
 package com.b3sk.fodmaper.activities;
 
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
 
 import com.b3sk.fodmaper.R;
 import com.b3sk.fodmaper.adapters.SectionsPagerAdapter;
-import com.b3sk.fodmaper.model.FodmapSearch;
-import com.b3sk.fodmaper.presenter.FodmapPresenter;
 import com.b3sk.fodmaper.presenter.MainPresenter;
 import com.b3sk.fodmaper.presenter.PresenterManager;
 import com.b3sk.fodmaper.view.MainView;
@@ -40,9 +31,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-    private SearchView searchView;
     private MainPresenter presenter;
-    private Menu menu;
 
 
     @Override
@@ -96,11 +85,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        this.menu = menu;
-        getMenuInflater().inflate(R.menu.fodmap_menu, menu);
-        final MenuItem menuItem = menu.findItem(R.id.action_search);
-        searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
-        presenter.onCreateMenu(mViewPager.getCurrentItem());
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -110,14 +95,4 @@ public class MainActivity extends AppCompatActivity implements MainView {
         PresenterManager.getInstance().savePresenter(presenter, outState);
     }
 
-    @Override
-    public void createOptionsMenu(boolean search, String query, boolean showSearch) {
-        if(search) {
-            menu.findItem(R.id.action_search).setVisible(true);
-            if(showSearch) {
-                searchView.setQuery(query, false);
-                searchView.setIconifiedByDefault(false);
-            }else searchView.setIconifiedByDefault(true);
-        }else menu.findItem(R.id.action_search).setVisible(false);
-    }
 }

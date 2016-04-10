@@ -5,6 +5,6 @@ package com.b3sk.fodmaper.view;
  */
 public interface MainView {
 
-    void createOptionsMenu(boolean search, String query, boolean showSearch);
+
 
 }

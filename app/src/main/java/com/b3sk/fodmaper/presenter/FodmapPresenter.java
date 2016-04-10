@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 
 import com.b3sk.fodmaper.data.FoodRepository;
 import com.b3sk.fodmaper.helpers.FoodFilter;
-import com.b3sk.fodmaper.model.FodmapSearch;
 import com.b3sk.fodmaper.model.Food;
 import com.b3sk.fodmaper.view.FodmapView;
 
@@ -16,6 +15,7 @@ import java.util.List;
 public class FodmapPresenter extends BasePresenter <List<Food>, FodmapView> {
 
 
+    private String search;
 
     @Override
     public void bindView(@NonNull FodmapView view) {
@@ -30,17 +30,18 @@ public class FodmapPresenter extends BasePresenter <List<Food>, FodmapView> {
         view().bindFoods(model);
 
         //If search is not null on resume animate to filtered list
-        String query = FodmapSearch.getInstance().getSearch();
-        if(query != null) {
-            onQueryTextChanged(query);
+        if(search != null) {
+            onQueryTextChanged(search);
         }
     }
 
 
     public void onQueryTextChanged(String query) {
         final List<Food> filteredFoodList = FoodFilter.filter(model, query);
-        FodmapSearch.getInstance().setSearch(query);
-        view().animateToFilter(filteredFoodList);
+        search = query;
+        if(view()!=null) {
+            view().animateToFilter(filteredFoodList);
+        }
     }
 
     private void loadData() {
