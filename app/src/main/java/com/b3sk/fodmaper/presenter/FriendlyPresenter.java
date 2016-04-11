@@ -6,6 +6,7 @@ import com.b3sk.fodmaper.data.FoodRepository;
 import com.b3sk.fodmaper.model.Food;
 import com.b3sk.fodmaper.view.FriendlyView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +17,10 @@ public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> {
     private boolean fruitClicked = true;
     private boolean vegiClicked = true;
     private boolean meatClicked = true;
+    private List<Food> fruit;
+    private List<Food> vegi;
+    private List<Food> meat;
+
 
     @Override
     public void bindView(@NonNull FriendlyView view) {
@@ -34,7 +39,15 @@ public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> {
     }
 
     private void loadData() {
-        setModel(new FoodRepository().getFood());
+        List<Food> data = new ArrayList<>();
+        FoodRepository dataBoy = new FoodRepository();
+        fruit = dataBoy.getFruit();
+        vegi = dataBoy.getVegi();
+        meat = dataBoy.getMeat();
+        if(fruitClicked) {data.addAll(fruit);}
+        if(vegiClicked) {data.addAll(vegi);}
+        if(meatClicked) {data.addAll(meat);}
+        setModel(data);
     }
 
     public void onFruitClicked() {
