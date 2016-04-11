@@ -20,7 +20,7 @@ public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> {
     @Override
     public void bindView(@NonNull FriendlyView view) {
         super.bindView(view);
-        if(model == null) {
+        if (model == null) {
             loadData();
         }
     }
@@ -38,32 +38,44 @@ public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> {
     }
 
     public void onFruitClicked() {
-        if(fruitClicked) {
+        if (fruitClicked) {
             fruitClicked = false;
+            model.removeAll(fruit);
             view().onFruitClicked(fruitClicked);
-        }else {
+            view().animateToFilter(model);
+        } else {
             fruitClicked = true;
+            model.addAll(fruit);
             view().onFruitClicked(fruitClicked);
+            view().animateToFilter(model);
         }
     }
 
     public void onVegiClicked() {
-        if(vegiClicked) {
+        if (vegiClicked) {
             vegiClicked = false;
+            model.removeAll(vegi);
             view().onVegiClicked(vegiClicked);
-        }else {
+            view().animateToFilter(model);
+        } else {
             vegiClicked = true;
+            model.addAll(vegi);
             view().onVegiClicked(vegiClicked);
+            view().animateToFilter(model);
         }
     }
 
     public void onMeatClicked() {
-        if(meatClicked) {
+        if (meatClicked) {
             meatClicked = false;
+            model.removeAll(meat);
             view().onMeatClicked(meatClicked);
-        }else {
+            view().animateToFilter(model);
+        } else {
             meatClicked = true;
+            model.addAll(meat);
             view().onMeatClicked(meatClicked);
+            view().animateToFilter(model);
         }
     }
 }
