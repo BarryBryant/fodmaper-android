@@ -101,4 +101,22 @@ public class FoodRepository {
         allItems.add(new Food("Romeo", 168, "M"));
         return allItems;
     }
+
+    public List<Food> getDairy() {
+        List<Food> allItems = new ArrayList<>();
+        allItems.add(new Food("Milk", 601, "D"));
+        allItems.add(new Food("AMilk", 602, "D"));
+        allItems.add(new Food("BMilk", 603, "D"));
+        allItems.add(new Food("CMilk", 604, "D"));
+        return allItems;
+    }
+
+    public List<Food> getGrain() {
+        List<Food> allItems = new ArrayList<>();
+        allItems.add(new Food("WoodGrain", 701, "G"));
+        allItems.add(new Food("GrainGrippin", 702, "G"));
+        allItems.add(new Food("inGrain", 703, "G"));
+        allItems.add(new Food("GrainMang", 704, "G"));
+        return allItems;
+    }
 }

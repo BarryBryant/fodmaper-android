@@ -43,6 +43,8 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
     private ImageView fruit;
     private ImageView vegi;
     private ImageView meat;
+    private ImageView dairy;
+    private ImageView grain;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -86,6 +88,10 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
         vegi.setOnClickListener(this);
         fruit = (ImageView) rootView.findViewById(R.id.fruit_button);
         fruit.setOnClickListener(this);
+        dairy = (ImageView) rootView.findViewById(R.id.dairy_button);
+        dairy.setOnClickListener(this);
+        grain = (ImageView) rootView.findViewById(R.id.grain_button);
+        grain.setOnClickListener(this);
         return rootView;
     }
 
@@ -118,6 +124,12 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
                 break;
             case R.id.fruit_button:
                 presenter.onFruitClicked();
+                break;
+            case R.id.dairy_button:
+                presenter.onDairyClicked();
+                break;
+            case R.id.grain_button:
+                presenter.onGrainClicked();
                 break;
         }
     }
@@ -158,6 +170,24 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
             meat.setImageResource(R.drawable.meat_icon_clicked);
         }else {
             meat.setImageResource(R.drawable.meat_icon);
+        }
+    }
+
+    @Override
+    public void onDairyClicked(boolean clicked) {
+        if(clicked) {
+            dairy.setImageResource(R.drawable.meat_icon_clicked);
+        }else {
+            dairy.setImageResource(R.drawable.meat_icon);
+        }
+    }
+
+    @Override
+    public void onGrainClicked(boolean clicked) {
+        if(clicked) {
+            grain.setImageResource(R.drawable.meat_icon_clicked);
+        }else {
+            grain.setImageResource(R.drawable.meat_icon);
         }
     }
 }

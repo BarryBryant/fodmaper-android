@@ -17,9 +17,13 @@ public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> {
     private boolean fruitClicked = true;
     private boolean vegiClicked = true;
     private boolean meatClicked = true;
+    private boolean dairyClicked = true;
+    private boolean grainClicked = true;
     private List<Food> fruit;
     private List<Food> vegi;
     private List<Food> meat;
+    private List<Food> dairy;
+    private List<Food> grain;
 
 
     @Override
@@ -36,6 +40,8 @@ public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> {
         view().onFruitClicked(fruitClicked);
         view().onVegiClicked(vegiClicked);
         view().onMeatClicked(meatClicked);
+        view().onDairyClicked(dairyClicked);
+        view().onGrainClicked(grainClicked);
     }
 
     private void loadData() {
@@ -44,9 +50,13 @@ public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> {
         fruit = dataBoy.getFruit();
         vegi = dataBoy.getVegi();
         meat = dataBoy.getMeat();
+        dairy = dataBoy.getDairy();
+        grain = dataBoy.getGrain();
         if(fruitClicked) {data.addAll(fruit);}
         if(vegiClicked) {data.addAll(vegi);}
         if(meatClicked) {data.addAll(meat);}
+        if(dairyClicked) {data.addAll(dairy);}
+        if(grainClicked) {data.addAll(grain);}
         setModel(data);
     }
 
@@ -88,6 +98,34 @@ public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> {
             meatClicked = true;
             model.addAll(meat);
             view().onMeatClicked(meatClicked);
+            view().animateToFilter(model);
+        }
+    }
+
+    public void onDairyClicked() {
+        if (dairyClicked) {
+            dairyClicked = false;
+            model.removeAll(dairy);
+            view().onDairyClicked(dairyClicked);
+            view().animateToFilter(model);
+        } else {
+            dairyClicked = true;
+            model.addAll(dairy);
+            view().onDairyClicked(dairyClicked);
+            view().animateToFilter(model);
+        }
+    }
+
+    public void onGrainClicked() {
+        if (grainClicked) {
+            grainClicked = false;
+            model.removeAll(grain);
+            view().onGrainClicked(grainClicked);
+            view().animateToFilter(model);
+        } else {
+            grainClicked = true;
+            model.addAll(grain);
+            view().onGrainClicked(grainClicked);
             view().animateToFilter(model);
         }
     }
