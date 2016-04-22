@@ -2,7 +2,7 @@ package com.b3sk.fodmaper.presenter;
 
 import android.support.annotation.NonNull;
 
-import com.b3sk.fodmaper.data.FoodRepository;
+import com.b3sk.fodmaper.data.FodmapTask;
 import com.b3sk.fodmaper.helpers.FoodFilter;
 import com.b3sk.fodmaper.model.Food;
 import com.b3sk.fodmaper.view.FodmapView;
@@ -45,6 +45,11 @@ public class FodmapPresenter extends BasePresenter <List<Food>, FodmapView> {
     }
 
     private void loadData() {
-        setModel(new FoodRepository().getFood());
+        FodmapTask task = new FodmapTask(this);
+        task.execute();
+    }
+
+    public void onDataLoaded(List<Food> foods) {
+        setModel(foods);
     }
 }

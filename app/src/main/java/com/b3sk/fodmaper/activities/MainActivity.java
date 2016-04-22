@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     public void onResume() {
         super.onResume();
         presenter.bindView(this);
+
     }
 
     @Override

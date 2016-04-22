@@ -15,6 +15,10 @@ public class MyApplication extends Application {
         return context.getResources();
     }
 
+    public static Context getAppContext() {
+        return context;
+    }
+
     @Override
     public void onCreate(){
         super.onCreate();
