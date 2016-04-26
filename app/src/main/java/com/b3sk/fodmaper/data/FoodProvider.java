@@ -19,12 +19,23 @@ public class FoodProvider extends ContentProvider {
     private DataBaseHelper openHelper;
 
     private static final int FODMAPS = 500;
+    private static final int FRUIT = 101;
+    private static final int VEGI = 102;
+    private static final int PROTEIN = 103;
+    private static final int GRAIN = 104;
+    private static final int OTHER = 105;
+
 
     private static UriMatcher buildUriMatcher() {
         UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         final String authority = FoodContract.CONTENT_AUTHORITY;
 
         uriMatcher.addURI(authority, FoodContract.PATH_FODMAP, FODMAPS);
+        uriMatcher.addURI(authority, FoodContract.PATH_FRUIT, FRUIT);
+        uriMatcher.addURI(authority, FoodContract.PATH_VEGI, VEGI);
+        uriMatcher.addURI(authority, FoodContract.PATH_PROTEIN, PROTEIN);
+        uriMatcher.addURI(authority, FoodContract.PATH_GRAIN, GRAIN);
+        uriMatcher.addURI(authority, FoodContract.PATH_OTHER, OTHER);
 
         return uriMatcher;
     }
@@ -60,6 +71,56 @@ public class FoodProvider extends ContentProvider {
                     null,
                     sortOrder);
         }
+
+        if(uriMatcher.match(uri) == FRUIT) {
+            return openHelper.getReadableDatabase().query(FoodContract.FruitEntry.TABLE_NAME,
+                    projection,
+                    selection,
+                    selectionArgs,
+                    null,
+                    null,
+                    sortOrder);
+        }
+
+        if(uriMatcher.match(uri) == VEGI) {
+            return openHelper.getReadableDatabase().query(FoodContract.VegiEntry.TABLE_NAME,
+                    projection,
+                    selection,
+                    selectionArgs,
+                    null,
+                    null,
+                    sortOrder);
+        }
+
+        if(uriMatcher.match(uri) == PROTEIN) {
+            return openHelper.getReadableDatabase().query(FoodContract.ProteinEntry.TABLE_NAME,
+                    projection,
+                    selection,
+                    selectionArgs,
+                    null,
+                    null,
+                    sortOrder);
+        }
+
+        if(uriMatcher.match(uri) == GRAIN) {
+            return openHelper.getReadableDatabase().query(FoodContract.GrainEntry.TABLE_NAME,
+                    projection,
+                    selection,
+                    selectionArgs,
+                    null,
+                    null,
+                    sortOrder);
+        }
+
+        if(uriMatcher.match(uri) == OTHER) {
+            return openHelper.getReadableDatabase().query(FoodContract.OtherEntry.TABLE_NAME,
+                    projection,
+                    selection,
+                    selectionArgs,
+                    null,
+                    null,
+                    sortOrder);
+        }
         return null;
     }
 
@@ -69,6 +130,16 @@ public class FoodProvider extends ContentProvider {
         switch (uriMatcher.match(uri)) {
             case FODMAPS:
                 return FoodContract.FodmapEntry.CONTENT_TYPE;
+            case FRUIT:
+                return FoodContract.FruitEntry.CONTENT_TYPE;
+            case VEGI:
+                return FoodContract.VegiEntry.CONTENT_TYPE;
+            case PROTEIN:
+                return FoodContract.ProteinEntry.CONTENT_TYPE;
+            case GRAIN:
+                return FoodContract.GrainEntry.CONTENT_TYPE;
+            case OTHER:
+                return FoodContract.OtherEntry.CONTENT_TYPE;
         }
         return null;
     }

@@ -1,8 +1,12 @@
 package com.b3sk.fodmaper.presenter;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
+import com.b3sk.fodmaper.data.FodmapTask;
+import com.b3sk.fodmaper.data.FoodContract;
 import com.b3sk.fodmaper.data.FoodRepository;
+import com.b3sk.fodmaper.data.foodLoader;
 import com.b3sk.fodmaper.model.Food;
 import com.b3sk.fodmaper.view.FriendlyView;
 
@@ -12,18 +16,20 @@ import java.util.List;
 /**
  * Created by Joopk on 4/9/2016.
  */
-public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> {
+public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> implements foodLoader {
 
+    private static final String LOG_TAG = FriendlyPresenter.class.getSimpleName();
     private boolean fruitClicked = true;
     private boolean vegiClicked = true;
-    private boolean meatClicked = true;
-    private boolean dairyClicked = true;
+    private boolean proteinClicked = true;
+    private boolean otherClicked = true;
     private boolean grainClicked = true;
     private List<Food> fruit;
     private List<Food> vegi;
-    private List<Food> meat;
-    private List<Food> dairy;
+    private List<Food> protein;
+    private List<Food> other;
     private List<Food> grain;
+    private List<Food> data;
 
 
     @Override
@@ -39,25 +45,22 @@ public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> {
         view().bindFoods(model);
         view().onFruitClicked(fruitClicked);
         view().onVegiClicked(vegiClicked);
-        view().onMeatClicked(meatClicked);
-        view().onDairyClicked(dairyClicked);
+        view().onMeatClicked(proteinClicked);
+        view().onDairyClicked(otherClicked);
         view().onGrainClicked(grainClicked);
     }
 
     private void loadData() {
-        List<Food> data = new ArrayList<>();
-        FoodRepository dataBoy = new FoodRepository();
-        fruit = dataBoy.getFruit();
-        vegi = dataBoy.getVegi();
-        meat = dataBoy.getMeat();
-        dairy = dataBoy.getDairy();
-        grain = dataBoy.getGrain();
-        if(fruitClicked) {data.addAll(fruit);}
-        if(vegiClicked) {data.addAll(vegi);}
-        if(meatClicked) {data.addAll(meat);}
-        if(dairyClicked) {data.addAll(dairy);}
-        if(grainClicked) {data.addAll(grain);}
-        setModel(data);
+        data = new ArrayList<>();
+        String[] columns = {FoodContract.FodmapEntry.COLUMN_FODMAP_ID,
+                FoodContract.FodmapEntry.COLUMN_FODMAP_NAME,
+                FoodContract.FodmapEntry.COLUMN_FODMAP_INFO};
+
+        FodmapTask task = new FodmapTask(this, FoodContract.FruitEntry.buildFruitUri(), columns,
+                "fruit");
+        task.execute();
+
+
     }
 
     public void onFruitClicked() {
@@ -89,29 +92,29 @@ public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> {
     }
 
     public void onMeatClicked() {
-        if (meatClicked) {
-            meatClicked = false;
-            model.removeAll(meat);
-            view().onMeatClicked(meatClicked);
+        if (proteinClicked) {
+            proteinClicked = false;
+            model.removeAll(protein);
+            view().onMeatClicked(proteinClicked);
             view().animateToFilter(model);
         } else {
-            meatClicked = true;
-            model.addAll(meat);
-            view().onMeatClicked(meatClicked);
+            proteinClicked = true;
+            model.addAll(protein);
+            view().onMeatClicked(proteinClicked);
             view().animateToFilter(model);
         }
     }
 
     public void onDairyClicked() {
-        if (dairyClicked) {
-            dairyClicked = false;
-            model.removeAll(dairy);
-            view().onDairyClicked(dairyClicked);
+        if (otherClicked) {
+            otherClicked = false;
+            model.removeAll(other);
+            view().onDairyClicked(otherClicked);
             view().animateToFilter(model);
         } else {
-            dairyClicked = true;
-            model.addAll(dairy);
-            view().onDairyClicked(dairyClicked);
+            otherClicked = true;
+            model.addAll(other);
+            view().onDairyClicked(otherClicked);
             view().animateToFilter(model);
         }
     }
@@ -128,5 +131,77 @@ public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> {
             view().onGrainClicked(grainClicked);
             view().animateToFilter(model);
         }
+    }
+
+    @Override
+    public void onDataLoaded(List<Food> foodList, String key) {
+        String[] columns = {FoodContract.FodmapEntry.COLUMN_FODMAP_ID,
+                FoodContract.FodmapEntry.COLUMN_FODMAP_NAME,
+                FoodContract.FodmapEntry.COLUMN_FODMAP_INFO};
+
+        switch(key) {
+            case "fruit": {
+                if(foodList != null) {
+                    fruit = foodList;
+                    if(fruitClicked) {data.addAll(fruit);}
+                }
+                Log.d(LOG_TAG, "Made it to vegi call");
+                FodmapTask vegiTask = new FodmapTask(this, FoodContract.VegiEntry.buildVegiUri(), columns,
+                        "vegi");
+                vegiTask.execute();
+            } break;
+
+            case "vegi": {
+                if (foodList != null) {
+                    vegi = foodList;
+                    if (vegiClicked) {
+                        data.addAll(vegi);
+                    }
+                }
+                Log.d(LOG_TAG, "Made it to protein call");
+                FodmapTask proteinTask = new FodmapTask(this, FoodContract.ProteinEntry.buildProteinUri(), columns,
+                        "protein");
+                proteinTask.execute();
+            } break;
+
+            case "protein": {
+                if (foodList != null) {
+                    protein = foodList;
+                    if (proteinClicked) {
+                        data.addAll(protein);
+                    }
+                }
+                Log.d(LOG_TAG, "Made it to grain call");
+                FodmapTask grainTask = new FodmapTask(this, FoodContract.GrainEntry.buildGrainUri(), columns,
+                        "grain");
+                grainTask.execute();
+            } break;
+
+            case "grain": {
+                if (foodList != null) {
+                    grain = foodList;
+                    if (grainClicked) {
+                        data.addAll(grain);
+                    }
+                }
+                Log.d(LOG_TAG, "Made it to other call");
+                FodmapTask otherTask = new FodmapTask(this, FoodContract.OtherEntry.buildOtherUri(), columns,
+                        "other");
+                otherTask.execute();
+            } break;
+
+            case "other": {
+                if (foodList != null) {
+                    other = foodList;
+                    if (otherClicked) {
+                        data.addAll(other);
+                    }
+                }
+                Log.d(LOG_TAG, "Setting model");
+                setModel(data);
+            }
+
+        }
+
     }
 }

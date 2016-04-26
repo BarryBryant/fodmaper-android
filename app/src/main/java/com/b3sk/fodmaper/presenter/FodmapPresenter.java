@@ -3,6 +3,8 @@ package com.b3sk.fodmaper.presenter;
 import android.support.annotation.NonNull;
 
 import com.b3sk.fodmaper.data.FodmapTask;
+import com.b3sk.fodmaper.data.FoodContract;
+import com.b3sk.fodmaper.data.foodLoader;
 import com.b3sk.fodmaper.helpers.FoodFilter;
 import com.b3sk.fodmaper.model.Food;
 import com.b3sk.fodmaper.view.FodmapView;
@@ -12,7 +14,7 @@ import java.util.List;
 /**
  * Created by Joopk on 4/8/2016.
  */
-public class FodmapPresenter extends BasePresenter <List<Food>, FodmapView> {
+public class FodmapPresenter extends BasePresenter <List<Food>, FodmapView> implements foodLoader {
 
 
     private String search;
@@ -45,11 +47,16 @@ public class FodmapPresenter extends BasePresenter <List<Food>, FodmapView> {
     }
 
     private void loadData() {
-        FodmapTask task = new FodmapTask(this);
+        String[] columns = {FoodContract.FodmapEntry.COLUMN_FODMAP_ID,
+                FoodContract.FodmapEntry.COLUMN_FODMAP_NAME,
+                FoodContract.FodmapEntry.COLUMN_FODMAP_INFO};
+        FodmapTask task = new FodmapTask(this, FoodContract.FodmapEntry.buildFodmapUri(), columns,
+                "fodmap");
         task.execute();
     }
 
-    public void onDataLoaded(List<Food> foods) {
+    @Override
+    public void onDataLoaded(List<Food> foods, String key) {
         setModel(foods);
     }
 }

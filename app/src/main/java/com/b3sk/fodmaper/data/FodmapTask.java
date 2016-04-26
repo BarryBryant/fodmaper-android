@@ -1,8 +1,8 @@
 package com.b3sk.fodmaper.data;
 
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.b3sk.fodmaper.helpers.MyApplication;
 import com.b3sk.fodmaper.model.Food;
@@ -16,20 +16,23 @@ import java.util.List;
 public class FodmapTask extends AsyncTask<Void, Void, List<Food>> {
 
     private static final String LOG_TAG = FodmapTask.class.getSimpleName();
-    private final com.b3sk.fodmaper.presenter.FodmapPresenter fodmapPresenter;
+    private final foodLoader foodLoader;
+    private final Uri uri;
+    private final String[] columns;
+    private final String key;
 
-    public FodmapTask(com.b3sk.fodmaper.presenter.FodmapPresenter fodmapPresenter) {
-        this.fodmapPresenter = fodmapPresenter;
+    public FodmapTask(foodLoader foodLoader, Uri uri, String[] columns, String key) {
+        this.foodLoader = foodLoader;
+        this.uri = uri;
+        this.columns = columns;
+        this.key = key;
     }
 
     @Override
     protected List<Food> doInBackground(Void... params) {
-        String[] COLUMNS = {FoodContract.FodmapEntry.COLUMN_FODMAP_ID,
-                FoodContract.FodmapEntry.COLUMN_FODMAP_NAME,
-                FoodContract.FodmapEntry.COLUMN_FODMAP_INFO};
         Cursor cursor = MyApplication.getAppContext().getContentResolver().query(
-                FoodContract.FodmapEntry.buildFodmapUri(),
-                COLUMNS,
+                uri,
+                columns,
                 null,
                 null,
                 FoodContract.FodmapEntry.COLUMN_FODMAP_NAME + " ASC");
@@ -44,6 +47,6 @@ public class FodmapTask extends AsyncTask<Void, Void, List<Food>> {
 
     @Override
     protected void onPostExecute(List<Food> foods) {
-        fodmapPresenter.onDataLoaded(foods);
+        foodLoader.onDataLoaded(foods, key);
     }
 }

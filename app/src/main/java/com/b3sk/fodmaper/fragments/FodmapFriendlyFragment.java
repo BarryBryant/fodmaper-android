@@ -35,7 +35,7 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
     public FodmapFriendlyFragment() {
     }
 
-    private static final String LOG_TAG = FodmapFragment.class.getSimpleName();
+    private static final String LOG_TAG = FodmapFriendlyFragment.class.getSimpleName();
     private GridLayoutManager mLayout;
     private RecyclerView mRecyclerView;
     private RecyclerViewAdapter mRecyclerViewAdapter;
