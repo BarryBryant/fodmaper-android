@@ -133,6 +133,10 @@ public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> i
         }
     }
 
+
+    //Chained AsyncTask calls to load each set of fodmap friendly foods from the SQLite database.
+    //The sequence is initiated from the loadData() method and subsequent calls are fired off
+    //from the onDataLoaded method. 
     @Override
     public void onDataLoaded(List<Food> foodList, String key) {
         String[] columns = {FoodContract.FodmapEntry.COLUMN_FODMAP_ID,
@@ -145,7 +149,6 @@ public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> i
                     fruit = foodList;
                     if(fruitClicked) {data.addAll(fruit);}
                 }
-                Log.d(LOG_TAG, "Made it to vegi call");
                 FodmapTask vegiTask = new FodmapTask(this, FoodContract.VegiEntry.buildVegiUri(), columns,
                         "vegi");
                 vegiTask.execute();
@@ -158,7 +161,6 @@ public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> i
                         data.addAll(vegi);
                     }
                 }
-                Log.d(LOG_TAG, "Made it to protein call");
                 FodmapTask proteinTask = new FodmapTask(this, FoodContract.ProteinEntry.buildProteinUri(), columns,
                         "protein");
                 proteinTask.execute();
@@ -171,7 +173,6 @@ public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> i
                         data.addAll(protein);
                     }
                 }
-                Log.d(LOG_TAG, "Made it to grain call");
                 FodmapTask grainTask = new FodmapTask(this, FoodContract.GrainEntry.buildGrainUri(), columns,
                         "grain");
                 grainTask.execute();
@@ -184,7 +185,6 @@ public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> i
                         data.addAll(grain);
                     }
                 }
-                Log.d(LOG_TAG, "Made it to other call");
                 FodmapTask otherTask = new FodmapTask(this, FoodContract.OtherEntry.buildOtherUri(), columns,
                         "other");
                 otherTask.execute();
@@ -197,7 +197,6 @@ public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> i
                         data.addAll(other);
                     }
                 }
-                Log.d(LOG_TAG, "Setting model");
                 setModel(data);
             }
 

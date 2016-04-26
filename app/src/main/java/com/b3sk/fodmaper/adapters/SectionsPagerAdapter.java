@@ -7,6 +7,7 @@ package com.b3sk.fodmaper.adapters;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.b3sk.fodmaper.helpers.MyApplication;
 import com.b3sk.fodmaper.R;
@@ -18,7 +19,7 @@ import com.b3sk.fodmaper.fragments.OcrFragment;
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-public class SectionsPagerAdapter extends FragmentPagerAdapter {
+public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
     public SectionsPagerAdapter(FragmentManager fm) {
         super(fm);
