@@ -136,7 +136,7 @@ public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> i
 
     //Chained AsyncTask calls to load each set of fodmap friendly foods from the SQLite database.
     //The sequence is initiated from the loadData() method and subsequent calls are fired off
-    //from the onDataLoaded method. 
+    //from the onDataLoaded method.
     @Override
     public void onDataLoaded(List<Food> foodList, String key) {
         String[] columns = {FoodContract.FodmapEntry.COLUMN_FODMAP_ID,
