@@ -64,17 +64,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                invalidateOptionsMenu();
-            }
-            @Override
-            public void onPageSelected(int position) {}
-            @Override
-            public void onPageScrollStateChanged(int state) {}
-        });
+        
 
         if(savedInstanceState == null) {
             presenter = new MainPresenter();
