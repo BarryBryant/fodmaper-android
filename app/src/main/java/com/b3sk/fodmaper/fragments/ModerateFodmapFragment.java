@@ -3,9 +3,6 @@ package com.b3sk.fodmaper.fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -15,22 +12,22 @@ import com.b3sk.fodmaper.R;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class OcrFragment extends Fragment {
+public class ModerateFodmapFragment extends Fragment {
     /**
      * The fragment argument representing the section number for this
      * fragment.
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
 
-    public OcrFragment() {
+    public ModerateFodmapFragment() {
     }
 
     /**
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static OcrFragment newInstance() {
-        OcrFragment fragment = new OcrFragment();
+    public static ModerateFodmapFragment newInstance() {
+        ModerateFodmapFragment fragment = new ModerateFodmapFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, 1);
         fragment.setArguments(args);

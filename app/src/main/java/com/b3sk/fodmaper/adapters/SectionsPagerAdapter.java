@@ -13,7 +13,7 @@ import com.b3sk.fodmaper.helpers.MyApplication;
 import com.b3sk.fodmaper.R;
 import com.b3sk.fodmaper.fragments.FodmapFragment;
 import com.b3sk.fodmaper.fragments.FodmapFriendlyFragment;
-import com.b3sk.fodmaper.fragments.OcrFragment;
+import com.b3sk.fodmaper.fragments.ModerateFodmapFragment;
 
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -32,9 +32,9 @@ public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return FodmapFriendlyFragment.newInstance();
             case 1:
-                return FodmapFragment.newInstance();
+                return ModerateFodmapFragment.newInstance();
             case 2:
-                return OcrFragment.newInstance();
+                return FodmapFragment.newInstance();
         }
         return null;
     }
@@ -52,10 +52,10 @@ public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
                         R.string.FODMAP_friendly_fragment);
             case 1:
                 return MyApplication.getResourcesStatic().getString(
-                        R.string.FODMAP_fragment);
+                        R.string.moderate_FODMAP_fragment);
             case 2:
                 return MyApplication.getResourcesStatic().getString(
-                        R.string.OCR_fragment);
+                        R.string.FODMAP_fragment);
         }
         return null;
     }

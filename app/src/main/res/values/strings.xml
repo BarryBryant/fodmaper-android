@@ -7,10 +7,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Fragment Titles -->
-    <string name="FODMAP_fragment">FODMAPs</string>
+    <string name="FODMAP_fragment">High FODMAP Foods</string>
     <string name="FODMAP_friendly_fragment">FODMAP Friendly Foods</string>
-    <string name="OCR_fragment">Label Scanner</string>
+    <string name="moderate_FODMAP_fragment">Moderate FODMAP Foods</string>
 
     <string name="action_search">Search FODMAPs</string>
+
 
 </resources>
