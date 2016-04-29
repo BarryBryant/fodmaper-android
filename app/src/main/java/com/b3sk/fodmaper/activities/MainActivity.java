@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-        
+
 
         if(savedInstanceState == null) {
             presenter = new MainPresenter();
