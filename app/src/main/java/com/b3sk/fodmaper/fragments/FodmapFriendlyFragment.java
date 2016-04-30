@@ -42,8 +42,8 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
     private FriendlyPresenter presenter;
     private ImageView fruit;
     private ImageView vegi;
-    private ImageView meat;
-    private ImageView dairy;
+    private ImageView protein;
+    private ImageView other;
     private ImageView grain;
 
     /**
@@ -82,14 +82,14 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
         }
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.fodmap_recycler);
-        meat = (ImageView) rootView.findViewById(R.id.meat_button);
-        meat.setOnClickListener(this);
+        protein = (ImageView) rootView.findViewById(R.id.protein_button);
+        protein.setOnClickListener(this);
         vegi = (ImageView) rootView.findViewById(R.id.vegitable_button);
         vegi.setOnClickListener(this);
         fruit = (ImageView) rootView.findViewById(R.id.fruit_button);
         fruit.setOnClickListener(this);
-        dairy = (ImageView) rootView.findViewById(R.id.dairy_button);
-        dairy.setOnClickListener(this);
+        other = (ImageView) rootView.findViewById(R.id.other_button);
+        other.setOnClickListener(this);
         grain = (ImageView) rootView.findViewById(R.id.grain_button);
         grain.setOnClickListener(this);
         return rootView;
@@ -116,8 +116,8 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.meat_button:
-                presenter.onMeatClicked();
+            case R.id.protein_button:
+                presenter.onProteinClicked();
                 break;
             case R.id.vegitable_button:
                 presenter.onVegiClicked();
@@ -125,8 +125,8 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
             case R.id.fruit_button:
                 presenter.onFruitClicked();
                 break;
-            case R.id.dairy_button:
-                presenter.onDairyClicked();
+            case R.id.other_button:
+                presenter.onOtherClicked();
                 break;
             case R.id.grain_button:
                 presenter.onGrainClicked();
@@ -165,20 +165,20 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
     }
 
     @Override
-    public void onMeatClicked(boolean clicked) {
+    public void onProteinClicked(boolean clicked) {
         if(clicked) {
-            meat.setImageResource(R.drawable.meat_icon_clicked);
+            protein.setImageResource(R.drawable.meat_icon_clicked);
         }else {
-            meat.setImageResource(R.drawable.meat_icon);
+            protein.setImageResource(R.drawable.meat_icon);
         }
     }
 
     @Override
-    public void onDairyClicked(boolean clicked) {
+    public void onOtherClicked(boolean clicked) {
         if(clicked) {
-            dairy.setImageResource(R.drawable.meat_icon_clicked);
+            other.setImageResource(R.drawable.meat_icon_clicked);
         }else {
-            dairy.setImageResource(R.drawable.meat_icon);
+            other.setImageResource(R.drawable.meat_icon);
         }
     }
 

@@ -13,8 +13,8 @@ public interface FriendlyView {
     void bindFoods(List<Food> foodList);
     void onFruitClicked(boolean clicked);
     void onVegiClicked(boolean clicked);
-    void onMeatClicked(boolean clicked);
-    void onDairyClicked(boolean clicked);
+    void onProteinClicked(boolean clicked);
+    void onOtherClicked(boolean clicked);
     void onGrainClicked(boolean clicked);
 
 }
