@@ -149,45 +149,45 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
     @Override
     public void onFruitClicked(boolean clicked) {
         if(clicked) {
-            fruit.setImageResource(R.drawable.meat_icon_clicked);
+            fruit.setImageResource(R.drawable.fruit_icon_clicked);
         }else {
-            fruit.setImageResource(R.drawable.meat_icon);
+            fruit.setImageResource(R.drawable.fruit_icon);
         }
     }
 
     @Override
     public void onVegiClicked(boolean clicked) {
         if(clicked) {
-            vegi.setImageResource(R.drawable.meat_icon_clicked);
+            vegi.setImageResource(R.drawable.vegi_icon_clicked);
         }else {
-            vegi.setImageResource(R.drawable.meat_icon);
+            vegi.setImageResource(R.drawable.vegi_icon);
         }
     }
 
     @Override
     public void onProteinClicked(boolean clicked) {
         if(clicked) {
-            protein.setImageResource(R.drawable.meat_icon_clicked);
+            protein.setImageResource(R.drawable.protein_icon_clicked);
         }else {
-            protein.setImageResource(R.drawable.meat_icon);
+            protein.setImageResource(R.drawable.protein_icon);
         }
     }
 
     @Override
     public void onOtherClicked(boolean clicked) {
         if(clicked) {
-            other.setImageResource(R.drawable.meat_icon_clicked);
+            other.setImageResource(R.drawable.other_icon_clicked);
         }else {
-            other.setImageResource(R.drawable.meat_icon);
+            other.setImageResource(R.drawable.other_icon);
         }
     }
 
     @Override
     public void onGrainClicked(boolean clicked) {
         if(clicked) {
-            grain.setImageResource(R.drawable.meat_icon_clicked);
+            grain.setImageResource(R.drawable.grain_icon_clicked);
         }else {
-            grain.setImageResource(R.drawable.meat_icon);
+            grain.setImageResource(R.drawable.grain_icon);
         }
     }
 }
