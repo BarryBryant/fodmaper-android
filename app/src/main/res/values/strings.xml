@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="http://schemas.android.com/tools">
     <string name="app_name">FODMAPer</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
@@ -12,6 +12,10 @@
     <string name="moderate_FODMAP_fragment">Moderate FODMAP Foods</string>
 
     <string name="action_search">Search FODMAPs</string>
+
+    <string name="fodmap_description">FODMAP</string>
+    <string name="moderate_fodmap_description">moderate FODMAP</string>
+    <string name="friendly_description">low FODMAP</string>
 
 
 </resources>

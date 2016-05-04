@@ -22,8 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:paddingLeft="@dimen/card_text_padding"
-            android:paddingRight="@dimen/card_text_padding"
+            android:paddingStart="@dimen/card_text_padding"
+            android:paddingEnd="@dimen/card_text_padding"
             android:paddingTop="@dimen/card_text_padding" />
 
         <TextView
@@ -34,8 +34,8 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:paddingBottom="@dimen/card_text_padding"
-            android:paddingLeft="@dimen/card_text_padding"
-            android:paddingRight="@dimen/card_text_padding"
+            android:paddingStart="@dimen/card_text_padding"
+            android:paddingEnd="@dimen/card_text_padding"
             android:textColor="@color/fontSecondary" />
     </LinearLayout>
 

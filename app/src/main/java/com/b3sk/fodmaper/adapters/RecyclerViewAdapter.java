@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.b3sk.fodmaper.helpers.FoodPhotoRetriever;
 import com.b3sk.fodmaper.R;
+import com.b3sk.fodmaper.helpers.MyApplication;
 import com.b3sk.fodmaper.model.Food;
 
 import java.util.ArrayList;
@@ -39,6 +40,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         holder.fodmapInfo.setText(mFoods.get(position).getInfo());
         holder.fodmapPhoto.setImageResource(FoodPhotoRetriever.getFoodPhoto(
                 mFoods.get(position).getId()));
+
+        int id = mFoods.get(position).getId();
+        if(id > 1000) {
+            holder.fodmapPhoto.setContentDescription(MyApplication.getAppContext().getString(
+                    R.string.fodmap_description));
+        }else {
+            holder.fodmapPhoto.setContentDescription(MyApplication.getAppContext().getString(
+                    R.string.friendly_description));
+        }
+
+
     }
 
     @Override
@@ -96,4 +108,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         mFoods.add(toPosition, food);
         notifyItemMoved(fromPosition, toPosition);
     }
+
 }
