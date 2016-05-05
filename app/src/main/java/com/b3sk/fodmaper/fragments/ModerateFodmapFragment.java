@@ -17,6 +17,9 @@ import com.b3sk.fodmaper.presenter.FodmapPresenter;
 import com.b3sk.fodmaper.presenter.ModerateFodmapPresenter;
 import com.b3sk.fodmaper.presenter.PresenterManager;
 import com.b3sk.fodmaper.view.ModerateFodmapView;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 
 import java.util.List;
 
@@ -69,6 +72,11 @@ public class ModerateFodmapFragment extends Fragment implements ModerateFodmapVi
 
         View rootView = inflater.inflate(R.layout.moderate_fodmap_list, container, false);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.moderate_recycler);
+
+        AdView adView = (AdView) rootView.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+        adView.loadAd(adRequest);
         return rootView;
     }
 
