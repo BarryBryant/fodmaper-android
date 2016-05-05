@@ -11,9 +11,12 @@ import android.view.Menu;
 
 import com.b3sk.fodmaper.R;
 import com.b3sk.fodmaper.adapters.SectionsPagerAdapter;
+import com.b3sk.fodmaper.helpers.MyApplication;
 import com.b3sk.fodmaper.presenter.MainPresenter;
 import com.b3sk.fodmaper.presenter.PresenterManager;
 import com.b3sk.fodmaper.view.MainView;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 public class MainActivity extends AppCompatActivity implements MainView {
 
@@ -32,12 +35,15 @@ public class MainActivity extends AppCompatActivity implements MainView {
      */
     private ViewPager mViewPager;
     private MainPresenter presenter;
+    private Tracker tracker;
 
 
     @Override
     public void onResume() {
         super.onResume();
         presenter.bindView(this);
+        tracker.setScreenName("Image~" + "MainActivity");
+        tracker.send(new HitBuilders.ScreenViewBuilder().build());
 
     }
 
@@ -71,6 +77,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
         }else {
             presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
         }
+
+        MyApplication application = (MyApplication) getApplication();
+        tracker = application.getDefaultTracker();
 
     }
 
