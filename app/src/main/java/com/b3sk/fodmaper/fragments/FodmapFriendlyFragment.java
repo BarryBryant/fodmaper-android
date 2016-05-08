@@ -79,6 +79,9 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
             presenter = new FriendlyPresenter();
         }else {
             presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
+            if(presenter == null) {
+                presenter = new FriendlyPresenter();
+            }
         }
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.fodmap_recycler);

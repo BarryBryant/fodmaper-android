@@ -40,7 +40,7 @@ public class FodmapTask extends AsyncTask<Void, Void, List<Food>> {
         while(cursor!= null && cursor.moveToNext()) {
             foods.add(new Food(cursor.getString(1), cursor.getInt(0), cursor.getString(2)));
         }
-        
+
         if (cursor != null) {
             cursor.close();
         }

@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -75,6 +76,9 @@ public class FodmapFragment extends Fragment implements FodmapView, TextWatcher 
             presenter = new FodmapPresenter();
         }else {
             presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
+            if(presenter == null) {
+                presenter = new FodmapPresenter();
+            }
         }
 
         View rootView = inflater.inflate(R.layout.fodmap_list, container, false);
@@ -121,7 +125,9 @@ public class FodmapFragment extends Fragment implements FodmapView, TextWatcher 
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        presenter.onQueryTextChanged(s.toString());
+        if(presenter!= null) {
+            presenter.onQueryTextChanged(s.toString());
+        }
     }
 
     @Override

@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by Joopk on 4/8/2016.
  */
-public class FodmapPresenter extends BasePresenter <List<Food>, FodmapView> implements foodLoader {
+public class FodmapPresenter extends BasePresenter<List<Food>, FodmapView> implements foodLoader {
 
 
     private String search;
@@ -22,7 +22,7 @@ public class FodmapPresenter extends BasePresenter <List<Food>, FodmapView> impl
     @Override
     public void bindView(@NonNull FodmapView view) {
         super.bindView(view);
-        if(model == null) {
+        if (model == null) {
             loadData();
         }
     }
@@ -32,17 +32,19 @@ public class FodmapPresenter extends BasePresenter <List<Food>, FodmapView> impl
         view().bindFoods(model);
 
         //If search is not null on resume animate to filtered list
-        if(search != null) {
+        if (search != null) {
             onQueryTextChanged(search);
         }
     }
 
 
     public void onQueryTextChanged(String query) {
-        final List<Food> filteredFoodList = FoodFilter.filter(model, query);
-        search = query;
-        if(view()!=null) {
-            view().animateToFilter(filteredFoodList);
+        if (model != null) {
+            final List<Food> filteredFoodList = FoodFilter.filter(model, query);
+            search = query;
+            if (view() != null) {
+                view().animateToFilter(filteredFoodList);
+            }
         }
     }
 

@@ -68,6 +68,9 @@ public class ModerateFodmapFragment extends Fragment implements ModerateFodmapVi
             presenter = new ModerateFodmapPresenter();
         }else {
             presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
+            if(presenter == null) {
+                presenter = new ModerateFodmapPresenter();
+            }
         }
 
         View rootView = inflater.inflate(R.layout.moderate_fodmap_list, container, false);
