@@ -1,15 +1,21 @@
 package com.b3sk.fodmaper.fragments;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.b3sk.fodmaper.R;
 import com.b3sk.fodmaper.adapters.RecyclerViewAdapter;
+import com.b3sk.fodmaper.data.FoodContract;
 import com.b3sk.fodmaper.helpers.MarginDecoration;
 import com.b3sk.fodmaper.helpers.MyApplication;
 import com.b3sk.fodmaper.model.Food;
@@ -21,13 +27,16 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class ModerateFodmapFragment extends Fragment implements ModerateFodmapView {
+public class ModerateFodmapFragment extends Fragment implements ModerateFodmapView,
+        LoaderManager.LoaderCallbacks<Cursor> {
+    private static final String LOG_TAG = ModerateFodmapFragment.class.getSimpleName();
     /**
      * The fragment argument representing the section number for this
      * fragment.
@@ -51,6 +60,7 @@ public class ModerateFodmapFragment extends Fragment implements ModerateFodmapVi
 
     @Override
     public void onResume() {
+        getLoaderManager().restartLoader(0, null, this);
         super.onResume();
         presenter.bindView(this);
     }
@@ -80,6 +90,8 @@ public class ModerateFodmapFragment extends Fragment implements ModerateFodmapVi
         AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
         adView.loadAd(adRequest);
+        getLoaderManager().initLoader(0, null, this);
+
         return rootView;
     }
 
@@ -104,5 +116,34 @@ public class ModerateFodmapFragment extends Fragment implements ModerateFodmapVi
     public void bindFoods(List<Food> foodList) {
         mRecyclerViewAdapter = new RecyclerViewAdapter(getActivity(), foodList);
         mRecyclerView.setAdapter(mRecyclerViewAdapter);
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        String[] columns = {FoodContract.FodmapEntry.COLUMN_FODMAP_ID,
+                FoodContract.FodmapEntry.COLUMN_FODMAP_NAME,
+                FoodContract.FodmapEntry.COLUMN_FODMAP_INFO};
+
+        return new CursorLoader(MyApplication.getAppContext(),
+                FoodContract.FodmapEntry.buildFodmapUri(),
+                columns,
+                null,
+                null,
+                null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        List<Food> foods = new ArrayList<>();
+        while(cursor!= null && cursor.moveToNext()) {
+            foods.add(new Food(cursor.getString(1), cursor.getInt(0), cursor.getString(2)));
+        }
+        mRecyclerViewAdapter = new RecyclerViewAdapter(getActivity(), foods);
+        mRecyclerView.setAdapter(mRecyclerViewAdapter);
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
     }
 }

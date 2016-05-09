@@ -85,7 +85,6 @@ public class FodmapFragment extends Fragment implements FodmapView, TextWatcher 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.fodmap_recycler);
         searchText = (EditText) rootView.findViewById(R.id.fodmap_search_text);
         searchText.addTextChangedListener(this);
-
         return rootView;
     }
 

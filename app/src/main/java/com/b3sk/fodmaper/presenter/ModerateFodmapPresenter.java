@@ -28,7 +28,7 @@ public class ModerateFodmapPresenter extends BasePresenter <List<Food>, Moderate
 
     @Override
     protected void updateView() {
-        view().bindFoods(model);
+        //view().bindFoods(model);
     }
 
 
