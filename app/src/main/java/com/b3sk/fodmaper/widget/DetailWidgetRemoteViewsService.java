@@ -39,9 +39,13 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
                 // data. Therefore we need to clear (and finally restore) the calling identity so
                 // that calls use our process and permission
                 final long identityToken = Binder.clearCallingIdentity();
-                String[] columns = {FoodContract.FodmapEntry.COLUMN_FODMAP_ID,
-                        FoodContract.FodmapEntry.COLUMN_FODMAP_NAME,
-                        FoodContract.FodmapEntry.COLUMN_FODMAP_INFO};
+                String[] columns = {FoodContract.ModerateEntry.COLUMN_MODERATE_NAME,
+                        FoodContract.ModerateEntry.COLUMN_MODERATE_F,
+                        FoodContract.ModerateEntry.COLUMN_MODERATE_O,
+                        FoodContract.ModerateEntry.COLUMN_MODERATE_D,
+                        FoodContract.ModerateEntry.COLUMN_MODERATE_M,
+                        FoodContract.ModerateEntry.COLUMN_MODERATE_P,
+                        "_id"};
                 Uri foodUri = FoodContract.FodmapEntry.buildFodmapUri();
                 data = getContentResolver().query(foodUri,
                         columns,
@@ -75,7 +79,7 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
                 RemoteViews views = new RemoteViews(getPackageName(),
                         R.layout.widget_detail_list_item);
 
-                String foodName = data.getString(1);
+                String foodName = data.getString(0);
                 views.setTextViewText(R.id.widget_item, foodName);
 
 
@@ -107,7 +111,7 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
             @Override
             public long getItemId(int position) {
                 if (data.moveToPosition(position))
-                    return data.getLong(0);
+                    return data.getLong(6);
                 return position;
             }
 

@@ -13,25 +13,27 @@ import org.w3c.dom.Text;
 /**
  * Created by Joopk on 3/23/2016.
  */
-public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
     public TextView fodmapName;
-    public TextView fodmapInfo;
-    public ImageView fodmapPhoto;
+    public TextView fodmapF;
+    public TextView fodmapO;
+    public TextView fodmapD;
+    public TextView fodmapM;
+    public TextView fodmapP;
     public View fodmapView;
 
     public RecyclerViewHolder(View itemView) {
         super(itemView);
-        itemView.setOnClickListener(this);
         fodmapView = itemView;
         fodmapName = (TextView)itemView.findViewById(R.id.food_name);
-//        fodmapInfo = (TextView)itemView.findViewById(R.id.additional_info);
-//        fodmapPhoto = (ImageView)itemView.findViewById(R.id.food_photo);
+        fodmapF = (TextView)itemView.findViewById(R.id.fodmap_F);
+        fodmapO = (TextView)itemView.findViewById(R.id.fodmap_O);
+        fodmapD = (TextView)itemView.findViewById(R.id.fodmap_D);
+        fodmapM = (TextView)itemView.findViewById(R.id.fodmap_M);
+        fodmapP = (TextView)itemView.findViewById(R.id.fodmap_AP);
+
+
     }
 
-    @Override
-    public void onClick(View view) {
-        Toast.makeText(view.getContext(), "Clicked Food At Position =" +
-                " " + getPosition(), Toast.LENGTH_SHORT).show();
-    }
 }

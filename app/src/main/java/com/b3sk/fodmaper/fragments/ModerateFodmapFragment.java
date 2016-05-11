@@ -120,12 +120,15 @@ public class ModerateFodmapFragment extends Fragment implements ModerateFodmapVi
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        String[] columns = {FoodContract.FodmapEntry.COLUMN_FODMAP_ID,
-                FoodContract.FodmapEntry.COLUMN_FODMAP_NAME,
-                FoodContract.FodmapEntry.COLUMN_FODMAP_INFO};
+        String[] columns = {FoodContract.ModerateEntry.COLUMN_MODERATE_NAME,
+                FoodContract.ModerateEntry.COLUMN_MODERATE_F,
+                FoodContract.ModerateEntry.COLUMN_MODERATE_O,
+                FoodContract.ModerateEntry.COLUMN_MODERATE_D,
+                FoodContract.ModerateEntry.COLUMN_MODERATE_M,
+                FoodContract.ModerateEntry.COLUMN_MODERATE_P};
 
         return new CursorLoader(MyApplication.getAppContext(),
-                FoodContract.FodmapEntry.buildFodmapUri(),
+                FoodContract.ModerateEntry.buildModerateUri(),
                 columns,
                 null,
                 null,
@@ -136,7 +139,8 @@ public class ModerateFodmapFragment extends Fragment implements ModerateFodmapVi
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         List<Food> foods = new ArrayList<>();
         while(cursor!= null && cursor.moveToNext()) {
-            foods.add(new Food(cursor.getString(1), cursor.getInt(0), cursor.getString(2)));
+            foods.add(new Food(cursor.getString(0), cursor.getInt(1), cursor.getInt(2),
+                    cursor.getInt(3), cursor.getInt(4), cursor.getInt(5)));
         }
         mRecyclerViewAdapter = new RecyclerViewAdapter(getActivity(), foods);
         mRecyclerView.setAdapter(mRecyclerViewAdapter);

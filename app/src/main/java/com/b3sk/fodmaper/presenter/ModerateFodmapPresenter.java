@@ -22,7 +22,7 @@ public class ModerateFodmapPresenter extends BasePresenter <List<Food>, Moderate
     public void bindView(@NonNull ModerateFodmapView view) {
         super.bindView(view);
         if(model == null) {
-            loadData();
+            //loadData();
         }
     }
 
@@ -34,11 +34,14 @@ public class ModerateFodmapPresenter extends BasePresenter <List<Food>, Moderate
 
 
     private void loadData() {
-        String[] columns = {FoodContract.FodmapEntry.COLUMN_FODMAP_ID,
-                FoodContract.FodmapEntry.COLUMN_FODMAP_NAME,
-                FoodContract.FodmapEntry.COLUMN_FODMAP_INFO};
-        FodmapTask task = new FodmapTask(this, FoodContract.FodmapEntry.buildFodmapUri(), columns,
-                "fodmap");
+        String[] columns = {FoodContract.ModerateEntry.COLUMN_MODERATE_NAME,
+                FoodContract.ModerateEntry.COLUMN_MODERATE_F,
+                FoodContract.ModerateEntry.COLUMN_MODERATE_O,
+                FoodContract.ModerateEntry.COLUMN_MODERATE_D,
+                FoodContract.ModerateEntry.COLUMN_MODERATE_M,
+                FoodContract.ModerateEntry.COLUMN_MODERATE_P};
+        FodmapTask task = new FodmapTask(this, FoodContract.ModerateEntry.buildModerateUri(), columns,
+                "moderate");
         task.execute();
     }
 

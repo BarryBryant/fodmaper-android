@@ -20,6 +20,7 @@
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
     <string name="empty_widget">Where are the fodmaps?!</string>
     <string name="title_widget_detail">FODMAP Quick List</string>
+    <string name="limit_to_one_small_serving">Limit to one small serving</string>
 
 
 </resources>

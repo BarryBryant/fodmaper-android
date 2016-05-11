@@ -38,7 +38,8 @@ public class FodmapTask extends AsyncTask<Void, Void, List<Food>> {
                 FoodContract.FodmapEntry.COLUMN_FODMAP_NAME + " ASC");
         List<Food> foods = new ArrayList<>();
         while(cursor!= null && cursor.moveToNext()) {
-            foods.add(new Food(cursor.getString(1), cursor.getInt(0), cursor.getString(2)));
+            foods.add(new Food(cursor.getString(0), cursor.getInt(1), cursor.getInt(2),
+                    cursor.getInt(3), cursor.getInt(4), cursor.getInt(5)));
         }
 
         if (cursor != null) {

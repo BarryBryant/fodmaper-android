@@ -36,12 +36,25 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, int position) {
         holder.fodmapName.setText(mFoods.get(position).getName());
-//        holder.fodmapInfo.setText(mFoods.get(position).getInfo());
-//        holder.fodmapPhoto.setImageResource(FoodPhotoRetriever.getFoodPhoto(
-//                mFoods.get(position).getId()));
 
-        int id = mFoods.get(position).getId();
-        if(id > 1000) {
+        if(mFoods.get(position).getF() == 1){holder.fodmapF.setTextColor(
+                MyApplication.getResourcesStatic().getColor(R.color.colorAccent));}
+
+        if(mFoods.get(position).getO() == 1){holder.fodmapO.setTextColor(
+                MyApplication.getResourcesStatic().getColor(R.color.colorAccent));}
+
+        if(mFoods.get(position).getD() == 1){holder.fodmapD.setTextColor(
+                MyApplication.getResourcesStatic().getColor(R.color.colorAccent));}
+
+        if(mFoods.get(position).getM() == 1){holder.fodmapM.setTextColor(
+                MyApplication.getResourcesStatic().getColor(R.color.colorAccent));}
+
+        if(mFoods.get(position).getP() == 1){holder.fodmapP.setTextColor(
+                MyApplication.getResourcesStatic().getColor(R.color.colorAccent));}
+
+
+        int id = mFoods.get(position).getF();
+        if(id == 1) {
             holder.fodmapView.setContentDescription(MyApplication.getAppContext().getString(
                     R.string.fodmap_description));
         }else {

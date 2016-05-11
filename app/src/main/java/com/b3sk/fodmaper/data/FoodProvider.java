@@ -24,6 +24,7 @@ public class FoodProvider extends ContentProvider {
     private static final int PROTEIN = 103;
     private static final int GRAIN = 104;
     private static final int OTHER = 105;
+    private static final int MODERATE = 106;
 
 
     private static UriMatcher buildUriMatcher() {
@@ -36,6 +37,7 @@ public class FoodProvider extends ContentProvider {
         uriMatcher.addURI(authority, FoodContract.PATH_PROTEIN, PROTEIN);
         uriMatcher.addURI(authority, FoodContract.PATH_GRAIN, GRAIN);
         uriMatcher.addURI(authority, FoodContract.PATH_OTHER, OTHER);
+        uriMatcher.addURI(authority, FoodContract.PATH_MODERATE, MODERATE);
 
         return uriMatcher;
     }
@@ -121,6 +123,16 @@ public class FoodProvider extends ContentProvider {
                     null,
                     sortOrder);
         }
+
+        if(uriMatcher.match(uri) == MODERATE) {
+            return openHelper.getReadableDatabase().query(FoodContract.ModerateEntry.TABLE_NAME,
+                    projection,
+                    selection,
+                    selectionArgs,
+                    null,
+                    null,
+                    sortOrder);
+        }
         return null;
     }
 
@@ -140,6 +152,8 @@ public class FoodProvider extends ContentProvider {
                 return FoodContract.GrainEntry.CONTENT_TYPE;
             case OTHER:
                 return FoodContract.OtherEntry.CONTENT_TYPE;
+            case MODERATE:
+                return FoodContract.ModerateEntry.CONTENT_TYPE;
         }
         return null;
     }
