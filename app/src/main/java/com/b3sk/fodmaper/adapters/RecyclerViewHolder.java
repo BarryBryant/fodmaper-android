@@ -25,8 +25,8 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.
         itemView.setOnClickListener(this);
         fodmapView = itemView;
         fodmapName = (TextView)itemView.findViewById(R.id.food_name);
-        fodmapInfo = (TextView)itemView.findViewById(R.id.additional_info);
-        fodmapPhoto = (ImageView)itemView.findViewById(R.id.food_photo);
+//        fodmapInfo = (TextView)itemView.findViewById(R.id.additional_info);
+//        fodmapPhoto = (ImageView)itemView.findViewById(R.id.food_photo);
     }
 
     @Override

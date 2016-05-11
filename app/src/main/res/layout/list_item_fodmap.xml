@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/list_item_height"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+
+    <TextView
+        android:id="@+id/food_name"
+        android:textStyle="bold"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_margin="@dimen/list_item_margin_end"
+        android:layout_gravity="center_vertical"
+        android:textSize="16sp"
+        tools:text="FODMAP"
+        android:layout_weight="0"/>
+
+
+    <TextView
+        android:id="@+id/fodmap_FO"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="end|right"
+        android:textSize="24sp"
+        android:text="FO"
+        android:layout_weight="1"/>
+    <TextView
+        android:id="@+id/fodmap_D"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="end|right"
+        android:textSize="24sp"
+        android:text="D"
+        android:layout_weight="0"/>
+    <TextView
+        android:id="@+id/fodmap_M"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="end|right"
+        android:textSize="24sp"
+        android:text="M"
+        android:layout_weight="0"/>
+    <TextView
+        android:id="@+id/fodmap_A"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="end|right"
+        android:textSize="24sp"
+        android:text="A"
+        android:layout_weight="0"/>
+    <TextView
+        android:id="@+id/fodmap_P"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="@dimen/list_item_margin_end"
+        android:layout_marginEnd="@dimen/list_item_margin_end"
+        android:gravity="end|right"
+        android:textSize="24sp"
+        android:text="P"
+        android:layout_weight="0"/>
+
+
+
+</LinearLayout>

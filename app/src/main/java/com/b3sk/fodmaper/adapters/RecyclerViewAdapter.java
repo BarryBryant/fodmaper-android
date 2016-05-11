@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.b3sk.fodmaper.helpers.FoodPhotoRetriever;
 import com.b3sk.fodmaper.R;
 import com.b3sk.fodmaper.helpers.MyApplication;
 import com.b3sk.fodmaper.model.Food;
@@ -29,7 +28,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
 
     @Override
     public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final View foodView = mInflater.inflate(R.layout.card_view_fodmap, parent, false);
+        final View foodView = mInflater.inflate(R.layout.list_item_fodmap, parent, false);
         return new RecyclerViewHolder(foodView);
 
     }
@@ -37,16 +36,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, int position) {
         holder.fodmapName.setText(mFoods.get(position).getName());
-        holder.fodmapInfo.setText(mFoods.get(position).getInfo());
-        holder.fodmapPhoto.setImageResource(FoodPhotoRetriever.getFoodPhoto(
-                mFoods.get(position).getId()));
+//        holder.fodmapInfo.setText(mFoods.get(position).getInfo());
+//        holder.fodmapPhoto.setImageResource(FoodPhotoRetriever.getFoodPhoto(
+//                mFoods.get(position).getId()));
 
         int id = mFoods.get(position).getId();
         if(id > 1000) {
-            holder.fodmapPhoto.setContentDescription(MyApplication.getAppContext().getString(
+            holder.fodmapView.setContentDescription(MyApplication.getAppContext().getString(
                     R.string.fodmap_description));
         }else {
-            holder.fodmapPhoto.setContentDescription(MyApplication.getAppContext().getString(
+            holder.fodmapView.setContentDescription(MyApplication.getAppContext().getString(
                     R.string.friendly_description));
         }
 
