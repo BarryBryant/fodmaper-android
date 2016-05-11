@@ -37,20 +37,25 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     public void onBindViewHolder(RecyclerViewHolder holder, int position) {
         holder.fodmapName.setText(mFoods.get(position).getName());
 
-        if(mFoods.get(position).getF() == 1){holder.fodmapF.setTextColor(
-                MyApplication.getResourcesStatic().getColor(R.color.colorAccent));}
+        if(mFoods.get(position).getF() == 1) {
+            holder.fodmapF.setTextColor(MyApplication.getResourcesStatic().getColor(R.color.colorAccent));
+        }else holder.fodmapF.setTextColor(MyApplication.getResourcesStatic().getColor(R.color.fontDisabled));
 
-        if(mFoods.get(position).getO() == 1){holder.fodmapO.setTextColor(
-                MyApplication.getResourcesStatic().getColor(R.color.colorAccent));}
+        if(mFoods.get(position).getO() == 1) {
+            holder.fodmapO.setTextColor(MyApplication.getResourcesStatic().getColor(R.color.colorAccent));
+        }else holder.fodmapO.setTextColor(MyApplication.getResourcesStatic().getColor(R.color.fontDisabled));
 
-        if(mFoods.get(position).getD() == 1){holder.fodmapD.setTextColor(
-                MyApplication.getResourcesStatic().getColor(R.color.colorAccent));}
+        if(mFoods.get(position).getD() == 1) {
+            holder.fodmapD.setTextColor(MyApplication.getResourcesStatic().getColor(R.color.colorAccent));
+        }else holder.fodmapD.setTextColor(MyApplication.getResourcesStatic().getColor(R.color.fontDisabled));
 
-        if(mFoods.get(position).getM() == 1){holder.fodmapM.setTextColor(
-                MyApplication.getResourcesStatic().getColor(R.color.colorAccent));}
+        if(mFoods.get(position).getM() == 1) {
+            holder.fodmapM.setTextColor(MyApplication.getResourcesStatic().getColor(R.color.colorAccent));
+        }else holder.fodmapM.setTextColor(MyApplication.getResourcesStatic().getColor(R.color.fontDisabled));
 
-        if(mFoods.get(position).getP() == 1){holder.fodmapP.setTextColor(
-                MyApplication.getResourcesStatic().getColor(R.color.colorAccent));}
+        if(mFoods.get(position).getP() == 1) {
+            holder.fodmapP.setTextColor(MyApplication.getResourcesStatic().getColor(R.color.colorAccent));
+        }else holder.fodmapP.setTextColor(MyApplication.getResourcesStatic().getColor(R.color.fontDisabled));
 
 
         int id = mFoods.get(position).getF();
