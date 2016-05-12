@@ -2,7 +2,7 @@ package com.b3sk.fodmaper.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,9 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.b3sk.fodmaper.R;
-import com.b3sk.fodmaper.helpers.MarginDecoration;
 import com.b3sk.fodmaper.adapters.RecyclerViewAdapter;
-import com.b3sk.fodmaper.helpers.MyApplication;
 import com.b3sk.fodmaper.model.Food;
 import com.b3sk.fodmaper.presenter.FriendlyPresenter;
 import com.b3sk.fodmaper.presenter.PresenterManager;
@@ -36,7 +34,6 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
     }
 
     private static final String LOG_TAG = FodmapFriendlyFragment.class.getSimpleName();
-    private GridLayoutManager mLayout;
     private RecyclerView mRecyclerView;
     private RecyclerViewAdapter mRecyclerViewAdapter;
     private FriendlyPresenter presenter;
@@ -100,11 +97,8 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        mLayout = new GridLayoutManager(getContext(), 1);
-        mRecyclerView.setLayoutManager(mLayout);
-
-        int margin = MyApplication.getResourcesStatic().getDimensionPixelSize(R.dimen.card_margin);
-        mRecyclerView.addItemDecoration(new MarginDecoration(margin));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        mRecyclerView.setLayoutManager(layoutManager);
         setHasOptionsMenu(true);
     }
 

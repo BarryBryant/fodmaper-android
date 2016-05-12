@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_margin="@dimen/list_item_margin_end"
         android:layout_gravity="center_vertical"
-        android:textSize="16sp"
+        android:textSize="@dimen/list_item_name_font_size"
         tools:text="FODMAP"
         android:layout_weight="0"/>
 
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_gravity="center_vertical"
         android:gravity="end|right"
-        android:textSize="24sp"
+        android:textSize="@dimen/fodmap_designator_font_size"
         android:text="F"
         android:layout_weight="1"/>
     <TextView
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:gravity="end|right"
-        android:textSize="24sp"
+        android:textSize="@dimen/fodmap_designator_font_size"
         android:text="O"
         android:layout_weight="0"/>
     <TextView
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:gravity="end|right"
-        android:textSize="24sp"
+        android:textSize="@dimen/fodmap_designator_font_size"
         android:text="D"
         android:layout_weight="0"/>
     <TextView
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:gravity="end|right"
-        android:textSize="24sp"
+        android:textSize="@dimen/fodmap_designator_font_size"
         android:text="M"
         android:layout_weight="0"/>
     <TextView
@@ -62,7 +62,7 @@
         android:layout_marginRight="@dimen/list_item_margin_end"
         android:layout_marginEnd="@dimen/list_item_margin_end"
         android:gravity="end|right"
-        android:textSize="24sp"
+        android:textSize="@dimen/fodmap_designator_font_size"
         android:text="AP"
         android:layout_weight="0"/>
 

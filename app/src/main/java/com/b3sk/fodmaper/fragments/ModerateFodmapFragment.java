@@ -6,9 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,15 +15,12 @@ import android.view.ViewGroup;
 import com.b3sk.fodmaper.R;
 import com.b3sk.fodmaper.adapters.RecyclerViewAdapter;
 import com.b3sk.fodmaper.data.FoodContract;
-import com.b3sk.fodmaper.helpers.MarginDecoration;
 import com.b3sk.fodmaper.helpers.MyApplication;
 import com.b3sk.fodmaper.model.Food;
-import com.b3sk.fodmaper.presenter.FodmapPresenter;
 import com.b3sk.fodmaper.presenter.ModerateFodmapPresenter;
 import com.b3sk.fodmaper.presenter.PresenterManager;
 import com.b3sk.fodmaper.view.ModerateFodmapView;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
@@ -37,11 +33,6 @@ import java.util.List;
 public class ModerateFodmapFragment extends Fragment implements ModerateFodmapView,
         LoaderManager.LoaderCallbacks<Cursor> {
     private static final String LOG_TAG = ModerateFodmapFragment.class.getSimpleName();
-    /**
-     * The fragment argument representing the section number for this
-     * fragment.
-     */
-    private GridLayoutManager mLayout;
     private RecyclerView mRecyclerView;
     private RecyclerViewAdapter mRecyclerViewAdapter;
     private ModerateFodmapPresenter presenter;
@@ -97,11 +88,8 @@ public class ModerateFodmapFragment extends Fragment implements ModerateFodmapVi
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        mLayout = new GridLayoutManager(getContext(), 1);
-        mRecyclerView.setLayoutManager(mLayout);
-
-        int margin = MyApplication.getResourcesStatic().getDimensionPixelSize(R.dimen.card_margin);
-        mRecyclerView.addItemDecoration(new MarginDecoration(margin));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        mRecyclerView.setLayoutManager(layoutManager);
         setHasOptionsMenu(true);
 
     }

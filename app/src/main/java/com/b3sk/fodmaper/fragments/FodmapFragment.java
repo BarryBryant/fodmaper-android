@@ -2,25 +2,17 @@ package com.b3sk.fodmaper.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.b3sk.fodmaper.R;
-import com.b3sk.fodmaper.helpers.MarginDecoration;
 import com.b3sk.fodmaper.adapters.RecyclerViewAdapter;
-import com.b3sk.fodmaper.helpers.MyApplication;
 import com.b3sk.fodmaper.model.Food;
 import com.b3sk.fodmaper.presenter.FodmapPresenter;
 import com.b3sk.fodmaper.presenter.PresenterManager;
@@ -39,7 +31,6 @@ public class FodmapFragment extends Fragment implements FodmapView, TextWatcher 
      */
 
     private static final String LOG_TAG = FodmapFragment.class.getSimpleName();
-    private GridLayoutManager mLayout;
     private RecyclerView mRecyclerView;
     private RecyclerViewAdapter mRecyclerViewAdapter;
     private FodmapPresenter presenter;
@@ -90,11 +81,9 @@ public class FodmapFragment extends Fragment implements FodmapView, TextWatcher 
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        mLayout = new GridLayoutManager(getContext(), 1);
-        mRecyclerView.setLayoutManager(mLayout);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        mRecyclerView.setLayoutManager(layoutManager);
 
-        int margin = MyApplication.getResourcesStatic().getDimensionPixelSize(R.dimen.card_margin);
-        mRecyclerView.addItemDecoration(new MarginDecoration(margin));
         setHasOptionsMenu(true);
 
     }
