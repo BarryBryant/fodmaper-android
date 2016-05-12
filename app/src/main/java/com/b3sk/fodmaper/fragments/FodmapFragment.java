@@ -100,6 +100,7 @@ public class FodmapFragment extends Fragment implements FodmapView, TextWatcher 
     @Override
     public void animateToFilter(List<Food> foodList) {
         mRecyclerViewAdapter.animateTo(foodList);
+        mRecyclerView.scrollToPosition(0);
     }
 
     @Override

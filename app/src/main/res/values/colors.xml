@@ -7,5 +7,5 @@
     <color name="photo_placeholder">#ccc</color>
     <color name="fontSecondary">#89000000</color>
 
-    <color name="fontDisabled">#66000000</color>
+    <color name="fontDisabled">#10000000</color>
 </resources>
