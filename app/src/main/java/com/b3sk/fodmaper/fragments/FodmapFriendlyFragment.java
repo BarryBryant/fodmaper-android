@@ -100,7 +100,7 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        mLayout = new GridLayoutManager(getContext(), getResources().getConfiguration().orientation);
+        mLayout = new GridLayoutManager(getContext(), 1);
         mRecyclerView.setLayoutManager(mLayout);
 
         int margin = MyApplication.getResourcesStatic().getDimensionPixelSize(R.dimen.card_margin);
