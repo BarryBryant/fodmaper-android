@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.b3sk.fodmaper.R;
 import com.b3sk.fodmaper.helpers.MyApplication;
@@ -34,7 +35,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     }
 
     @Override
-    public void onBindViewHolder(RecyclerViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerViewHolder holder, final int position) {
         holder.fodmapName.setText(mFoods.get(position).getName());
 
         if(mFoods.get(position).getF() == 1) {
@@ -66,6 +67,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
             holder.fodmapView.setContentDescription(MyApplication.getAppContext().getString(
                     R.string.friendly_description));
         }
+
+        holder.fodmapView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), mFoods.get(position).getInfo(),
+                        Toast.LENGTH_SHORT).show();}
+        });
 
 
     }
@@ -125,5 +133,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         mFoods.add(toPosition, food);
         notifyItemMoved(fromPosition, toPosition);
     }
+
 
 }

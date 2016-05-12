@@ -46,4 +46,17 @@ public class Food {
     public int getP() {
         return p;
     }
+
+    public String getInfo() {
+        String info = "Contains: ";
+        if(f != 1) {
+            return "FODMAP Free";
+        }else {
+            if(o ==1) {info += "Oligosaccharides ";}
+            if(d ==1) {info += "Disaccharides ";}
+            if(m ==1) {info += "Monosaccharides ";}
+            if(p ==1) {info += "Polyols ";}
+            return info;
+        }
+    }
 }
