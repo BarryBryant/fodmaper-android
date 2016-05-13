@@ -87,7 +87,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         applyAndAnimateRemovals(foods);
         applyAndAnimateAdditions(foods);
         applyAndAnimateMovedItems(foods);
-        
+
     }
 
     private void applyAndAnimateRemovals(List<Food> newFoods) {

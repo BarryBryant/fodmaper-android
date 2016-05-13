@@ -4,21 +4,12 @@
     android:layout_height="match_parent"
     android:background="@android:color/white">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/limit_to_one_small_serving"
-        android:textSize="@dimen/list_item_name_font_size"
-        android:textStyle="italic|bold"
-        android:gravity="center_horizontal"/>
-
 
     <android.support.v7.widget.RecyclerView
 
         android:id="@+id/moderate_recycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/moderate_warning_height"
+        android:layout_height="match_parent"
         android:paddingBottom="@dimen/moderate_advertisement_height"
         >
 

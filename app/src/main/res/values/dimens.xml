@@ -33,4 +33,5 @@
     <dimen name="fodmap_designator_font_size">24sp</dimen>
     <dimen name="moderate_warning_height">25dp</dimen>
     <dimen name="moderate_advertisement_height">50dp</dimen>
+    <dimen name="toggle_bar_padding">2dp</dimen>
 </resources>
