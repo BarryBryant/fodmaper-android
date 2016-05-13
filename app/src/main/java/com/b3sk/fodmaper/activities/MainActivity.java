@@ -1,16 +1,19 @@
 package com.b3sk.fodmaper.activities;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 
 import com.b3sk.fodmaper.R;
 import com.b3sk.fodmaper.adapters.SectionsPagerAdapter;
+import com.b3sk.fodmaper.fragments.FodmapFragment;
+import com.b3sk.fodmaper.fragments.FodmapFriendlyFragment;
+import com.b3sk.fodmaper.fragments.ModerateFodmapFragment;
 import com.b3sk.fodmaper.helpers.MyApplication;
 import com.b3sk.fodmaper.presenter.MainPresenter;
 import com.b3sk.fodmaper.presenter.PresenterManager;
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     private ViewPager mViewPager;
     private MainPresenter presenter;
     private Tracker tracker;
+    private boolean tablet;
 
 
     @Override
@@ -57,24 +61,40 @@ public class MainActivity extends AppCompatActivity implements MainView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        if (findViewById(R.id.container_one) != null) {
+            tablet = true;
+            Log.d("HRMMM", "SHOULD BE TROOO");
+        }
 
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        if (!tablet) {
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
+            // Create the adapter that will return a fragment for each of the three
+            // primary sections of the activity.
+            mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+            // Set up the ViewPager with the sections adapter.
+            mViewPager = (ViewPager) findViewById(R.id.container);
+            mViewPager.setAdapter(mSectionsPagerAdapter);
+
+            TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+            tabLayout.setupWithViewPager(mViewPager);
+        } else {
+            if (savedInstanceState == null) {
+                getSupportFragmentManager().beginTransaction().add(R.id.container_one,
+                        FodmapFragment.newInstance()).commit();
+                getSupportFragmentManager().beginTransaction().add(R.id.container_two,
+                        FodmapFriendlyFragment.newInstance()).commit();
+                getSupportFragmentManager().beginTransaction().add(R.id.container_three,
+                        ModerateFodmapFragment.newInstance()).commit();
+            }
+        }
 
 
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
             presenter = new MainPresenter();
-        }else {
+        } else {
             presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
         }
 
