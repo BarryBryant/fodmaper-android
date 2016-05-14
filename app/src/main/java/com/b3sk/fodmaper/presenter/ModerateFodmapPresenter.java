@@ -7,6 +7,7 @@ import com.b3sk.fodmaper.data.FoodContract;
 import com.b3sk.fodmaper.data.foodLoader;
 import com.b3sk.fodmaper.helpers.FoodFilter;
 import com.b3sk.fodmaper.model.Food;
+import com.b3sk.fodmaper.model.FoodRepository;
 import com.b3sk.fodmaper.view.FodmapView;
 import com.b3sk.fodmaper.view.ModerateFodmapView;
 
@@ -34,15 +35,7 @@ public class ModerateFodmapPresenter extends BasePresenter <List<Food>, Moderate
 
 
     private void loadData() {
-        String[] columns = {FoodContract.ModerateEntry.COLUMN_MODERATE_NAME,
-                FoodContract.ModerateEntry.COLUMN_MODERATE_F,
-                FoodContract.ModerateEntry.COLUMN_MODERATE_O,
-                FoodContract.ModerateEntry.COLUMN_MODERATE_D,
-                FoodContract.ModerateEntry.COLUMN_MODERATE_M,
-                FoodContract.ModerateEntry.COLUMN_MODERATE_P};
-        FodmapTask task = new FodmapTask(this, FoodContract.ModerateEntry.buildModerateUri(), columns,
-                "moderate");
-        task.execute();
+        new FoodRepository().getModerates(this);
     }
 
     @Override

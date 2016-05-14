@@ -7,6 +7,7 @@ import com.b3sk.fodmaper.data.FodmapTask;
 import com.b3sk.fodmaper.data.FoodContract;
 import com.b3sk.fodmaper.data.foodLoader;
 import com.b3sk.fodmaper.model.Food;
+import com.b3sk.fodmaper.model.FoodRepository;
 import com.b3sk.fodmaper.view.FriendlyView;
 
 import java.util.ArrayList;
@@ -23,6 +24,14 @@ public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> i
     private boolean proteinClicked = false;
     private boolean otherClicked = false;
     private boolean grainClicked = false;
+
+    private boolean fruitLoaded = false;
+    private boolean vegiLoaded = false;
+    private boolean proteinLoaded = false;
+    private boolean grainLoaded = false;
+    private boolean otherLoaded = false;
+
+
     private List<Food> fruit;
     private List<Food> vegi;
     private List<Food> protein;
@@ -50,16 +59,12 @@ public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> i
     }
 
     private void loadData() {
-        String[] columns = {FoodContract.ModerateEntry.COLUMN_MODERATE_NAME,
-                FoodContract.ModerateEntry.COLUMN_MODERATE_F,
-                FoodContract.ModerateEntry.COLUMN_MODERATE_O,
-                FoodContract.ModerateEntry.COLUMN_MODERATE_D,
-                FoodContract.ModerateEntry.COLUMN_MODERATE_M,
-                FoodContract.ModerateEntry.COLUMN_MODERATE_P};
-
-        FodmapTask task = new FodmapTask(this, FoodContract.FruitEntry.buildFruitUri(), columns,
-                "fruit");
-        task.execute();
+        FoodRepository foodRepository = new FoodRepository();
+        foodRepository.getFruits(this);
+        foodRepository.getVeggies(this);
+        foodRepository.getProtein(this);
+        foodRepository.getGrains(this);
+        foodRepository.getOthers(this);
 
 
     }
@@ -139,53 +144,55 @@ public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> i
     }
 
 
-    //Chained AsyncTask calls to load each set of fodmap friendly foods from the SQLite database.
-    //The sequence is initiated from the loadData() method and subsequent calls are fired off
-    //from the onDataLoaded method.
+
     @Override
     public void onDataLoaded(List<Food> foodList, String key) {
-        String[] columns = {FoodContract.ModerateEntry.COLUMN_MODERATE_NAME,
-                FoodContract.ModerateEntry.COLUMN_MODERATE_F,
-                FoodContract.ModerateEntry.COLUMN_MODERATE_O,
-                FoodContract.ModerateEntry.COLUMN_MODERATE_D,
-                FoodContract.ModerateEntry.COLUMN_MODERATE_M,
-                FoodContract.ModerateEntry.COLUMN_MODERATE_P};
 
         switch(key) {
-            case "fruit": {
-                if(foodList != null) {fruit = foodList;}
-                FodmapTask vegiTask = new FodmapTask(this,
-                        FoodContract.VegiEntry.buildVegiUri(), columns, "vegi");
-                vegiTask.execute();
-            } break;
+            case "fruit":
+                if(foodList != null) {
+                    fruit = foodList;
+                    fruitLoaded = true;
+                }
+                break;
 
-            case "vegi": {
-                if (foodList != null) {vegi = foodList;}
-                FodmapTask proteinTask = new FodmapTask(this,
-                        FoodContract.ProteinEntry.buildProteinUri(), columns, "protein");
-                proteinTask.execute();
-            } break;
+            case "vegi":
+                if (foodList != null) {
+                    vegi = foodList;
+                    vegiLoaded = true;
+                }
+                break;
 
-            case "protein": {
-                if (foodList != null) {protein = foodList;}
-                FodmapTask grainTask = new FodmapTask(this,
-                        FoodContract.GrainEntry.buildGrainUri(), columns, "grain");
-                grainTask.execute();
-            } break;
+            case "protein":
+                if (foodList != null) {
+                    protein = foodList;
+                    proteinLoaded = true;
+                }
+                break;
 
-            case "grain": {
-                if (foodList != null) {grain = foodList;}
-                FodmapTask otherTask = new FodmapTask(this,
-                        FoodContract.OtherEntry.buildOtherUri(), columns, "other");
-                otherTask.execute();
-            } break;
+            case "grain":
+                if (foodList != null) {
+                    grain = foodList;
+                    grainLoaded = true;
+                }
+             break;
 
-            case "other": {
-                if (foodList != null) {other = foodList;}
-            }
+            case "other":
+                if (foodList != null) {
+                    other = foodList;
+                    otherLoaded = true;
+                }
+
         }
 
-        //Initialize model based on which button is toggled
+        if(fruitLoaded & vegiLoaded & proteinLoaded & grainLoaded & otherLoaded) {
+            initializeModel();
+        }
+
+    }
+
+    private void initializeModel() {
+
         List<Food> modelList = new ArrayList<>();
         if(fruitClicked){
             modelList.addAll(fruit);
