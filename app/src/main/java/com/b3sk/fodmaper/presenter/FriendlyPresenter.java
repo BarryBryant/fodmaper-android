@@ -211,4 +211,5 @@ public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> i
             setModel(modelList);
         }
     }
+
 }

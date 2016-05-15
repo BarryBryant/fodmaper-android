@@ -62,7 +62,9 @@ public class FodmapPresenter extends BasePresenter<List<Food>, FodmapView> imple
 
     @Override
     public void onDataLoaded(List<Food> foods, String key) {
-        setModel(foods);
+        if(foods!=null) {
+            setModel(foods);
+        }
     }
 
 }
