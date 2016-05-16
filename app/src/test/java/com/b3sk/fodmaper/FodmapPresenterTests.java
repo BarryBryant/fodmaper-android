@@ -73,7 +73,7 @@ public class FodmapPresenterTests {
     }
 
     @Test
-    public void updateViewMaintainsSearchWithNonNullSearch() {
+    public void updateViewMaintainsNonNullSearch() {
         spyFodmapPresenter.setModel(foods);
         spyFodmapPresenter.onQueryTextChanged("string");
         spyFodmapPresenter.bindView(mockFodmapView);
