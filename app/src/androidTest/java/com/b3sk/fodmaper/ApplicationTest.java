@@ -27,7 +27,6 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
             FoodContract.ModerateEntry.COLUMN_MODERATE_F,
             FoodContract.ModerateEntry.COLUMN_MODERATE_O,
             FoodContract.ModerateEntry.COLUMN_MODERATE_D,
-
             FoodContract.ModerateEntry.COLUMN_MODERATE_M,
             FoodContract.ModerateEntry.COLUMN_MODERATE_P};
     FodmapPresenter fPresenter = new FodmapPresenter();

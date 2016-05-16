@@ -5,7 +5,6 @@
     android:background="@color/bg_screen3">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -21,8 +20,7 @@
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:layout_toRightOf="@+id/high_fodmap"
-            android:src="@drawable/ic_cancel_black_24dp"
-            android:id="@+id/imageView" />
+            android:src="@drawable/ic_cancel_black_24dp" />
 
         <TextView
             android:id="@+id/high_fodmap"
@@ -78,8 +76,7 @@
             android:layout_height="56dp"
 
             android:layout_toRightOf="@+id/fodmap_friendly"
-            android:src="@drawable/ic_check_circle_black_24dp"
-            android:id="@+id/imageView2" />
+            android:src="@drawable/ic_check_circle_black_24dp" />
 
         <TextView
             android:id="@+id/fodmap_friendly"
