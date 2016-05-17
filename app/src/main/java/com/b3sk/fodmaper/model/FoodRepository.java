@@ -10,12 +10,10 @@ import java.util.List;
 /**
  * Created by Joopkins on 5/14/16.
  */
-public class FoodRepository implements foodLoader {
+public class FoodRepository {
 
-    private foodLoader presenterFoodLoader;
 
     public void getFodmaps(foodLoader foodLoader) {
-        presenterFoodLoader = foodLoader;
 
         String[] columns = {FoodContract.ModerateEntry.COLUMN_MODERATE_NAME,
                 FoodContract.ModerateEntry.COLUMN_MODERATE_F,
@@ -25,13 +23,12 @@ public class FoodRepository implements foodLoader {
                 FoodContract.ModerateEntry.COLUMN_MODERATE_M,
                 FoodContract.ModerateEntry.COLUMN_MODERATE_P};
 
-        FodmapTask task = new FodmapTask(this, FoodContract.FodmapEntry.buildFodmapUri(), columns,
+        FodmapTask task = new FodmapTask(foodLoader, FoodContract.FodmapEntry.buildFodmapUri(), columns,
                 "fodmaps");
         task.execute();
     }
 
     public void getModerates(foodLoader foodLoader) {
-        presenterFoodLoader = foodLoader;
 
         String[] columns = {FoodContract.ModerateEntry.COLUMN_MODERATE_NAME,
                 FoodContract.ModerateEntry.COLUMN_MODERATE_F,
@@ -41,13 +38,12 @@ public class FoodRepository implements foodLoader {
                 FoodContract.ModerateEntry.COLUMN_MODERATE_M,
                 FoodContract.ModerateEntry.COLUMN_MODERATE_P};
 
-        FodmapTask task = new FodmapTask(this, FoodContract.ModerateEntry.buildModerateUri(), columns,
+        FodmapTask task = new FodmapTask(foodLoader, FoodContract.ModerateEntry.buildModerateUri(), columns,
                 "moderates");
         task.execute();
     }
 
     public void getFruits(foodLoader foodLoader) {
-        presenterFoodLoader = foodLoader;
 
         String[] columns = {FoodContract.ModerateEntry.COLUMN_MODERATE_NAME,
                 FoodContract.ModerateEntry.COLUMN_MODERATE_F,
@@ -57,13 +53,12 @@ public class FoodRepository implements foodLoader {
                 FoodContract.ModerateEntry.COLUMN_MODERATE_M,
                 FoodContract.ModerateEntry.COLUMN_MODERATE_P};
 
-        FodmapTask task = new FodmapTask(this, FoodContract.FruitEntry.buildFruitUri(), columns,
+        FodmapTask task = new FodmapTask(foodLoader, FoodContract.FruitEntry.buildFruitUri(), columns,
                 "fruit");
         task.execute();
     }
 
     public void getVeggies(foodLoader foodLoader) {
-        presenterFoodLoader = foodLoader;
 
         String[] columns = {FoodContract.ModerateEntry.COLUMN_MODERATE_NAME,
                 FoodContract.ModerateEntry.COLUMN_MODERATE_F,
@@ -73,13 +68,12 @@ public class FoodRepository implements foodLoader {
                 FoodContract.ModerateEntry.COLUMN_MODERATE_M,
                 FoodContract.ModerateEntry.COLUMN_MODERATE_P};
 
-        FodmapTask task = new FodmapTask(this, FoodContract.VegiEntry.buildVegiUri(), columns,
+        FodmapTask task = new FodmapTask(foodLoader, FoodContract.VegiEntry.buildVegiUri(), columns,
                 "vegi");
         task.execute();
     }
 
     public void getProtein(foodLoader foodLoader) {
-        presenterFoodLoader = foodLoader;
 
         String[] columns = {FoodContract.ModerateEntry.COLUMN_MODERATE_NAME,
                 FoodContract.ModerateEntry.COLUMN_MODERATE_F,
@@ -89,13 +83,12 @@ public class FoodRepository implements foodLoader {
                 FoodContract.ModerateEntry.COLUMN_MODERATE_M,
                 FoodContract.ModerateEntry.COLUMN_MODERATE_P};
 
-        FodmapTask task = new FodmapTask(this, FoodContract.ProteinEntry.buildProteinUri(), columns,
+        FodmapTask task = new FodmapTask(foodLoader, FoodContract.ProteinEntry.buildProteinUri(), columns,
                 "protein");
         task.execute();
     }
 
     public void getGrains(foodLoader foodLoader) {
-        presenterFoodLoader = foodLoader;
 
         String[] columns = {FoodContract.ModerateEntry.COLUMN_MODERATE_NAME,
                 FoodContract.ModerateEntry.COLUMN_MODERATE_F,
@@ -105,13 +98,12 @@ public class FoodRepository implements foodLoader {
                 FoodContract.ModerateEntry.COLUMN_MODERATE_M,
                 FoodContract.ModerateEntry.COLUMN_MODERATE_P};
 
-        FodmapTask task = new FodmapTask(this, FoodContract.GrainEntry.buildGrainUri(), columns,
+        FodmapTask task = new FodmapTask(foodLoader, FoodContract.GrainEntry.buildGrainUri(), columns,
                 "grain");
         task.execute();
     }
 
     public void getOthers(foodLoader foodLoader) {
-        presenterFoodLoader = foodLoader;
 
         String[] columns = {FoodContract.ModerateEntry.COLUMN_MODERATE_NAME,
                 FoodContract.ModerateEntry.COLUMN_MODERATE_F,
@@ -121,14 +113,11 @@ public class FoodRepository implements foodLoader {
                 FoodContract.ModerateEntry.COLUMN_MODERATE_M,
                 FoodContract.ModerateEntry.COLUMN_MODERATE_P};
 
-        FodmapTask task = new FodmapTask(this, FoodContract.OtherEntry.buildOtherUri(), columns,
+        FodmapTask task = new FodmapTask(foodLoader, FoodContract.OtherEntry.buildOtherUri(), columns,
                 "other");
         task.execute();
     }
 
 
-    @Override
-    public void onDataLoaded(List<Food> foodList, String key) {
-        presenterFoodLoader.onDataLoaded(foodList, key);
-    }
+
 }

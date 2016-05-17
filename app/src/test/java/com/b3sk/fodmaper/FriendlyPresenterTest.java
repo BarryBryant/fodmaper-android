@@ -53,7 +53,7 @@ public class FriendlyPresenterTest {
     }
 
     @Test
-    public void verifyViewUpdatedOnCickDisengagedToggle() {
+    public void verifyViewUpdatesOnCickDisengagedToggle() {
         friendlyPresenter.setModel(foods);
         friendlyPresenter.bindView(mockFriendlyView);
         friendlyPresenter.onDataLoaded(foods, "vegi");
