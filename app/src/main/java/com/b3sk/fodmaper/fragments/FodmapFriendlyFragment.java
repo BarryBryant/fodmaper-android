@@ -33,7 +33,6 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
     public FodmapFriendlyFragment() {
     }
 
-    private static final String LOG_TAG = FodmapFriendlyFragment.class.getSimpleName();
     private RecyclerView mRecyclerView;
     private RecyclerViewAdapter mRecyclerViewAdapter;
     private FriendlyPresenter presenter;
@@ -54,14 +53,12 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
 
     @Override
     public void onResume() {
-        Log.d(LOG_TAG, "onResume Called");
         super.onResume();
         presenter.bindView(this);
     }
 
     @Override
     public void onPause() {
-        Log.d(LOG_TAG, "onPause Called");
         super.onPause();
         presenter.unbindView();
     }
@@ -104,7 +101,6 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        Log.d(LOG_TAG, "SAVED STATE");
         super.onSaveInstanceState(outState);
 
         PresenterManager.getInstance().savePresenter(presenter, outState);

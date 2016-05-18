@@ -27,7 +27,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     private final Context myContext;
 
-    private final String LOG_TAG = DataBaseHelper.class.getSimpleName();
 
     /**
      * Constructor
@@ -60,7 +59,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 copyDataBase();
 
             } catch (IOException e) {
-                Log.d(LOG_TAG, "Error copying");
                 throw new Error("Error copying database");
 
             }
@@ -130,7 +128,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         //Open the database
         String myPath = DB_PATH + DB_NAME;
         myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
-        Log.d(LOG_TAG, "Opened database");
 
     }
 

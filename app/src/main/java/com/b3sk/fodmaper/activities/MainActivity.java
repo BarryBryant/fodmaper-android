@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
         setSupportActionBar(toolbar);
         if (findViewById(R.id.container_one) != null) {
             tablet = true;
-            Log.d("HRMMM", "SHOULD BE TROOO");
         }
 
         if (!tablet) {
@@ -102,12 +101,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
         tracker = application.getDefaultTracker();
 
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return super.onCreateOptionsMenu(menu);
-//    }
+    
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
