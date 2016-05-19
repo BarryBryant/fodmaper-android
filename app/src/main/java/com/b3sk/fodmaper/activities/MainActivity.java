@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
         tracker = application.getDefaultTracker();
 
     }
-    
+
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
