@@ -1,4 +1,4 @@
-# FODMAPer - Udacity Nanodegree Capstone Project
+# FODMAPer 
 A pocket reference for the Low [FODMAP](https://en.wikipedia.org/wiki/FODMAP) Diet! The app is built around MVP architecture and uses the full gamut of the Android framework, including a Material user experience and the use of a variety of Google Play services.
 ___
 ![](http://i.imgur.com/jOLh5R0.gif) 
