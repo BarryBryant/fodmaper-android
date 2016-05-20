@@ -2,15 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 android {
-    signingConfigs {
 
-        Udacity {
-            keyAlias 'UdacityKey'
-            keyPassword 'UDACITY'
-            storeFile file('/Users/Joopkins/StudioProjects/FODMAPer/UDACITY.jks')
-            storePassword 'UDACITY'
-        }
-    }
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
     defaultConfig {
@@ -24,7 +16,6 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.Udacity
         }
     }
 }

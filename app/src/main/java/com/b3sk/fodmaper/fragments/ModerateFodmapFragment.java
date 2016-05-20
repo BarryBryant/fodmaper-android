@@ -30,9 +30,7 @@ import java.util.List;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class ModerateFodmapFragment extends Fragment implements ModerateFodmapView,
-        LoaderManager.LoaderCallbacks<Cursor> {
-    private static final String LOG_TAG = ModerateFodmapFragment.class.getSimpleName();
+public class ModerateFodmapFragment extends Fragment implements ModerateFodmapView {
     private RecyclerView mRecyclerView;
     private RecyclerViewAdapter mRecyclerViewAdapter;
     private ModerateFodmapPresenter presenter;
@@ -51,7 +49,6 @@ public class ModerateFodmapFragment extends Fragment implements ModerateFodmapVi
 
     @Override
     public void onResume() {
-        getLoaderManager().restartLoader(0, null, this);
         super.onResume();
         presenter.bindView(this);
     }
@@ -81,7 +78,6 @@ public class ModerateFodmapFragment extends Fragment implements ModerateFodmapVi
         AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
         adView.loadAd(adRequest);
-        getLoaderManager().initLoader(0, null, this);
 
         return rootView;
     }
@@ -106,36 +102,5 @@ public class ModerateFodmapFragment extends Fragment implements ModerateFodmapVi
         mRecyclerView.setAdapter(mRecyclerViewAdapter);
     }
 
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        String[] columns = {FoodContract.ModerateEntry.COLUMN_MODERATE_NAME,
-                FoodContract.ModerateEntry.COLUMN_MODERATE_F,
-                FoodContract.ModerateEntry.COLUMN_MODERATE_O,
-                FoodContract.ModerateEntry.COLUMN_MODERATE_D,
-                FoodContract.ModerateEntry.COLUMN_MODERATE_M,
-                FoodContract.ModerateEntry.COLUMN_MODERATE_P};
 
-        return new CursorLoader(MyApplication.getAppContext(),
-                FoodContract.ModerateEntry.buildModerateUri(),
-                columns,
-                null,
-                null,
-                null);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        List<Food> foods = new ArrayList<>();
-        while(cursor!= null && cursor.moveToNext()) {
-            foods.add(new Food(cursor.getString(0), cursor.getInt(1), cursor.getInt(2),
-                    cursor.getInt(3), cursor.getInt(4), cursor.getInt(5)));
-        }
-        mRecyclerViewAdapter = new RecyclerViewAdapter(getActivity(), foods);
-        mRecyclerView.setAdapter(mRecyclerViewAdapter);
-
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-    }
 }

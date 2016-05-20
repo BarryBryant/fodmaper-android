@@ -23,13 +23,13 @@ public class ModerateFodmapPresenter extends BasePresenter <List<Food>, Moderate
     public void bindView(@NonNull ModerateFodmapView view) {
         super.bindView(view);
         if(model == null) {
-            //loadData();
+            loadData();
         }
     }
 
     @Override
     protected void updateView() {
-        //view().bindFoods(model);
+        view().bindFoods(model);
     }
 
 
@@ -40,6 +40,8 @@ public class ModerateFodmapPresenter extends BasePresenter <List<Food>, Moderate
 
     @Override
     public void onDataLoaded(List<Food> foods, String key) {
-        setModel(foods);
+        if(foods != null) {
+            setModel(foods);
+        }
     }
 }
