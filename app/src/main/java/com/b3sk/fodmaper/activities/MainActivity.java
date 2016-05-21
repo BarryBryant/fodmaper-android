@@ -6,8 +6,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
 
 import com.b3sk.fodmaper.R;
 import com.b3sk.fodmaper.adapters.SectionsPagerAdapter;
@@ -15,7 +13,6 @@ import com.b3sk.fodmaper.fragments.FodmapFragment;
 import com.b3sk.fodmaper.fragments.FodmapFriendlyFragment;
 import com.b3sk.fodmaper.fragments.ModerateFodmapFragment;
 import com.b3sk.fodmaper.helpers.MyApplication;
-import com.b3sk.fodmaper.presenter.MainPresenter;
 import com.b3sk.fodmaper.presenter.PresenterManager;
 import com.b3sk.fodmaper.view.MainView;
 import com.google.android.gms.analytics.HitBuilders;
@@ -37,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-    private MainPresenter presenter;
     private Tracker tracker;
     private boolean tablet;
 
@@ -45,17 +41,11 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Override
     public void onResume() {
         super.onResume();
-        presenter.bindView(this);
         tracker.setScreenName("Image~" + "MainActivity");
         tracker.send(new HitBuilders.ScreenViewBuilder().build());
 
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        presenter.unbindView();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,22 +81,12 @@ public class MainActivity extends AppCompatActivity implements MainView {
         }
 
 
-        if (savedInstanceState == null) {
-            presenter = new MainPresenter();
-        } else {
-            presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
-        }
+
 
         MyApplication application = (MyApplication) getApplication();
         tracker = application.getDefaultTracker();
 
     }
 
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        PresenterManager.getInstance().savePresenter(presenter, outState);
-    }
 
 }
