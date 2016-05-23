@@ -18,7 +18,6 @@ import java.util.List;
  */
 public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> implements foodLoader {
 
-    private static final String LOG_TAG = FriendlyPresenter.class.getSimpleName();
     private boolean fruitClicked = true;
     private boolean vegiClicked = false;
     private boolean proteinClicked = false;
