@@ -30,7 +30,6 @@ public class FodmapFragment extends Fragment implements FodmapView, TextWatcher 
      * fragment.
      */
 
-    private static final String LOG_TAG = FodmapFragment.class.getSimpleName();
     private RecyclerView mRecyclerView;
     private RecyclerViewAdapter mRecyclerViewAdapter;
     private FodmapPresenter presenter;
