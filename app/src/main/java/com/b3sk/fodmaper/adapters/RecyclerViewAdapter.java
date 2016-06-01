@@ -71,9 +71,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         holder.fodmapView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Viewholder returning position of 1 when mfoods filtered down to 1 item
-                //check to prevent index out of bounds
-                if(position == mFoods.size() && position == 1) {
+                //Prevent index out of bounds
+                if(position > mFoods.size()-1) {
                     Toast.makeText(v.getContext(), mFoods.get(0).getInfo(),
                             Toast.LENGTH_SHORT).show();
                 } else {
