@@ -30,11 +30,11 @@ public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return FodmapFriendlyFragment.newInstance();
+                return FodmapFragment.newInstance();
             case 1:
                 return ModerateFodmapFragment.newInstance();
             case 2:
-                return FodmapFragment.newInstance();
+                return FodmapFriendlyFragment.newInstance();
         }
         return null;
     }
@@ -49,13 +49,14 @@ public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
         switch (position) {
             case 0:
                 return MyApplication.getResourcesStatic().getString(
-                        R.string.FODMAP_friendly_fragment);
+                        R.string.FODMAP_fragment);
             case 1:
                 return MyApplication.getResourcesStatic().getString(
                         R.string.moderate_FODMAP_fragment);
             case 2:
                 return MyApplication.getResourcesStatic().getString(
-                        R.string.FODMAP_fragment);
+                        R.string.FODMAP_friendly_fragment);
+
         }
         return null;
     }
