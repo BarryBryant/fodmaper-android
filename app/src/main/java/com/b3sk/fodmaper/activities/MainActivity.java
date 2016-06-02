@@ -15,6 +15,7 @@ import com.b3sk.fodmaper.fragments.ModerateFodmapFragment;
 import com.b3sk.fodmaper.helpers.MyApplication;
 import com.b3sk.fodmaper.presenter.PresenterManager;
 import com.b3sk.fodmaper.view.MainView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
@@ -83,6 +84,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
 
 
+        MobileAds.initialize(getApplicationContext(),
+                getResources().getString(R.string.banner_ad_app_id));
         MyApplication application = (MyApplication) getApplication();
         tracker = application.getDefaultTracker();
 
