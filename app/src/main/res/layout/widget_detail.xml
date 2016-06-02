@@ -8,11 +8,11 @@
     android:background="@android:color/white">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:contentDescription="@string/app_name"
         android:layout_gravity="center"
-        android:src="@drawable/fruit_icon_clicked"
+        android:src="@drawable/background_splash"
         />
 
     <FrameLayout
