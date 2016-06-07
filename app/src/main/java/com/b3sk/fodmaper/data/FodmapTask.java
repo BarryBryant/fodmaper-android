@@ -4,7 +4,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 
-import com.b3sk.fodmaper.helpers.MyApplication;
+import com.b3sk.fodmaper.MyApplication;
 import com.b3sk.fodmaper.model.Food;
 
 import java.util.ArrayList;

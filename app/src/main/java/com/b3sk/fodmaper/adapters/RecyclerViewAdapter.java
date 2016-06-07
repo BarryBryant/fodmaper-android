@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.b3sk.fodmaper.R;
-import com.b3sk.fodmaper.helpers.MyApplication;
+import com.b3sk.fodmaper.MyApplication;
 import com.b3sk.fodmaper.model.Food;
 
 import java.util.ArrayList;

@@ -9,7 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.b3sk.fodmaper.helpers.MyApplication;
+import com.b3sk.fodmaper.MyApplication;
 import com.b3sk.fodmaper.R;
 import com.b3sk.fodmaper.fragments.FodmapFragment;
 import com.b3sk.fodmaper.fragments.FodmapFriendlyFragment;
