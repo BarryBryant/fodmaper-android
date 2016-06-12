@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
 
 
-
         MobileAds.initialize(getApplicationContext(),
                 getResources().getString(R.string.banner_ad_app_id));
         MyApplication application = (MyApplication) getApplication();
