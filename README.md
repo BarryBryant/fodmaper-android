@@ -25,3 +25,6 @@ ___
 - [x] All app dependencies are managed by Gradle.
 - [x] App implements a ContentProvider to access locally stored data.
 - [x] It it performs short duration, on-demand requests (such as search), app uses an AsyncTask.
+
+
+Android, Google Play, and the Google Play logo are trademarks of Google Inc.
