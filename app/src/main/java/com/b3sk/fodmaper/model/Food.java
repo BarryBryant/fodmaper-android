@@ -69,7 +69,7 @@ public class Food implements Comparable<Food>{
 
     @Override
     public boolean equals(Object o) {
-        return o instanceof Food && name.equals(((Food) o).getName());
+        return this == o || o instanceof Food && name.equals(((Food) o).getName());
     }
 
     @Override
