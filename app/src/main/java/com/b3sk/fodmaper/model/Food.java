@@ -1,9 +1,11 @@
 package com.b3sk.fodmaper.model;
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by Joopk on 3/23/2016.
  */
-public class Food {
+public class Food implements Comparable<Food>{
 
     private String name;
     private int f;
@@ -59,4 +61,21 @@ public class Food {
             return info;
         }
     }
+
+    @Override
+    public int compareTo(@NonNull Food food) {
+        return name.compareTo(food.getName());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof Food && name.equals(((Food) o).getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
+
+
 }
