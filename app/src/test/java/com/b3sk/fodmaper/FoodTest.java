@@ -45,4 +45,32 @@ public class FoodTest {
         assertEquals("Contains: Oligosaccharides ", foodSix.getInfo());
     }
 
+    @Test
+    public void sameValueFoodReturnsSameHashCode() {
+        Food foodOne = new Food("Food", 0, 0, 0, 0, 0);
+        Food foodTwo = new Food("Food", 0, 0, 0, 0, 0);
+        assertEquals(foodOne.hashCode(), foodTwo.hashCode());
+    }
+
+    @Test
+    public void differentValueFoodReturnsDifferentHashCode() {
+        Food foodOne = new Food("Food", 0, 0, 0, 0, 0);
+        Food foodTwo = new Food("FoodTwo", 0, 0, 0, 0, 0);
+        assertFalse(foodOne.hashCode() == foodTwo.hashCode());
+    }
+
+    @Test
+    public void twoFoodsWithSameValueReturnTrueOnEquals() {
+        Food foodOne = new Food("Food", 0, 0, 0, 0, 0);
+        Food foodTwo = new Food("Food", 0, 0, 0, 0, 0);
+        assertTrue(foodOne.equals(foodTwo));
+    }
+
+    @Test
+    public void twoFoodsWithDifferentValueReturnFalseOnEquals() {
+        Food foodOne = new Food("FoodOne", 0, 0, 0, 0, 0);
+        Food foodTwo = new Food("FoodTwo", 0, 0, 0, 0, 0);
+        assertFalse(foodOne.equals(foodTwo));
+    }
+
 }
