@@ -1,7 +1,9 @@
 # FODMAPer 
 A pocket reference for the Low [FODMAP](https://en.wikipedia.org/wiki/FODMAP) Diet! The app is built around MVP architecture and uses the full gamut of the Android framework, including a Material user experience and the use of a variety of Google Play services.
+<br>
+<a href='https://play.google.com/store/apps/details?id=com.b3sk.fodmaper&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' width="250px"/></a>
 ___
-![](http://i.imgur.com/jOLh5R0.gif) 
+![](http://i.imgur.com/8awSyDm.gif) 
 ___
 ###Required Components
 - [x] App conforms to common standards found in the Android Nanodegree General Project Guidelines
@@ -23,3 +25,6 @@ ___
 - [x] All app dependencies are managed by Gradle.
 - [x] App implements a ContentProvider to access locally stored data.
 - [x] It it performs short duration, on-demand requests (such as search), app uses an AsyncTask.
+
+
+Android, Google Play, and the Google Play logo are trademarks of Google Inc.
