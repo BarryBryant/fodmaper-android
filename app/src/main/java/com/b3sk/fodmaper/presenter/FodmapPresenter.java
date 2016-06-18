@@ -2,10 +2,9 @@ package com.b3sk.fodmaper.presenter;
 
 import android.support.annotation.NonNull;
 
-import com.b3sk.fodmaper.data.foodLoader;
 import com.b3sk.fodmaper.helpers.FoodFilter;
 import com.b3sk.fodmaper.model.Food;
-import com.b3sk.fodmaper.model.FoodRepository;
+import com.b3sk.fodmaper.model.RealmFoodRepoImpl;
 import com.b3sk.fodmaper.view.FodmapView;
 
 import java.util.List;
@@ -13,7 +12,7 @@ import java.util.List;
 /**
  * Created by Joopk on 4/8/2016.
  */
-public class FodmapPresenter extends BasePresenter<List<Food>, FodmapView> implements foodLoader {
+public class FodmapPresenter extends BasePresenter<List<Food>, FodmapView> {
 
 
     private String search;
@@ -48,14 +47,11 @@ public class FodmapPresenter extends BasePresenter<List<Food>, FodmapView> imple
     }
 
     private void loadData() {
-        new FoodRepository().getFodmaps(this);
-    }
-
-    @Override
-    public void onDataLoaded(List<Food> foods, String key) {
-        if(foods!=null) {
+        List<Food> foods = new RealmFoodRepoImpl().getFodmaps();
+        if (foods != null) {
             setModel(foods);
         }
     }
+
 
 }

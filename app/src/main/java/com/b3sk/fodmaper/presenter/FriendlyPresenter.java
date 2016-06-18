@@ -1,13 +1,9 @@
 package com.b3sk.fodmaper.presenter;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
-import com.b3sk.fodmaper.data.FodmapTask;
-import com.b3sk.fodmaper.data.FoodContract;
-import com.b3sk.fodmaper.data.foodLoader;
 import com.b3sk.fodmaper.model.Food;
-import com.b3sk.fodmaper.model.FoodRepository;
+import com.b3sk.fodmaper.model.RealmFoodRepoImpl;
 import com.b3sk.fodmaper.view.FriendlyView;
 
 import java.util.ArrayList;
@@ -16,7 +12,7 @@ import java.util.List;
 /**
  * Created by Joopk on 4/9/2016.
  */
-public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> implements foodLoader {
+public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> {
 
     private boolean fruitClicked = true;
     private boolean vegiClicked = false;
@@ -24,19 +20,11 @@ public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> i
     private boolean otherClicked = false;
     private boolean grainClicked = false;
 
-    private boolean fruitLoaded = false;
-    private boolean vegiLoaded = false;
-    private boolean proteinLoaded = false;
-    private boolean grainLoaded = false;
-    private boolean otherLoaded = false;
-
-
     private List<Food> fruit;
     private List<Food> vegi;
     private List<Food> protein;
     private List<Food> other;
     private List<Food> grain;
-
 
 
     @Override
@@ -58,12 +46,13 @@ public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> i
     }
 
     private void loadData() {
-        FoodRepository foodRepository = new FoodRepository();
-        foodRepository.getFruits(this);
-        foodRepository.getVeggies(this);
-        foodRepository.getProtein(this);
-        foodRepository.getGrains(this);
-        foodRepository.getOthers(this);
+        RealmFoodRepoImpl repo = new RealmFoodRepoImpl();
+        fruit = repo.getFruits();
+        vegi = repo.getVeggies();
+        protein = repo.getProtein();
+        grain = repo.getGrains();
+        other = repo.getOthers();
+        initializeModel();
 
 
     }
@@ -143,72 +132,26 @@ public class FriendlyPresenter extends BasePresenter<List<Food>, FriendlyView> i
     }
 
 
-
-    @Override
-    public void onDataLoaded(List<Food> foodList, String key) {
-
-        switch(key) {
-            case "fruit":
-                if(foodList != null) {
-                    fruit = foodList;
-                    fruitLoaded = true;
-                }
-                break;
-
-            case "vegi":
-                if (foodList != null) {
-                    vegi = foodList;
-                    vegiLoaded = true;
-                }
-                break;
-
-            case "protein":
-                if (foodList != null) {
-                    protein = foodList;
-                    proteinLoaded = true;
-                }
-                break;
-
-            case "grain":
-                if (foodList != null) {
-                    grain = foodList;
-                    grainLoaded = true;
-                }
-             break;
-
-            case "other":
-                if (foodList != null) {
-                    other = foodList;
-                    otherLoaded = true;
-                }
-
-        }
-
-        if(fruitLoaded & vegiLoaded & proteinLoaded & grainLoaded & otherLoaded) {
-            initializeModel();
-        }
-
-    }
-
     private void initializeModel() {
 
         List<Food> modelList = new ArrayList<>();
-        if(fruitClicked){
+        if (fruitClicked) {
             modelList.addAll(fruit);
             setModel(modelList);
-        }else if(vegiClicked){
+        } else if (vegiClicked) {
             modelList.addAll(vegi);
             setModel(modelList);
-        }else if(proteinClicked){
+        } else if (proteinClicked) {
             modelList.addAll(protein);
             setModel(modelList);
-        }else if(grainClicked){
+        } else if (grainClicked) {
             modelList.addAll(grain);
             setModel(modelList);
-        }else if(otherClicked){
+        } else if (otherClicked) {
             modelList.addAll(other);
             setModel(modelList);
         }
     }
+
 
 }

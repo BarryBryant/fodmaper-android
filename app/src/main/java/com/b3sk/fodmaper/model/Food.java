@@ -2,21 +2,28 @@ package com.b3sk.fodmaper.model;
 
 import android.support.annotation.NonNull;
 
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 /**
  * Created by Joopk on 3/23/2016.
  */
-public class Food implements Comparable<Food>{
+public class Food extends RealmObject implements Comparable<Food>{
 
+    @PrimaryKey
     private String name;
+
+
     private int f;
     private int o;
     private int d;
     private int m;
     private int p;
 
+
+    public Food() {}
     public Food(String name, int f, int o, int d, int m, int p) {
         this.name = name;
-
         this.f = f;
         this.o = o;
         this.d = d;
@@ -51,7 +58,7 @@ public class Food implements Comparable<Food>{
 
     public String getInfo() {
         String info = "Contains: ";
-        if(f != 1) {
+        if(f < 1) {
             return "FODMAP Free";
         }else {
             if(o ==1) {info += "Oligosaccharides ";}
@@ -78,4 +85,27 @@ public class Food implements Comparable<Food>{
     }
 
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setF(int f) {
+        this.f = f;
+    }
+
+    public void setO(int o) {
+        this.o = o;
+    }
+
+    public void setD(int d) {
+        this.d = d;
+    }
+
+    public void setM(int m) {
+        this.m = m;
+    }
+
+    public void setP(int p) {
+        this.p = p;
+    }
 }

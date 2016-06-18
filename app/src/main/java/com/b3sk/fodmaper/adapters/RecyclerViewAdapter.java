@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.b3sk.fodmaper.R;
 import com.b3sk.fodmaper.MyApplication;
+import com.b3sk.fodmaper.R;
 import com.b3sk.fodmaper.model.Food;
 
 import java.util.ArrayList;
@@ -37,30 +37,39 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, final int position) {
         holder.fodmapName.setText(mFoods.get(position).getName());
+        int f = mFoods.get(position).getF();
 
-        if(mFoods.get(position).getF() == 1) {
-            holder.fodmapF.setTextColor(MyApplication.getResourcesStatic().getColor(R.color.colorAccent));
-        }else holder.fodmapF.setTextColor(MyApplication.getResourcesStatic().getColor(R.color.fontDisabled));
+        //Check if food item is high or moderate fodmap and set accent color accordingly
+        int flagColor = MyApplication.getResourcesStatic().getColor(R.color.fontDisabled);
+        int disabledColor = MyApplication.getResourcesStatic().getColor(R.color.fontDisabled);
+
+        if(f == 2) flagColor = MyApplication.getResourcesStatic().getColor(R.color.colorAccent);
+        if(f == 1) flagColor = MyApplication.getResourcesStatic().getColor(R.color.colorModerateAccent);
+
+        //Set colors of each letter in FODMAP according to its presence in the Food
+        //Moderate foods flag as orange, high flag as red
+
+        holder.fodmapF.setTextColor(flagColor);
 
         if(mFoods.get(position).getO() == 1) {
-            holder.fodmapO.setTextColor(MyApplication.getResourcesStatic().getColor(R.color.colorAccent));
-        }else holder.fodmapO.setTextColor(MyApplication.getResourcesStatic().getColor(R.color.fontDisabled));
+            holder.fodmapO.setTextColor(flagColor);
+        }else holder.fodmapO.setTextColor(disabledColor);
 
         if(mFoods.get(position).getD() == 1) {
-            holder.fodmapD.setTextColor(MyApplication.getResourcesStatic().getColor(R.color.colorAccent));
-        }else holder.fodmapD.setTextColor(MyApplication.getResourcesStatic().getColor(R.color.fontDisabled));
+            holder.fodmapD.setTextColor(flagColor);
+        }else holder.fodmapD.setTextColor(disabledColor);
 
         if(mFoods.get(position).getM() == 1) {
-            holder.fodmapM.setTextColor(MyApplication.getResourcesStatic().getColor(R.color.colorAccent));
-        }else holder.fodmapM.setTextColor(MyApplication.getResourcesStatic().getColor(R.color.fontDisabled));
+            holder.fodmapM.setTextColor(flagColor);
+        }else holder.fodmapM.setTextColor(disabledColor);
 
         if(mFoods.get(position).getP() == 1) {
-            holder.fodmapP.setTextColor(MyApplication.getResourcesStatic().getColor(R.color.colorAccent));
-        }else holder.fodmapP.setTextColor(MyApplication.getResourcesStatic().getColor(R.color.fontDisabled));
+            holder.fodmapP.setTextColor(flagColor);
+        }else holder.fodmapP.setTextColor(disabledColor);
 
 
-        int id = mFoods.get(position).getF();
-        if(id == 1) {
+        //set content descriptions
+        if(f > 0) {
             holder.fodmapView.setContentDescription(MyApplication.getAppContext().getString(
                     R.string.fodmap_description));
         }else {
