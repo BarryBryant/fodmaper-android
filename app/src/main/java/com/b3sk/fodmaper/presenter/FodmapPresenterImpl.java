@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by Joopkins on 6/18/16.
  */
-public class FodmapPresenterImpl implements FodmapPresenter, LifecyclePresenter<FodmapView> {
+public class FodmapPresenterImpl implements FodmapPresenter {
 
     private FoodRepo repo;
     private List<Food> model;
@@ -28,7 +28,7 @@ public class FodmapPresenterImpl implements FodmapPresenter, LifecyclePresenter<
     public void loadFood() {
         model = repo.getFodmaps();
         view.bindFoods(model);
-        if(search != null && search.length() > 0) {
+        if (search != null && search.length() > 0) {
             onQueryTextChanged(search);
         }
 
@@ -37,6 +37,7 @@ public class FodmapPresenterImpl implements FodmapPresenter, LifecyclePresenter<
     @Override
     public void bindView(@NonNull FodmapView view) {
         this.view = view;
+        loadFood();
     }
 
     @Override

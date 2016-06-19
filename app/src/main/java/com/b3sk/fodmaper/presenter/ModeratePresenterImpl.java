@@ -4,8 +4,6 @@ import android.support.annotation.NonNull;
 
 import com.b3sk.fodmaper.model.Food;
 import com.b3sk.fodmaper.model.FoodRepo;
-import com.b3sk.fodmaper.model.RealmFoodRepoImpl;
-import com.b3sk.fodmaper.view.FodmapView;
 import com.b3sk.fodmaper.view.ModerateFodmapView;
 
 import java.util.List;
@@ -13,7 +11,7 @@ import java.util.List;
 /**
  * Created by Joopkins on 6/18/16.
  */
-public class ModeratePresenterImpl implements LifecyclePresenter<ModerateFodmapView>, ModeratePresenter {
+public class ModeratePresenterImpl implements ModeratePresenter {
 
     private FoodRepo repo;
     private List<Food> model;
@@ -26,6 +24,7 @@ public class ModeratePresenterImpl implements LifecyclePresenter<ModerateFodmapV
     @Override
     public void bindView(@NonNull ModerateFodmapView view) {
         this.view = view;
+        loadFood();
     }
 
     @Override
@@ -35,7 +34,7 @@ public class ModeratePresenterImpl implements LifecyclePresenter<ModerateFodmapV
 
     @Override
     public void loadFood() {
-        if(model == null) {
+        if (model == null) {
             model = repo.getModerates();
         }
         view.bindFoods(model);

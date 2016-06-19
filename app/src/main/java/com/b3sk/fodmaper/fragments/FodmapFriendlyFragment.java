@@ -9,15 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.b3sk.fodmaper.MyApplication;
 import com.b3sk.fodmaper.R;
 import com.b3sk.fodmaper.adapters.RecyclerViewAdapter;
 import com.b3sk.fodmaper.model.Food;
+import com.b3sk.fodmaper.model.FoodRepo;
 import com.b3sk.fodmaper.model.RealmFoodRepoImpl;
 import com.b3sk.fodmaper.presenter.FriendlyPresenterImpl;
 import com.b3sk.fodmaper.presenter.PresenterManager;
 import com.b3sk.fodmaper.view.FriendlyView;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 
 /**
@@ -42,6 +46,8 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
     private ImageView other;
     private ImageView grain;
 
+    @Inject FoodRepo foodRepo;
+
     /**
      * Returns a new instance of this fragment for the given section
      * number.
@@ -54,7 +60,6 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
     public void onResume() {
         super.onResume();
         presenter.bindView(this);
-        presenter.loadFood();
     }
 
     @Override
@@ -64,17 +69,23 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ((MyApplication) getActivity().getApplication()).getComponent().inject(this);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fodmap_friendly_list, container, false);
 
         if(savedInstanceState == null) {
-            presenter = new FriendlyPresenterImpl(new RealmFoodRepoImpl());
+            presenter = new FriendlyPresenterImpl(foodRepo);
         }else {
             presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
             if(presenter == null) {
-                presenter = new FriendlyPresenterImpl(new RealmFoodRepoImpl());
+                presenter = new FriendlyPresenterImpl(foodRepo);
             }
         }
 

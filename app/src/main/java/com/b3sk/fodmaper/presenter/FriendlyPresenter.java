@@ -1,9 +1,11 @@
 package com.b3sk.fodmaper.presenter;
 
+import com.b3sk.fodmaper.view.FriendlyView;
+
 /**
  * Created by Joopkins on 6/18/16.
  */
-public interface FriendlyPresenter {
+public interface FriendlyPresenter extends LifecyclePresenter<FriendlyView> {
 
     void loadFood();
     void onFruitClicked();

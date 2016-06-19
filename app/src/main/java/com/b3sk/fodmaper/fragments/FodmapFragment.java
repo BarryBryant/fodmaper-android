@@ -6,20 +6,25 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.b3sk.fodmaper.MyApplication;
 import com.b3sk.fodmaper.R;
 import com.b3sk.fodmaper.adapters.RecyclerViewAdapter;
 import com.b3sk.fodmaper.model.Food;
+import com.b3sk.fodmaper.model.FoodRepo;
 import com.b3sk.fodmaper.model.RealmFoodRepoImpl;
 import com.b3sk.fodmaper.presenter.FodmapPresenterImpl;
 import com.b3sk.fodmaper.presenter.PresenterManager;
 import com.b3sk.fodmaper.view.FodmapView;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 
 /**
@@ -34,6 +39,7 @@ public class FodmapFragment extends Fragment implements FodmapView, TextWatcher 
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
     private FodmapPresenterImpl presenter;
+    @Inject FoodRepo foodRepo;
 
     public FodmapFragment() {
     }
@@ -50,7 +56,6 @@ public class FodmapFragment extends Fragment implements FodmapView, TextWatcher 
     public void onResume() {
         super.onResume();
         presenter.bindView(this);
-        presenter.loadFood();
     }
 
     @Override
@@ -60,14 +65,20 @@ public class FodmapFragment extends Fragment implements FodmapView, TextWatcher 
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ((MyApplication) getActivity().getApplication()).getComponent().inject(this);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if(savedInstanceState == null) {
-            presenter = new FodmapPresenterImpl(new RealmFoodRepoImpl());
+            presenter = new FodmapPresenterImpl(foodRepo);
         }else {
             presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
             if(presenter == null) {
-                presenter = new FodmapPresenterImpl(new RealmFoodRepoImpl());
+                presenter = new FodmapPresenterImpl(foodRepo);
             }
         }
 

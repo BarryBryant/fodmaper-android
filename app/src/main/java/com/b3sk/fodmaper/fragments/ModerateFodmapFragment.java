@@ -8,9 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.b3sk.fodmaper.MyApplication;
 import com.b3sk.fodmaper.R;
 import com.b3sk.fodmaper.adapters.RecyclerViewAdapter;
 import com.b3sk.fodmaper.model.Food;
+import com.b3sk.fodmaper.model.FoodRepo;
 import com.b3sk.fodmaper.model.RealmFoodRepoImpl;
 import com.b3sk.fodmaper.presenter.ModeratePresenterImpl;
 import com.b3sk.fodmaper.view.ModerateFodmapView;
@@ -19,6 +21,8 @@ import com.google.android.gms.ads.AdView;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 
 /**
  * A placeholder fragment containing a simple view.
@@ -26,6 +30,7 @@ import java.util.List;
 public class ModerateFodmapFragment extends Fragment implements ModerateFodmapView {
     private RecyclerView recyclerView;
     private ModeratePresenterImpl presenter;
+    @Inject FoodRepo foodRepo;
 
     public ModerateFodmapFragment() {
     }
@@ -42,7 +47,6 @@ public class ModerateFodmapFragment extends Fragment implements ModerateFodmapVi
     public void onResume() {
         super.onResume();
         presenter.bindView(this);
-        presenter.loadFood();
     }
 
     @Override
@@ -52,12 +56,18 @@ public class ModerateFodmapFragment extends Fragment implements ModerateFodmapVi
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ((MyApplication) getActivity().getApplication()).getComponent().inject(this);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (savedInstanceState == null) {
-            presenter = new ModeratePresenterImpl(new RealmFoodRepoImpl());
+            presenter = new ModeratePresenterImpl(foodRepo);
         } else if (presenter == null) {
-            presenter = new ModeratePresenterImpl(new RealmFoodRepoImpl());
+            presenter = new ModeratePresenterImpl(foodRepo);
         }
 
         View rootView = inflater.inflate(R.layout.moderate_fodmap_list, container, false);
