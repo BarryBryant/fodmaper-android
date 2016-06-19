@@ -12,13 +12,13 @@ public class PrefManager {
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
     SharedPreferences pref;
     SharedPreferences.Editor editor;
-    Context _context;
+    Context context;
     // shared pref mode
     int PRIVATE_MODE = 0;
 
     public PrefManager(Context context) {
-        this._context = context;
-        pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
+        this.context = context;
+        pref = this.context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = pref.edit();
     }
 

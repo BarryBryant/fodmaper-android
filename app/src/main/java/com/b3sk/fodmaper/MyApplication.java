@@ -27,6 +27,7 @@ public class MyApplication extends Application {
     }
 
     private Tracker tracker;
+    private AppComponent component;
 
     @Override
     public void onCreate() {
@@ -40,6 +41,10 @@ public class MyApplication extends Application {
                 .build();
         Realm.setDefaultConfiguration(config);
 
+        component = DaggerAppComponent.builder().build();
+
+
+
     }
 
     synchronized public Tracker getDefaultTracker() {
@@ -48,6 +53,10 @@ public class MyApplication extends Application {
             tracker = analytics.newTracker(R.xml.global_tracker);
         }
         return tracker;
+    }
+
+    public AppComponent getComponent() {
+        return component;
     }
 
 
