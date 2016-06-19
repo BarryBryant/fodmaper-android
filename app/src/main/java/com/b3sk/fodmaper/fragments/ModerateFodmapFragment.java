@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import com.b3sk.fodmaper.R;
 import com.b3sk.fodmaper.adapters.RecyclerViewAdapter;
 import com.b3sk.fodmaper.model.Food;
-import com.b3sk.fodmaper.presenter.ModerateFodmapPresenter;
-import com.b3sk.fodmaper.presenter.PresenterManager;
+import com.b3sk.fodmaper.model.RealmFoodRepoImpl;
+import com.b3sk.fodmaper.presenter.ModeratePresenterImpl;
 import com.b3sk.fodmaper.view.ModerateFodmapView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -24,9 +24,8 @@ import java.util.List;
  * A placeholder fragment containing a simple view.
  */
 public class ModerateFodmapFragment extends Fragment implements ModerateFodmapView {
-    private RecyclerView mRecyclerView;
-    private RecyclerViewAdapter mRecyclerViewAdapter;
-    private ModerateFodmapPresenter presenter;
+    private RecyclerView recyclerView;
+    private ModeratePresenterImpl presenter;
 
     public ModerateFodmapFragment() {
     }
@@ -36,14 +35,14 @@ public class ModerateFodmapFragment extends Fragment implements ModerateFodmapVi
      * number.
      */
     public static ModerateFodmapFragment newInstance() {
-        ModerateFodmapFragment fragment = new ModerateFodmapFragment();
-        return fragment;
+        return new ModerateFodmapFragment();
     }
 
     @Override
     public void onResume() {
         super.onResume();
         presenter.bindView(this);
+        presenter.loadFood();
     }
 
     @Override
@@ -55,17 +54,14 @@ public class ModerateFodmapFragment extends Fragment implements ModerateFodmapVi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if(savedInstanceState == null) {
-            presenter = new ModerateFodmapPresenter();
-        }else {
-            presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
-            if(presenter == null) {
-                presenter = new ModerateFodmapPresenter();
-            }
+        if (savedInstanceState == null) {
+            presenter = new ModeratePresenterImpl(new RealmFoodRepoImpl());
+        } else if (presenter == null) {
+            presenter = new ModeratePresenterImpl(new RealmFoodRepoImpl());
         }
 
         View rootView = inflater.inflate(R.layout.moderate_fodmap_list, container, false);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.moderate_recycler);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.moderate_recycler);
 
         AdView adView = (AdView) rootView.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
@@ -78,7 +74,7 @@ public class ModerateFodmapFragment extends Fragment implements ModerateFodmapVi
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(layoutManager);
         setHasOptionsMenu(true);
 
     }
@@ -86,13 +82,12 @@ public class ModerateFodmapFragment extends Fragment implements ModerateFodmapVi
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        PresenterManager.getInstance().savePresenter(presenter, outState);
     }
 
     @Override
     public void bindFoods(List<Food> foodList) {
-        mRecyclerViewAdapter = new RecyclerViewAdapter(getActivity(), foodList);
-        mRecyclerView.setAdapter(mRecyclerViewAdapter);
+        RecyclerViewAdapter mRecyclerViewAdapter = new RecyclerViewAdapter(getActivity(), foodList);
+        recyclerView.setAdapter(mRecyclerViewAdapter);
     }
 
 

@@ -14,7 +14,8 @@ import android.widget.EditText;
 import com.b3sk.fodmaper.R;
 import com.b3sk.fodmaper.adapters.RecyclerViewAdapter;
 import com.b3sk.fodmaper.model.Food;
-import com.b3sk.fodmaper.presenter.FodmapPresenter;
+import com.b3sk.fodmaper.model.RealmFoodRepoImpl;
+import com.b3sk.fodmaper.presenter.FodmapPresenterImpl;
 import com.b3sk.fodmaper.presenter.PresenterManager;
 import com.b3sk.fodmaper.view.FodmapView;
 
@@ -30,10 +31,9 @@ public class FodmapFragment extends Fragment implements FodmapView, TextWatcher 
      * fragment.
      */
 
-    private RecyclerView mRecyclerView;
-    private RecyclerViewAdapter mRecyclerViewAdapter;
-    private FodmapPresenter presenter;
-    private EditText searchText;
+    private RecyclerView recyclerView;
+    private RecyclerViewAdapter recyclerViewAdapter;
+    private FodmapPresenterImpl presenter;
 
     public FodmapFragment() {
     }
@@ -43,14 +43,14 @@ public class FodmapFragment extends Fragment implements FodmapView, TextWatcher 
      * number.
      */
     public static FodmapFragment newInstance() {
-        FodmapFragment fragment = new FodmapFragment();
-        return fragment;
+        return new FodmapFragment();
     }
 
     @Override
     public void onResume() {
         super.onResume();
         presenter.bindView(this);
+        presenter.loadFood();
     }
 
     @Override
@@ -63,17 +63,17 @@ public class FodmapFragment extends Fragment implements FodmapView, TextWatcher 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if(savedInstanceState == null) {
-            presenter = new FodmapPresenter();
+            presenter = new FodmapPresenterImpl(new RealmFoodRepoImpl());
         }else {
             presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
             if(presenter == null) {
-                presenter = new FodmapPresenter();
+                presenter = new FodmapPresenterImpl(new RealmFoodRepoImpl());
             }
         }
 
         View rootView = inflater.inflate(R.layout.fodmap_list, container, false);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.fodmap_recycler);
-        searchText = (EditText) rootView.findViewById(R.id.fodmap_search_text);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.fodmap_recycler);
+        EditText searchText = (EditText) rootView.findViewById(R.id.fodmap_search_text);
         searchText.addTextChangedListener(this);
         return rootView;
     }
@@ -81,8 +81,7 @@ public class FodmapFragment extends Fragment implements FodmapView, TextWatcher 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(layoutManager);
-
+        recyclerView.setLayoutManager(layoutManager);
         setHasOptionsMenu(true);
 
     }
@@ -94,18 +93,16 @@ public class FodmapFragment extends Fragment implements FodmapView, TextWatcher 
         PresenterManager.getInstance().savePresenter(presenter, outState);
     }
 
-
-
     @Override
     public void animateToFilter(List<Food> foodList) {
-        mRecyclerViewAdapter.animateTo(foodList);
-        mRecyclerView.scrollToPosition(0);
+        recyclerViewAdapter.animateTo(foodList);
+        recyclerView.scrollToPosition(0);
     }
 
     @Override
     public void bindFoods(List<Food> foodList) {
-        mRecyclerViewAdapter = new RecyclerViewAdapter(getActivity(), foodList);
-        mRecyclerView.setAdapter(mRecyclerViewAdapter);
+        recyclerViewAdapter = new RecyclerViewAdapter(getActivity(), foodList);
+        recyclerView.setAdapter(recyclerViewAdapter);
     }
 
     @Override

@@ -28,12 +28,12 @@ public class MainActivity extends AppCompatActivity implements MainView {
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+    private SectionsPagerAdapter sectionsPagerAdapter;
 
     /**
      * The {@link ViewPager} that will host the section contents.
      */
-    private ViewPager mViewPager;
+    private ViewPager viewPager;
     private Tracker tracker;
     private boolean tablet;
 
@@ -61,14 +61,15 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
             // Create the adapter that will return a fragment for each of the three
             // primary sections of the activity.
-            mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+            sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
             // Set up the ViewPager with the sections adapter.
-            mViewPager = (ViewPager) findViewById(R.id.container);
-            mViewPager.setAdapter(mSectionsPagerAdapter);
+            viewPager = (ViewPager) findViewById(R.id.container);
+            viewPager.setOffscreenPageLimit(2);
+            viewPager.setAdapter(sectionsPagerAdapter);
 
             TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-            tabLayout.setupWithViewPager(mViewPager);
+            tabLayout.setupWithViewPager(viewPager);
         } else {
             if (savedInstanceState == null) {
                 getSupportFragmentManager().beginTransaction().add(R.id.container_one,

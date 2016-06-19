@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,8 @@ import android.widget.ImageView;
 import com.b3sk.fodmaper.R;
 import com.b3sk.fodmaper.adapters.RecyclerViewAdapter;
 import com.b3sk.fodmaper.model.Food;
-import com.b3sk.fodmaper.presenter.FriendlyPresenter;
+import com.b3sk.fodmaper.model.RealmFoodRepoImpl;
+import com.b3sk.fodmaper.presenter.FriendlyPresenterImpl;
 import com.b3sk.fodmaper.presenter.PresenterManager;
 import com.b3sk.fodmaper.view.FriendlyView;
 
@@ -33,9 +33,9 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
     public FodmapFriendlyFragment() {
     }
 
-    private RecyclerView mRecyclerView;
-    private RecyclerViewAdapter mRecyclerViewAdapter;
-    private FriendlyPresenter presenter;
+    private RecyclerView recyclerView;
+    private RecyclerViewAdapter recyclerViewAdapter;
+    private FriendlyPresenterImpl presenter;
     private ImageView fruit;
     private ImageView vegi;
     private ImageView protein;
@@ -47,14 +47,14 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
      * number.
      */
     public static FodmapFriendlyFragment newInstance() {
-        FodmapFriendlyFragment fragment = new FodmapFriendlyFragment();
-        return fragment;
+        return new FodmapFriendlyFragment();
     }
 
     @Override
     public void onResume() {
         super.onResume();
         presenter.bindView(this);
+        presenter.loadFood();
     }
 
     @Override
@@ -70,15 +70,15 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
         View rootView = inflater.inflate(R.layout.fodmap_friendly_list, container, false);
 
         if(savedInstanceState == null) {
-            presenter = new FriendlyPresenter();
+            presenter = new FriendlyPresenterImpl(new RealmFoodRepoImpl());
         }else {
             presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
             if(presenter == null) {
-                presenter = new FriendlyPresenter();
+                presenter = new FriendlyPresenterImpl(new RealmFoodRepoImpl());
             }
         }
 
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.fodmap_recycler);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.fodmap_recycler);
         protein = (ImageView) rootView.findViewById(R.id.protein_button);
         protein.setOnClickListener(this);
         vegi = (ImageView) rootView.findViewById(R.id.vegitable_button);
@@ -95,14 +95,13 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(layoutManager);
         setHasOptionsMenu(true);
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
         PresenterManager.getInstance().savePresenter(presenter, outState);
     }
 
@@ -129,13 +128,13 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
 
     @Override
     public void animateToFilter(List<Food> foodList) {
-        mRecyclerViewAdapter.animateTo(foodList);
+        recyclerViewAdapter.animateTo(foodList);
     }
 
     @Override
     public void bindFoods(List<Food> foodList) {
-        mRecyclerViewAdapter = new RecyclerViewAdapter(getActivity(), foodList);
-        mRecyclerView.setAdapter(mRecyclerViewAdapter);
+        recyclerViewAdapter = new RecyclerViewAdapter(getActivity(), foodList);
+        recyclerView.setAdapter(recyclerViewAdapter);
 
     }
 
