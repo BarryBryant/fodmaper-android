@@ -37,14 +37,9 @@ public class FriendlyPresenterTest {
     }
 
     @Test
-    public void loadFoodFromRepo_UpdateToggles() {
+    public void bindView_LoadsFoodFromRepo_UpdateToggles() {
         presenter.bindView(mockFriendlyView);
-        presenter.loadFood();
-        verify(mockFoodRepo).getFruits();
-        verify(mockFoodRepo).getVeggies();
-        verify(mockFoodRepo).getProtein();
-        verify(mockFoodRepo).getGrains();
-        verify(mockFoodRepo).getOthers();
+        verify(mockFoodRepo).getFruits();//presenter initializes with fruit toggled
         verify(mockFriendlyView).onFruitClicked(anyBoolean());
         verify(mockFriendlyView).onVegiClicked(anyBoolean());
         verify(mockFriendlyView).onProteinClicked(anyBoolean());
@@ -54,9 +49,8 @@ public class FriendlyPresenterTest {
 
     @Test
     public void onFruitClicked_DoesntUpdate_Toggles_WhenAlreadyActive() {
-        presenter.bindView(mockFriendlyView);
-        presenter.loadFood();
-        presenter.onFruitClicked();
+        presenter.bindView(mockFriendlyView);//all toggles updated on initial view update
+        presenter.onFruitClicked();//fruit already toggled no second call should be made
         verify(mockFriendlyView, times(1)).onFruitClicked(anyBoolean());
         verify(mockFriendlyView, times(1)).onVegiClicked(anyBoolean());
         verify(mockFriendlyView, times(1)).onProteinClicked(anyBoolean());
@@ -67,7 +61,6 @@ public class FriendlyPresenterTest {
     @Test
     public void onVegiClickedUpdatesToggles() {
         presenter.bindView(mockFriendlyView);
-        presenter.loadFood();
         presenter.onVegiClicked();
         verify(mockFriendlyView, times(2)).onFruitClicked(anyBoolean());
         verify(mockFriendlyView, times(2)).onVegiClicked(anyBoolean());
@@ -79,7 +72,6 @@ public class FriendlyPresenterTest {
     @Test
     public void onProteinClickedUpdatesToggles() {
         presenter.bindView(mockFriendlyView);
-        presenter.loadFood();
         presenter.onProteinClicked();
         verify(mockFriendlyView, times(2)).onFruitClicked(anyBoolean());
         verify(mockFriendlyView, times(2)).onVegiClicked(anyBoolean());
@@ -91,7 +83,6 @@ public class FriendlyPresenterTest {
     @Test
     public void onGrainClickedUpdatesToggles() {
         presenter.bindView(mockFriendlyView);
-        presenter.loadFood();
         presenter.onGrainClicked();
         verify(mockFriendlyView, times(2)).onFruitClicked(anyBoolean());
         verify(mockFriendlyView, times(2)).onVegiClicked(anyBoolean());
@@ -103,7 +94,6 @@ public class FriendlyPresenterTest {
     @Test
     public void onOtherClickedUpdatesToggles() {
         presenter.bindView(mockFriendlyView);
-        presenter.loadFood();
         presenter.onOtherClicked();
         verify(mockFriendlyView, times(2)).onFruitClicked(anyBoolean());
         verify(mockFriendlyView, times(2)).onVegiClicked(anyBoolean());

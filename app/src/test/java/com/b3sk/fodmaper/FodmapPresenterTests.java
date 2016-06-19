@@ -47,20 +47,17 @@ public class FodmapPresenterTests {
         presenter = new FodmapPresenterImpl(mockFoodRepo);
     }
 
-
     @Test
-    public void loadFoodFromRepoAndUpdateView_NoFilterWhenSearchNull() {
+    public void bindView_LoadsFoodFromRepoAndUpdatesView_NoFilterWhenSearchNull() {
         presenter.bindView(mockFodmapView);
-        presenter.loadFood();
         verify(mockFoodRepo).getFodmaps();
         verify(mockFodmapView).bindFoods(anyListOf(Food.class));
         verify(mockFodmapView, never()).animateToFilter(anyListOf(Food.class));
     }
 
     @Test
-    public void loadFoodFromRepoAndUpdateView_FilterWhenSearchNotNull() {
+    public void bindView_LoadsFoodFromRepoAndUpdatesView_FilterWhenSearchNotNull() {
         presenter.bindView(mockFodmapView);
-        presenter.loadFood();
         verify(mockFoodRepo).getFodmaps();
         verify(mockFodmapView).bindFoods(anyListOf(Food.class));
         verify(mockFodmapView, times(0)).animateToFilter(anyListOf(Food.class));
