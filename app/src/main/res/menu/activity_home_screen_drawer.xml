@@ -3,19 +3,19 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_friendly"
             android:icon="@drawable/ic_check_circle_black_24dp"
             android:title="FODMAP Friendly" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_moderate"
             android:icon="@drawable/ic_warning_black_24dp"
             android:title="Moderate FODMAP" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_high"
             android:icon="@drawable/ic_cancel_black_24dp"
             android:title="High FODMAP" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_search"
             android:icon="@drawable/ic_search_24dp"
             android:title="Search Everything" />
     </group>

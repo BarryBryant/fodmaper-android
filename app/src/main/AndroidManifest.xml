@@ -12,34 +12,32 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".activities.SplashActivity"
+        <activity
+            android:name=".activities.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activities.WelcomeActivity"
-            android:theme="@style/WelcomeActivity">
-        </activity>
-
+            android:theme="@style/WelcomeActivity"></activity>
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustNothing">
-        </activity>
-
+            android:windowSoftInputMode="adjustNothing"></activity>
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <!-- Optionally, register AnalyticsReceiver and AnalyticsService to support background
-         dispatching on non-Google Play devices -->
+        <!--
+         Optionally, register AnalyticsReceiver and AnalyticsService to support background
+         dispatching on non-Google Play devices
+        -->
         <receiver
             android:name="com.google.android.gms.analytics.AnalyticsReceiver"
             android:enabled="true">
@@ -47,13 +45,16 @@
                 <action android:name="com.google.android.gms.analytics.ANALYTICS_DISPATCH" />
             </intent-filter>
         </receiver>
+
         <service
             android:name="com.google.android.gms.analytics.AnalyticsService"
             android:enabled="true"
             android:exported="false" />
 
-        <!-- Optionally, register CampaignTrackingReceiver and CampaignTrackingService to enable
-             installation campaign reporting -->
+        <!--
+             Optionally, register CampaignTrackingReceiver and CampaignTrackingService to enable
+             installation campaign reporting
+        -->
         <receiver
             android:name="com.google.android.gms.analytics.CampaignTrackingReceiver"
             android:exported="true">
@@ -61,9 +62,8 @@
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
             </intent-filter>
         </receiver>
+
         <service android:name="com.google.android.gms.analytics.CampaignTrackingService" />
-
-
 
         <provider
             android:name=".data.FoodProvider"
@@ -74,17 +74,17 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:theme="@android:style/Theme.Translucent" />
 
-
-
-        <!--detail widget info-->
+        <!-- detail widget info -->
         <receiver
             android:name=".widget.DetailWidgetProvider"
-            android:label="@string/title_widget_detail"
-            android:enabled="true" >
+            android:enabled="true"
+            android:label="@string/title_widget_detail">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
-            <meta-data android:name="android.appwidget.provider"
+
+            <meta-data
+                android:name="android.appwidget.provider"
                 android:resource="@xml/widget_info_detail" />
         </receiver>
 
@@ -94,6 +94,7 @@
             android:exported="false"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
+        <activity android:name=".activities.SearchAllActivity"></activity>
     </application>
 
 </manifest>

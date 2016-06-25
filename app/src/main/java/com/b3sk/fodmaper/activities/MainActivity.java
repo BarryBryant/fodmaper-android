@@ -1,5 +1,6 @@
 package com.b3sk.fodmaper.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -9,7 +10,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.b3sk.fodmaper.R;
 import com.b3sk.fodmaper.adapters.SectionsPagerAdapter;
@@ -17,22 +20,11 @@ import com.b3sk.fodmaper.fragments.FodmapFragment;
 import com.b3sk.fodmaper.fragments.FodmapFriendlyFragment;
 import com.b3sk.fodmaper.fragments.ModerateFodmapFragment;
 import com.b3sk.fodmaper.MyApplication;
-import com.b3sk.fodmaper.view.MainView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
-public class MainActivity extends AppCompatActivity implements MainView {
-
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
-    private SectionsPagerAdapter sectionsPagerAdapter;
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -65,7 +57,15 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
             // Create the adapter that will return a fragment for each of the three
             // primary sections of the activity.
-            sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+            /*
+      The {@link android.support.v4.view.PagerAdapter} that will provide
+      fragments for each of the sections. We use a
+      {@link FragmentPagerAdapter} derivative, which will keep every
+      loaded fragment in memory. If this becomes too memory intensive, it
+      may be best to switch to a
+      {@link android.support.v4.app.FragmentStatePagerAdapter}.
+     */
+            SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
             // Set up the ViewPager with the sections adapter.
             viewPager = (ViewPager) findViewById(R.id.container);
@@ -82,6 +82,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
             toggle.syncState();
 
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            navigationView.setNavigationItemSelectedListener(this);
+
+
 
         } else {
             if (savedInstanceState == null) {
@@ -114,4 +117,25 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
 
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.nav_friendly) {
+            viewPager.setCurrentItem(2, true);
+        } else if (id == R.id.nav_moderate) {
+            viewPager.setCurrentItem(1, true);
+        } else if (id == R.id.nav_high) {
+            viewPager.setCurrentItem(0, true);
+        } else if (id == R.id.nav_share) {
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, "CHECK OUT THIS INCREDIBLE APP");
+            startActivity(Intent.createChooser(shareIntent, "Tell a friend about FODMAPer"));
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
 }
