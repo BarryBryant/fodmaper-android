@@ -39,7 +39,6 @@ public class ModeratePresenterTest {
     @Test
     public void loadFoodFromRepoAndUpdateView() {
         presenter.bindView(mockModerateView);
-        presenter.loadFood();
         verify(mockFoodRepo).getModerates();
         verify(mockModerateView).bindFoods(anyListOf(Food.class));
     }
