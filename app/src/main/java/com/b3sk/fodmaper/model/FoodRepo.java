@@ -14,4 +14,5 @@ public interface FoodRepo {
     List<Food> getProtein();
     List<Food> getGrains();
     List<Food> getOthers();
+    List<Food> getAllFood();
 }

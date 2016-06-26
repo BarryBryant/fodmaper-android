@@ -58,4 +58,11 @@ public class RealmFoodRepoImpl implements FoodRepo {
         RealmQuery<Food> query = realm.where(Food.class);
         query.equalTo("f", -5);
         return query.findAll();    }
+
+    @Override
+    public List<Food> getAllFood() {
+        Realm realm = Realm.getDefaultInstance();
+        RealmQuery<Food> query = realm.where(Food.class);
+        return query.findAll();
+    }
 }
