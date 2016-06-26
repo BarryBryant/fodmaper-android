@@ -7,6 +7,7 @@ import com.b3sk.fodmaper.model.Food;
 import com.b3sk.fodmaper.model.FoodRepo;
 import com.b3sk.fodmaper.view.FodmapView;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.List;
 public class SearchAllPresenterImpl implements FodmapPresenter {
 
     private FoodRepo repo;
-    private List<Food> model;
+    private List<Food> model = new ArrayList<>();
     private FodmapView view;
     private String search;
 
@@ -28,7 +29,7 @@ public class SearchAllPresenterImpl implements FodmapPresenter {
 
     @Override
     public void loadFood() {
-        model = repo.getAllFood();
+        model.addAll(repo.getAllFood());
         view.bindFoods(model);
         if (search != null && search.length() > 0) {
             onQueryTextChanged(search);
