@@ -30,6 +30,7 @@ public class SearchAllPresenterImpl implements FodmapPresenter {
     @Override
     public void loadFood() {
         model.addAll(repo.getAllFood());
+        Collections.sort(model);
         view.bindFoods(model);
         if (search != null && search.length() > 0) {
             onQueryTextChanged(search);
