@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ViewPager viewPager;
     private Tracker tracker;
     private boolean tablet;
+    private NavigationView navigationView;
 
 
     @Override
@@ -37,6 +38,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onResume();
         tracker.setScreenName("Image~" + "MainActivity");
         tracker.send(new HitBuilders.ScreenViewBuilder().build());
+
+        //Set the current item in the nav drawer to reflect the current viewpager page
+        if(!tablet) {
+            navigationView.getMenu().getItem(viewPager.getCurrentItem()).setChecked(true);
+        }
 
     }
 
@@ -69,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawer.setDrawerListener(toggle);
             toggle.syncState();
 
-            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);
 
         } else {
@@ -133,6 +139,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onPageSelected(int position) {
+        //Set the current item in the nav drawer to reflect the current viewpager page
+        if(!tablet) {
+            navigationView.getMenu().getItem(position).setChecked(true);
+        }
 
     }
 
