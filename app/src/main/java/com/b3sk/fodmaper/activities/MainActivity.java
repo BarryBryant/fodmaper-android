@@ -2,6 +2,7 @@ package com.b3sk.fodmaper.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
@@ -119,8 +120,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_high) {
             viewPager.setCurrentItem(0, true);
         } else if (id == R.id.nav_search) {
-            Intent intent = new Intent(this, SearchAllActivity.class);
-            startActivity(intent);
+            //Delay launching of new activity to prevent jank in nav drawer
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                Intent intent = new Intent(getApplicationContext(), SearchAllActivity.class);
+                startActivity(intent);
+                }
+            }, 200);
         } else if (id == R.id.nav_share) {
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
