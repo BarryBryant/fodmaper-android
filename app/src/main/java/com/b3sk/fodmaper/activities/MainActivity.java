@@ -129,15 +129,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }, 200);
         } else if (id == R.id.nav_share) {
-            Intent shareIntent = new Intent(Intent.ACTION_SEND);
-            shareIntent.setType("text/plain");
-            shareIntent.putExtra(Intent.EXTRA_TEXT, "CHECK OUT THIS INCREDIBLE APP");
-            startActivity(Intent.createChooser(shareIntent, "Tell a friend about FODMAPer"));
+            sendShareIntent();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void sendShareIntent() {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_string));
+        startActivity(Intent.createChooser(shareIntent, getString(R.string.share_tag)));
     }
 
     @Override

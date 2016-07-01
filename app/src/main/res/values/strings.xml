@@ -32,6 +32,8 @@
     <string name="moderate_fodmaps_welcome">Moderate FODMAPs</string>
     <string name="moderate_note_welcome">Note: Limit to a small serving!</string>
     <string name="fodmap_friendly_welcome">FODMAP Friendly</string>
+    <string name="share_string"><![CDATA[Check out FODMAPer in the Google play store, https://play.google.com/store/apps/details?id=com.b3sk.fodmaper&hl=en!]]></string>
+    <string name="share_tag">Tell a friend about FODMAPer</string>
 
 
 </resources>
