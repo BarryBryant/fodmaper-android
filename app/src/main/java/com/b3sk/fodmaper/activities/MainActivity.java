@@ -121,12 +121,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewPager.setCurrentItem(0, true);
         } else if (id == R.id.nav_search) {
             //Delay launching of new activity to prevent jank in nav drawer
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
+            new Handler().postDelayed(() -> {
                 Intent intent = new Intent(getApplicationContext(), SearchAllActivity.class);
                 startActivity(intent);
-                }
             }, 200);
         } else if (id == R.id.nav_share) {
             sendShareIntent();
