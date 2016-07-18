@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tracker.send(new HitBuilders.ScreenViewBuilder().build());
 
         //Set the current item in the nav drawer to reflect the current viewpager page
-        if(!tablet) {
+        if (!tablet) {
             navigationView.getMenu().getItem(viewPager.getCurrentItem()).setChecked(true);
         }
 
@@ -100,12 +100,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
+        if (tablet) {
             super.onBackPressed();
+        } else {
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            } else {
+                super.onBackPressed();
+            }
         }
+
     }
 
 
@@ -148,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onPageSelected(int position) {
         //Set the current item in the nav drawer to reflect the current viewpager page
-        if(!tablet) {
+        if (!tablet) {
             navigationView.getMenu().getItem(position).setChecked(true);
         }
 
