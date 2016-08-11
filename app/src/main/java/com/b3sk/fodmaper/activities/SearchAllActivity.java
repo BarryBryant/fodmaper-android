@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.b3sk.fodmaper.MyApplication;
 import com.b3sk.fodmaper.R;
 import com.b3sk.fodmaper.adapters.RecyclerViewAdapter;
+import com.b3sk.fodmaper.adapters.SearchAllRecyclerViewAdapter;
 import com.b3sk.fodmaper.model.Food;
 import com.b3sk.fodmaper.model.FoodRepo;
 import com.b3sk.fodmaper.presenter.FodmapPresenterImpl;
@@ -25,7 +26,7 @@ import javax.inject.Inject;
 public class SearchAllActivity extends AppCompatActivity implements FodmapView, TextWatcher {
 
     private RecyclerView recyclerView;
-    private RecyclerViewAdapter recyclerViewAdapter;
+    private SearchAllRecyclerViewAdapter recyclerViewAdapter;
     private SearchAllPresenterImpl presenter;
 
     @Inject
@@ -82,7 +83,7 @@ public class SearchAllActivity extends AppCompatActivity implements FodmapView, 
 
     @Override
     public void bindFoods(List<Food> foodList) {
-        recyclerViewAdapter = new RecyclerViewAdapter(this, foodList);
+        recyclerViewAdapter = new SearchAllRecyclerViewAdapter(this, foodList);
         recyclerView.setAdapter(recyclerViewAdapter);
     }
 
