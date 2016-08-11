@@ -43,52 +43,51 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         int flagColor = MyApplication.getResourcesStatic().getColor(R.color.fontDisabled);
         int disabledColor = MyApplication.getResourcesStatic().getColor(R.color.fontDisabled);
 
-        if(f == 2) flagColor = MyApplication.getResourcesStatic().getColor(R.color.colorAccent);
-        if(f == 1) flagColor = MyApplication.getResourcesStatic().getColor(R.color.colorModerateAccent);
+        if (f == 2) flagColor = MyApplication.getResourcesStatic().getColor(R.color.colorAccent);
+        if (f == 1)
+            flagColor = MyApplication.getResourcesStatic().getColor(R.color.colorModerateAccent);
 
         //Set colors of each letter in FODMAP according to its presence in the Food
         //Moderate foods flag as orange, high flag as red
 
         holder.fodmapF.setTextColor(flagColor);
 
-        if(mFoods.get(position).getO() == 1) {
+        if (mFoods.get(position).getO() == 1) {
             holder.fodmapO.setTextColor(flagColor);
-        }else holder.fodmapO.setTextColor(disabledColor);
+        } else holder.fodmapO.setTextColor(disabledColor);
 
-        if(mFoods.get(position).getD() == 1) {
+        if (mFoods.get(position).getD() == 1) {
             holder.fodmapD.setTextColor(flagColor);
-        }else holder.fodmapD.setTextColor(disabledColor);
+        } else holder.fodmapD.setTextColor(disabledColor);
 
-        if(mFoods.get(position).getM() == 1) {
+        if (mFoods.get(position).getM() == 1) {
             holder.fodmapM.setTextColor(flagColor);
-        }else holder.fodmapM.setTextColor(disabledColor);
+        } else holder.fodmapM.setTextColor(disabledColor);
 
-        if(mFoods.get(position).getP() == 1) {
+        if (mFoods.get(position).getP() == 1) {
             holder.fodmapP.setTextColor(flagColor);
-        }else holder.fodmapP.setTextColor(disabledColor);
+        } else holder.fodmapP.setTextColor(disabledColor);
 
 
         //set content descriptions
-        if(f > 0) {
+        if (f > 0) {
             holder.fodmapView.setContentDescription(MyApplication.getAppContext().getString(
                     R.string.fodmap_description));
-        }else {
+        } else {
             holder.fodmapView.setContentDescription(MyApplication.getAppContext().getString(
                     R.string.friendly_description));
         }
 
-        holder.fodmapView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Prevent index out of bounds
-                if(position > mFoods.size()-1) {
-                    Toast.makeText(v.getContext(), mFoods.get(0).getInfo(),
-                            Toast.LENGTH_SHORT).show();
-                } else {
+        holder.fodmapView.setOnClickListener((v) -> {
+            //Prevent index out of bounds
+            if (position > mFoods.size() - 1) {
+                Toast.makeText(v.getContext(), mFoods.get(0).getInfo(),
+                        Toast.LENGTH_SHORT).show();
+            } else {
                 Toast.makeText(v.getContext(), mFoods.get(position).getInfo(),
                         Toast.LENGTH_SHORT).show();
-                }
             }
+
         });
 
 
