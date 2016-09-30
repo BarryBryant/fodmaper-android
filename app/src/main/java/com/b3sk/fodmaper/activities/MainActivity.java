@@ -117,26 +117,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
+        switch(id) {
+            case R.id.nav_friendly:
+                viewPager.setCurrentItem(2, true);
+                break;
+            case R.id.nav_moderate:
+                viewPager.setCurrentItem(1, true);
+                break;
+            case R.id.nav_high:
+                viewPager.setCurrentItem(0, true);
+                break;
+            case R.id.nav_search:
+                //Delay launching of new activity to prevent jank in nav drawer
+                new Handler().postDelayed(() -> {
+                    Intent intent = new Intent(getApplicationContext(), SearchAllActivity.class);
+                    startActivity(intent);
+                }, 200);
+                break;
+            case R.id.nav_share:
+                sendShareIntent();
+                break;
+            case R.id.nav_feedback:
+                sendFeedbackEmail();
+                break;
 
-        if (id == R.id.nav_friendly) {
-            viewPager.setCurrentItem(2, true);
-        } else if (id == R.id.nav_moderate) {
-            viewPager.setCurrentItem(1, true);
-        } else if (id == R.id.nav_high) {
-            viewPager.setCurrentItem(0, true);
-        } else if (id == R.id.nav_search) {
-            //Delay launching of new activity to prevent jank in nav drawer
-            new Handler().postDelayed(() -> {
-                Intent intent = new Intent(getApplicationContext(), SearchAllActivity.class);
-                startActivity(intent);
-            }, 200);
-        } else if (id == R.id.nav_share) {
-            sendShareIntent();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void sendFeedbackEmail() {
+        //send email
     }
 
     private void sendShareIntent() {
