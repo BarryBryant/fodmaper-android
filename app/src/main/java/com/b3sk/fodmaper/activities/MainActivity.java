@@ -1,6 +1,7 @@
 package com.b3sk.fodmaper.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -149,7 +150,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void sendFeedbackEmail() {
-        //send email
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+        emailIntent.setType("message/rfc822");
+        String body = "SUP";
+        String uriText = "mailto:" + Uri.encode("bigdog@swagcity.com") +
+                "?subject=" + Uri.encode("HELP ME SOMETHIGNS WRONG") +
+                "&body=" + Uri.encode(body);
+        emailIntent.setData(Uri.parse(uriText));
+        startActivity(emailIntent);
     }
 
     private void sendShareIntent() {
