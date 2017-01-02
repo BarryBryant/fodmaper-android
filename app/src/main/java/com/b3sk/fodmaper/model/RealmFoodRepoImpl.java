@@ -1,5 +1,8 @@
 package com.b3sk.fodmaper.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import io.realm.Realm;
@@ -14,7 +17,10 @@ public class RealmFoodRepoImpl implements FoodRepo {
         Realm realm = Realm.getDefaultInstance();
         RealmQuery<Food> query = realm.where(Food.class);
         query.equalTo("f", 2);
-        return query.findAll();
+        List<Food> foods = new ArrayList<>();
+        foods.addAll(query.findAll());
+        Collections.sort(foods);
+        return foods;
     }
 
     @Override
@@ -22,47 +28,74 @@ public class RealmFoodRepoImpl implements FoodRepo {
         Realm realm = Realm.getDefaultInstance();
         RealmQuery<Food> query = realm.where(Food.class);
         query.equalTo("f", 1);
-        return query.findAll();    }
+        List<Food> foods = new ArrayList<>();
+        foods.addAll(query.findAll());
+        Collections.sort(foods);
+        return foods;
+    }
 
     @Override
     public List<Food> getFruits() {
         Realm realm = Realm.getDefaultInstance();
         RealmQuery<Food> query = realm.where(Food.class);
         query.equalTo("f", -1);
-        return query.findAll();    }
+        List<Food> foods = new ArrayList<>();
+        foods.addAll(query.findAll());
+        Collections.sort(foods);
+        return foods;
+    }
 
     @Override
     public List<Food> getVeggies() {
         Realm realm = Realm.getDefaultInstance();
         RealmQuery<Food> query = realm.where(Food.class);
         query.equalTo("f", -2);
-        return query.findAll();    }
+        List<Food> foods = new ArrayList<>();
+        foods.addAll(query.findAll());
+        Collections.sort(foods);
+        return foods;
+    }
 
     @Override
     public List<Food> getProtein() {
         Realm realm = Realm.getDefaultInstance();
         RealmQuery<Food> query = realm.where(Food.class);
         query.equalTo("f", -3);
-        return query.findAll();    }
+        List<Food> foods = new ArrayList<>();
+        foods.addAll(query.findAll());
+        Collections.sort(foods);
+        return foods;
+    }
 
     @Override
     public List<Food> getGrains() {
         Realm realm = Realm.getDefaultInstance();
         RealmQuery<Food> query = realm.where(Food.class);
         query.equalTo("f", -4);
-        return query.findAll();    }
+        List<Food> foods = new ArrayList<>();
+        foods.addAll(query.findAll());
+        Collections.sort(foods);
+        return foods;
+    }
 
     @Override
     public List<Food> getOthers() {
         Realm realm = Realm.getDefaultInstance();
         RealmQuery<Food> query = realm.where(Food.class);
         query.equalTo("f", -5);
-        return query.findAll();    }
+        List<Food> foods = new ArrayList<>();
+        foods.addAll(query.findAll());
+        Collections.sort(foods);
+        return foods;
+    }
 
     @Override
     public List<Food> getAllFood() {
         Realm realm = Realm.getDefaultInstance();
         RealmQuery<Food> query = realm.where(Food.class);
-        return query.findAll();
+        List<Food> foods = new ArrayList<>();
+        foods.addAll(query.findAll());
+        Collections.sort(foods);
+        return foods;
     }
 }

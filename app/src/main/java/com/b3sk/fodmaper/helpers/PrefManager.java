@@ -10,6 +10,9 @@ public class PrefManager {
     // Shared preferences file name
     private static final String PREF_NAME = "androidhive-welcome";
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
+    private static final String IS_DB_INIT = "IsDbInit";
+    private static final String DB_VERSION = "dbVersion";
+
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     Context context;
@@ -28,6 +31,24 @@ public class PrefManager {
 
     public void setFirstTimeLaunch(boolean isFirstTime) {
         editor.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime);
+        editor.commit();
+    }
+
+    public boolean isDbInit() {
+        return pref.getBoolean(IS_DB_INIT, false);
+    }
+
+    public void setDbInit(boolean init) {
+        editor.putBoolean(IS_DB_INIT, init);
+        editor.commit();
+    }
+
+    public int getDbVersion() {
+        return pref.getInt(DB_VERSION, -1);
+    }
+
+    public void setDbVersion(int version) {
+        editor.putInt(DB_VERSION, version);
         editor.commit();
     }
 }

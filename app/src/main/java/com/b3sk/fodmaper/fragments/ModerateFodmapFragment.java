@@ -74,8 +74,7 @@ public class ModerateFodmapFragment extends Fragment implements ModerateFodmapVi
         recyclerView = (RecyclerView) rootView.findViewById(R.id.moderate_recycler);
 
         AdView adView = (AdView) rootView.findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .build();
+        AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
 
         return rootView;

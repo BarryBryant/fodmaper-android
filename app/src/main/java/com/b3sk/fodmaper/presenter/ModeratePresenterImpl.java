@@ -6,6 +6,7 @@ import com.b3sk.fodmaper.model.Food;
 import com.b3sk.fodmaper.model.FoodRepo;
 import com.b3sk.fodmaper.view.ModerateFodmapView;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
