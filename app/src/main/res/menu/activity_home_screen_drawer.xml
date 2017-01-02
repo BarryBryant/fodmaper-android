@@ -18,6 +18,10 @@
             android:id="@+id/nav_search"
             android:icon="@drawable/ic_search_24dp"
             android:title="Search Everything" />
+        <item
+            android:id="@+id/refresher"
+            android:icon="@drawable/ic_help_black_24px"
+            android:title="FODMAP Info"/>
     </group>
 
     <item android:title="Communicate">

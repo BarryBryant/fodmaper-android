@@ -19,6 +19,7 @@ import com.b3sk.fodmaper.adapters.SectionsPagerAdapter;
 import com.b3sk.fodmaper.fragments.FodmapFragment;
 import com.b3sk.fodmaper.fragments.FodmapFriendlyFragment;
 import com.b3sk.fodmaper.fragments.ModerateFodmapFragment;
+import com.b3sk.fodmaper.helpers.PrefManager;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
@@ -132,6 +133,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }, 200);
         } else if (id == R.id.nav_share) {
             sendShareIntent();
+        } else if (id == R.id.refresher) {
+            PrefManager manager = new PrefManager(this);
+            manager.setFirstTimeLaunch(true);
+            //Delay launching of new activity to prevent jank in nav drawer
+            new Handler().postDelayed(() -> {
+                Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
+                startActivity(intent);
+            }, 200);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
