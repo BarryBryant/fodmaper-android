@@ -99,9 +99,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     }
 
     public void animateTo(List<Food> foods) {
-        applyAndAnimateRemovals(foods);
-        applyAndAnimateAdditions(foods);
-        applyAndAnimateMovedItems(foods);
+        mFoods.clear();
+        mFoods.addAll(foods);
+        notifyDataSetChanged();
 
     }
 

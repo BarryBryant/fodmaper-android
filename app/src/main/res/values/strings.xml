@@ -12,8 +12,8 @@
     <string name="fodmap_description">FODMAP</string>
     <string name="friendly_description">low FODMAP</string>
 
-    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="banner_ad_app_id">ca-app-pub-3940256099942544~6300978111</string>
+    <string name="banner_ad_unit_id">@string/banner_ad_unit_id_key</string>
+    <string name="banner_ad_app_id">@string/banner_ad_app_id_key</string>
     <string name="empty_widget">Where are the fodmaps?!</string>
     <string name="title_widget_detail">FODMAP Quick List</string>
     <string name="moderate_fodmap_food">MODERATE FODMAP FOODS</string>
