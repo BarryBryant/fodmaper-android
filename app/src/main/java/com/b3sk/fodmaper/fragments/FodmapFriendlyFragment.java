@@ -140,6 +140,7 @@ public class FodmapFriendlyFragment extends Fragment implements View.OnClickList
     @Override
     public void animateToFilter(List<Food> foodList) {
         recyclerViewAdapter.animateTo(foodList);
+        recyclerView.scrollToPosition(0);
     }
 
     @Override
