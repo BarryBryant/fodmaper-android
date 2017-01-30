@@ -76,6 +76,9 @@
             android:name=".activities.SearchAllActivity"
             android:windowSoftInputMode="adjustNothing"
             android:parentActivityName=".activities.MainActivity"/>
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".activities.MainActivity" />
     </application>
 
 </manifest>
