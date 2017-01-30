@@ -48,7 +48,9 @@ public class SearchAllActivity extends AppCompatActivity implements FodmapView, 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_all);
         ((MyApplication) getApplication()).getComponent().inject(this);
-
+        if (getActionBar() != null) {
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         if(savedInstanceState == null) {
             presenter = new SearchAllPresenterImpl(foodRepo);
