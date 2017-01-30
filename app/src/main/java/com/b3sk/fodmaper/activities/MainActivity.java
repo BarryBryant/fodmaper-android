@@ -24,6 +24,8 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
+import de.cketti.mailto.EmailIntentBuilder;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener {
 
     /**
@@ -141,6 +143,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
                 startActivity(intent);
             }, 200);
+        } else if (id == R.id.feedback) {
+            boolean success = EmailIntentBuilder.from(this)
+                    .to("fodmaper.app@gmail.com")
+                    .subject("FODMAPer Feedback")
+                    .body("Suggestions and Feedback")
+                    .start();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
