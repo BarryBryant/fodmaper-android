@@ -1088,7 +1088,7 @@
     "p": 0
   },
   {
-    "name": "Egglant",
+    "name": "Eggplant",
     "f": -2,
     "o": 0,
     "d": 0,
@@ -1329,6 +1329,14 @@
   },
   {
     "name": "Cooking Oil",
+    "f": -3,
+    "o": 0,
+    "d": 0,
+    "m": 0,
+    "p": 0
+  },
+  {
+    "name": "Eggs",
     "f": -3,
     "o": 0,
     "d": 0,
@@ -2009,6 +2017,30 @@
   },
   {
     "name": "Sugar (Sucrose)",
+    "f": -5,
+    "o": 0,
+    "d": 0,
+    "m": 0,
+    "p": 0
+  },
+  {
+    "name": "Splenda (Sucralose)",
+    "f": -5,
+    "o": 0,
+    "d": 0,
+    "m": 0,
+    "p": 0
+  },
+  {
+    "name": "Saccharine",
+    "f": -5,
+    "o": 0,
+    "d": 0,
+    "m": 0,
+    "p": 0
+  },
+  {
+    "name": "Aspartame",
     "f": -5,
     "o": 0,
     "d": 0,

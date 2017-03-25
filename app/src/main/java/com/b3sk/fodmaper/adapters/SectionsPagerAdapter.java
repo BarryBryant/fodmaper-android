@@ -46,15 +46,16 @@ public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
+        boolean nullContext = MyApplication.getResourcesStatic() == null;
         switch (position) {
             case 0:
-                return MyApplication.getResourcesStatic().getString(
+                return nullContext ? "High FODMAP Foods" : MyApplication.getResourcesStatic().getString(
                         R.string.FODMAP_fragment);
             case 1:
-                return MyApplication.getResourcesStatic().getString(
+                return nullContext ? "Moderate FODMAP Foods" : MyApplication.getResourcesStatic().getString(
                         R.string.moderate_FODMAP_fragment);
             case 2:
-                return MyApplication.getResourcesStatic().getString(
+                return nullContext ? "FODMAP Friendly Foods" : MyApplication.getResourcesStatic().getString(
                         R.string.FODMAP_friendly_fragment);
 
         }

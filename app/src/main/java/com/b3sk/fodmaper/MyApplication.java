@@ -23,10 +23,10 @@ public class MyApplication extends Application {
 
     private static Context context;
 
-    private static int dbVersion = 0;
+    private static int dbVersion = 1;
 
     public static Resources getResourcesStatic() {
-        return context.getResources();
+        return getAppContext().getResources();
     }
 
     public static Context getAppContext() {

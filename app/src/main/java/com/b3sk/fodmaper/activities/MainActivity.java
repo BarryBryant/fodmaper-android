@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.b3sk.fodmaper.MyApplication;
@@ -23,6 +24,9 @@ import com.b3sk.fodmaper.helpers.PrefManager;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.pollfish.constants.Position;
+import com.pollfish.main.PollFish;
+import com.pollfish.main.PollFish.ParamsBuilder;
 
 import de.cketti.mailto.EmailIntentBuilder;
 
@@ -48,6 +52,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.getMenu().getItem(viewPager.getCurrentItem()).setChecked(true);
         }
 
+        //Pollfish initialization
+        ParamsBuilder paramsBuilder = new ParamsBuilder(getString(R.string.pollfish_id))
+                .releaseMode(true)
+                .indicatorPosition(Position.MIDDLE_RIGHT)
+                .build();
+        PollFish.initWith(this, paramsBuilder);
     }
 
 
