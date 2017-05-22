@@ -49,10 +49,8 @@ public class MyApplication extends Application {
 
     private void initDb() {
         PrefManager manager = new PrefManager(context);
-        if (!manager.isDbInit()) {
-            Realm.deleteRealm(new RealmConfiguration.Builder().build());
-        }
         if (!manager.isDbInit() || manager.getDbVersion() != dbVersion) {
+            Realm.deleteRealm(new RealmConfiguration.Builder().build());
             RealmGenerator generator = new RealmGenerator(context);
             generator.copyJsonAssetToRealm();
             manager.setDbInit(true);
