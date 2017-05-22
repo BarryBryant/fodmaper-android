@@ -13,7 +13,6 @@ import com.b3sk.fodmaper.R;
 import com.b3sk.fodmaper.adapters.RecyclerViewAdapter;
 import com.b3sk.fodmaper.model.Food;
 import com.b3sk.fodmaper.model.FoodRepo;
-import com.b3sk.fodmaper.model.RealmFoodRepoImpl;
 import com.b3sk.fodmaper.presenter.ModeratePresenterImpl;
 import com.b3sk.fodmaper.view.ModerateFodmapView;
 import com.google.android.gms.ads.AdRequest;

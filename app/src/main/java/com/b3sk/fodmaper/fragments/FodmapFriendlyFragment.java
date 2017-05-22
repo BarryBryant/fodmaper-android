@@ -14,7 +14,6 @@ import com.b3sk.fodmaper.R;
 import com.b3sk.fodmaper.adapters.RecyclerViewAdapter;
 import com.b3sk.fodmaper.model.Food;
 import com.b3sk.fodmaper.model.FoodRepo;
-import com.b3sk.fodmaper.model.RealmFoodRepoImpl;
 import com.b3sk.fodmaper.presenter.FriendlyPresenterImpl;
 import com.b3sk.fodmaper.presenter.PresenterManager;
 import com.b3sk.fodmaper.view.FriendlyView;

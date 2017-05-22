@@ -1,9 +1,10 @@
 package com.b3sk.fodmaper;
 
-import android.app.Application;
+import android.content.Context;
 
+import com.b3sk.fodmaper.helpers.FoodGenerator;
 import com.b3sk.fodmaper.model.FoodRepo;
-import com.b3sk.fodmaper.model.RealmFoodRepoImpl;
+import com.b3sk.fodmaper.model.JsonFoodRepoImpl;
 
 import javax.inject.Singleton;
 
@@ -16,8 +17,22 @@ import dagger.Provides;
 
 @Module
 public class AppModule {
+
+    private final Context context;
+
+    AppModule(Context context) {
+        this.context = context;
+    }
+
     @Provides @Singleton
-    public FoodRepo provideFoodRepo() {
-        return new RealmFoodRepoImpl();
+    public FoodGenerator provideFoodGenerator() {
+        FoodGenerator foodGenerator = new FoodGenerator(context);
+        return foodGenerator;
+    }
+
+    @Provides @Singleton
+    public FoodRepo provideFoodRepo(FoodGenerator foodGenerator) {
+        FoodRepo foodRepo = new JsonFoodRepoImpl(foodGenerator);
+        return foodRepo;
     }
 }

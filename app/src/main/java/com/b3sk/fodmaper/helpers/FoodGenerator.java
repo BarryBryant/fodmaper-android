@@ -1,5 +1,9 @@
 package com.b3sk.fodmaper.helpers;
 
+/**
+ * Created by barrybryant on 5/22/17.
+ */
+
 import android.content.Context;
 
 import com.b3sk.fodmaper.model.Food;
@@ -10,43 +14,42 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
-import io.realm.Realm;
 
 /**
  * Created by Joopkins on 1/1/17.
  */
 
-public class RealmGenerator {
+public class FoodGenerator {
 
     private Context context;
 
-    public RealmGenerator(Context context) {
+    public FoodGenerator(Context context) {
         this.context = context;
     }
 
-    public void copyJsonAssetToRealm() {
+    public List<Food> generateFoodFromJSON() {
+        List<Food> foodList = new ArrayList<>();
         try {
             JSONObject obj = new JSONObject(loadJSONFromAsset());
             JSONArray foodArray = obj.getJSONArray("food");
-            Realm realm = Realm.getDefaultInstance();
-            realm.beginTransaction();
             for (int i = 0; i < foodArray.length(); i++) {
-                JSONObject food = foodArray.getJSONObject(i);
-                Food realmFood = new Food();
-                realmFood.setName(food.getString("name"));
-                realmFood.setF(food.getInt("f"));
-                realmFood.setO(food.getInt("o"));
-                realmFood.setD(food.getInt("d"));
-                realmFood.setM(food.getInt("m"));
-                realmFood.setP(food.getInt("p"));
-                realm.copyToRealmOrUpdate(realmFood);
-
+                JSONObject foodJSON = foodArray.getJSONObject(i);
+                Food food = new Food();
+                food.setName(foodJSON.getString("name"));
+                food.setF(foodJSON.getInt("f"));
+                food.setO(foodJSON.getInt("o"));
+                food.setD(foodJSON.getInt("d"));
+                food.setM(foodJSON.getInt("m"));
+                food.setP(foodJSON.getInt("p"));
+                foodList.add(food);
             }
-            realm.commitTransaction();
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        return foodList;
     }
 
     private String loadJSONFromAsset() {

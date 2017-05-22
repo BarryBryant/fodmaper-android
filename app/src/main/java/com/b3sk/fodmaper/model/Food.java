@@ -2,15 +2,12 @@ package com.b3sk.fodmaper.model;
 
 import android.support.annotation.NonNull;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by Joopk on 3/23/2016.
  */
-public class Food extends RealmObject implements Comparable<Food>{
+public class Food implements Comparable<Food>{
 
-    @PrimaryKey
     private String name;
 
 
