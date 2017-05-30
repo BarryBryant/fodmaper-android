@@ -11,8 +11,8 @@ android {
         applicationId "com.b3sk.fodmaper"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 7
-        versionName "1.06"
+        versionCode 8
+        versionName "1.07"
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
