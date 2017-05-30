@@ -14,6 +14,7 @@ import com.b3sk.fodmaper.R;
 import com.b3sk.fodmaper.fragments.FodmapFragment;
 import com.b3sk.fodmaper.fragments.FodmapFriendlyFragment;
 import com.b3sk.fodmaper.fragments.ModerateFodmapFragment;
+import com.b3sk.fodmaper.fragments.SearchAllFragment;
 
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -30,10 +31,12 @@ public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return FodmapFragment.newInstance();
+                return SearchAllFragment.newInstance();
             case 1:
-                return ModerateFodmapFragment.newInstance();
+                return FodmapFragment.newInstance();
             case 2:
+                return ModerateFodmapFragment.newInstance();
+            case 3:
                 return FodmapFriendlyFragment.newInstance();
         }
         return null;
@@ -41,7 +44,7 @@ public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 
     @Override
@@ -49,12 +52,15 @@ public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
         boolean nullContext = MyApplication.getResourcesStatic() == null;
         switch (position) {
             case 0:
+                return nullContext ? "All Foods" : MyApplication.getResourcesStatic().getString(
+                        R.string.ALL_fragment);
+            case 1:
                 return nullContext ? "High FODMAP Foods" : MyApplication.getResourcesStatic().getString(
                         R.string.FODMAP_fragment);
-            case 1:
+            case 2:
                 return nullContext ? "Moderate FODMAP Foods" : MyApplication.getResourcesStatic().getString(
                         R.string.moderate_FODMAP_fragment);
-            case 2:
+            case 3:
                 return nullContext ? "FODMAP Friendly Foods" : MyApplication.getResourcesStatic().getString(
                         R.string.FODMAP_friendly_fragment);
 

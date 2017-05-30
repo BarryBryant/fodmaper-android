@@ -5,9 +5,10 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <!-- Fragment Titles -->
-    <string name="FODMAP_fragment">High FODMAP Foods</string>
-    <string name="FODMAP_friendly_fragment">FODMAP Friendly Foods</string>
-    <string name="moderate_FODMAP_fragment">Moderate FODMAP Foods</string>
+    <string name="ALL_fragment">Search All</string>
+    <string name="FODMAP_fragment">High FODMAP</string>
+    <string name="FODMAP_friendly_fragment">FODMAP Friendly</string>
+    <string name="moderate_FODMAP_fragment">Moderate FODMAP</string>
 
     <string name="fodmap_description">FODMAP</string>
     <string name="friendly_description">low FODMAP</string>

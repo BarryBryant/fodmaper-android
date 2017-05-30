@@ -11,7 +11,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.b3sk.fodmaper.MyApplication;
@@ -24,9 +23,7 @@ import com.b3sk.fodmaper.helpers.PrefManager;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
-import com.pollfish.constants.Position;
-import com.pollfish.main.PollFish;
-import com.pollfish.main.PollFish.ParamsBuilder;
+
 
 import de.cketti.mailto.EmailIntentBuilder;
 
@@ -51,13 +48,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (!tablet) {
             navigationView.getMenu().getItem(viewPager.getCurrentItem()).setChecked(true);
         }
-
-        //Pollfish initialization
-        ParamsBuilder paramsBuilder = new ParamsBuilder(getString(R.string.pollfish_id))
-                .releaseMode(true)
-                .indicatorPosition(Position.MIDDLE_RIGHT)
-                .build();
-        PollFish.initWith(this, paramsBuilder);
     }
 
 
@@ -76,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             // Set up the ViewPager with the sections adapter.
             viewPager = (ViewPager) findViewById(R.id.container);
-            viewPager.setOffscreenPageLimit(2);
+            viewPager.setOffscreenPageLimit(3);
             viewPager.setAdapter(sectionsPagerAdapter);
             viewPager.addOnPageChangeListener(this);
 
@@ -132,17 +122,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_friendly) {
-            viewPager.setCurrentItem(2, true);
+            viewPager.setCurrentItem(3, true);
         } else if (id == R.id.nav_moderate) {
-            viewPager.setCurrentItem(1, true);
+            viewPager.setCurrentItem(2, true);
         } else if (id == R.id.nav_high) {
-            viewPager.setCurrentItem(0, true);
+            viewPager.setCurrentItem(1, true);
         } else if (id == R.id.nav_search) {
-            //Delay launching of new activity to prevent jank in nav drawer
-            new Handler().postDelayed(() -> {
-                Intent intent = new Intent(getApplicationContext(), SearchAllActivity.class);
-                startActivity(intent);
-            }, 200);
+            viewPager.setCurrentItem(0, true);
         } else if (id == R.id.nav_share) {
             sendShareIntent();
         } else if (id == R.id.refresher) {
